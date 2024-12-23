@@ -10,5 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 0) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_23_212747) do
+  create_table "agencies", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_agencies_on_name", unique: true
+  end
+
+  create_table "branches", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "agency_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agency_id"], name: "index_branches_on_agency_id"
+    t.index ["name", "agency_id"], name: "index_branches_on_name_and_agency_id", unique: true
+  end
+
+  add_foreign_key "branches", "agencies"
 end
