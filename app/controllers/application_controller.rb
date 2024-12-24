@@ -10,7 +10,10 @@ class ApplicationController < ActionController::Base
   def set_agency
     current_agency = Current.agency
 
-    raise ActiveRecord::RecordNotFound unless current_agency.present?
+    unless current_agency.present?
+      flash[:alert] = t("sessions.select_agency")
+      return redirect_to root_path
+    end
 
     set_current_tenant(current_agency)
   end

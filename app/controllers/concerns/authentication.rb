@@ -31,7 +31,11 @@ module Authentication
 
     def request_authentication
       session[:return_to_after_authenticating] = request.url
-      redirect_to new_session_path
+      # Ensure params are included in login url
+      # Agency name is passed in params when attempting to view deliveries from agency list
+      # in root url
+      flash[:error] = t("sessions.login_required")
+      redirect_to login_path(params: params.permit(:agency_name))
     end
 
     def after_authentication_url

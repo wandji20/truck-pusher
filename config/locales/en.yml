@@ -50,6 +50,7 @@ en:
   sessions:
     invalid_credentials: "Wrong telephone number or password."
     login_required: "You need to sign in to continue"
+    select_agency: "Please select an agency to login"
     new:
       title: "Sign in to your account"
       telephone:
