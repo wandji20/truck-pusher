@@ -1,0 +1,12 @@
+<nav class="bg-white border-t fixed inset-x-0 bottom-0">
+  <div class="mx-auto max-w-lg">
+    <div class="flex h-16 justify-between">
+      <% navigations(@current_agency).each do |navigation| %>
+        <%= link_to navigatio["url"], class: "nav-link <%= active_class(*navigation["details"]) %>" do %>
+          <span><%= render "shared/svgs/#{navigation["url"]}" %></span>
+          <span><%= navigation["text"] %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</nav>

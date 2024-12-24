@@ -1,11 +1,16 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  # Registration
+  get "/account", to: "users#edit"
+
   # Session
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-  resource :session, except: %i[new create destroy]
+
+  # Agencies
+  get "/settings", to: "agencies#edit", as: :agency_setting
 
   # Password
   resources :passwords, param: :token, except: %i[index show]

@@ -26,12 +26,20 @@
   <body class="bg-tp-white">
     <%# Logo %>
     <div class="shadow bg-tp-white fixed top-0 inset-x-0 z-20">
-      <%= image_tag "truck-pusher.jpg", class: "h-16 w-auto mx-auto" %>
+      <%= link_to home_path(Current.agency) do %>
+        <%= image_tag "truck-pusher.jpg", class: "h-16 w-auto mx-auto" %>
+      <% end %>
     </div>
 
     <%# Main content %>
-    <main class="container mx-auto my-16 px-2 flex max-w-screen-md">
+    <main class="mx-auto my-16 px-2 flex max-w-screen-md">
       <%= yield %>
     </main>
+
+    <%# Flash messages %>
+    <%= render 'shared/flash' %>
+
+    <%# Bottom navigation %>
+    <%= render navigation_partial(@current_agency) %>
   </body>
 </html>
