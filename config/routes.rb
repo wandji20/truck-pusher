@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
-  # User Session and Password
-  resources :agencies, param: :name do
-    resource :session, only: %i[new create destroy]
-    resources :passwords, param: :token, except: %i[index show destroy]
-  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  # Session
+  get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
+  resource :session, except: %i[new create destroy]
+
+  # Password
+  resources :passwords, param: :token, except: %i[index show]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
