@@ -1,0 +1,13 @@
+@layer components {
+  .btn {
+    @apply rounded-md px-2.5 py-1.5 text-sm font-semibold shadow-sm shadow-none;
+  }
+
+  .btn-primary {
+    @apply bg-tp-sky-blue text-tp-white hover:bg-tp-deep-sky-blue;
+  }
+
+  .btn-secondary {
+    @apply bg-tp-light-sea-blue text-tp-deep-sea-blue hover:bg-tp-gentle-teal;
+  }
+}
