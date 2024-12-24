@@ -28,4 +28,35 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  general:
+    close: "Close"
+  navigations:
+    add_delivery: "Add Delivery"
+    account: "Account"
+    settings: "Settings"
+    deliveries: "Deliveries"
+  agencies:
+    index:
+      title: "Agencies"
+  passwords:
+    reset_instructions_sent: "Password reset instructions sent."
+    invalid_telephone_address: "Telephone number not found!"
+    new:
+      title: "Forgot your password?"
+      telephone:
+        label: "Telephone"
+        placeholder: "Enter your phone number"
+      submit: "Send reset instructions"
+  sessions:
+    invalid_credentials: "Wrong telephone number or password."
+    login_required: "You need to sign in to continue"
+    new:
+      title: "Sign in to your account"
+      telephone:
+        label: "Telephone"
+        placeholder: "Enter your phone number"
+      password:
+        label: "Password"
+        placeholder: "Enter password"
+      submit: "Sign in"
+      forgot_password: "Forgot Password?"
