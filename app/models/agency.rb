@@ -1,7 +1,5 @@
 class Agency < ApplicationRecord
-  # Constants
-  MIN_NAME_LENGTH = 5
-  MAX_NAME_LENGTH = 256
+  include NameConstants
 
   # Validations
   validates :name, presence: true,
