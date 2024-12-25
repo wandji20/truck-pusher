@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   # Secure password
   has_secure_password
+  has_many :sessions, dependent: :destroy
 
   # Hooks
   normalizes :telephone, with: ->(e) { e.strip }

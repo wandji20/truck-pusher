@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :admin, class: 'Users::Admin' do
+    type { "Users::Admin" }
     full_name { Faker::Name.name }
     telephone { Faker::PhoneNumber.unique.phone_number }
     password { "password" }

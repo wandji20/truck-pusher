@@ -14,6 +14,6 @@ class CreateUsers < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
-    add_index :users, :telephone, unique: true
+    add_index :users, %i[telephone agency_id], unique: true
   end
 end

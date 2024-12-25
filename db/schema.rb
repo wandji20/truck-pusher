@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_23_225432) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_25_003830) do
   create_table "agencies", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -25,6 +25,29 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_23_225432) do
     t.datetime "updated_at", null: false
     t.index ["agency_id"], name: "index_branches_on_agency_id"
     t.index ["name", "agency_id"], name: "index_branches_on_name_and_agency_id", unique: true
+  end
+
+  create_table "deliveries", force: :cascade do |t|
+    t.integer "agency_id", null: false
+    t.integer "origin_id", null: false
+    t.integer "destination_id", null: false
+    t.integer "sender_id", null: false
+    t.integer "receiver_id", null: false
+    t.integer "registered_by_id", null: false
+    t.integer "checked_in_by_id"
+    t.integer "checked_out_by_id"
+    t.datetime "checked_in_at"
+    t.datetime "checked_out_at"
+    t.integer "status", default: 0
+    t.string "tracking_number", null: false
+    t.string "tracking_secret", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["agency_id"], name: "index_deliveries_on_agency_id"
+    t.index ["destination_id"], name: "index_deliveries_on_destination_id"
+    t.index ["origin_id"], name: "index_deliveries_on_origin_id"
+    t.index ["receiver_id"], name: "index_deliveries_on_receiver_id"
+    t.index ["sender_id"], name: "index_deliveries_on_sender_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -50,7 +73,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_23_225432) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["telephone"], name: "index_users_on_telephone", unique: true
+    t.index ["telephone", "agency_id"], name: "index_users_on_telephone_and_agency_id", unique: true
   end
 
   add_foreign_key "branches", "agencies"
