@@ -33,10 +33,13 @@ class PasswordsController < ApplicationController
   end
 
   def set_agency
-    current_agency = Agency.find_by(name: params[:agency_name])
+    @current_agency = Agency.find_by(name: params[:agency_name])
 
-    raise ActiveRecord::RecordNotFound unless current_agency.present?
+    unless @current_agency.present?
+      flash[:alert] = t("sessions.select_agency")
+      return redirect_to root_path
+    end
 
-    set_current_tenant(current_agency)
+    set_current_tenant(@current_agency)
   end
 end

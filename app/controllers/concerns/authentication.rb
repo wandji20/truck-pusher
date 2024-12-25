@@ -39,18 +39,20 @@ module Authentication
     end
 
     def after_authentication_url
-      session.delete(:return_to_after_authenticating) || deleveries_path
+      session.delete(:return_to_after_authenticating) || deliveries_path
     end
 
     def start_new_session_for(user)
       user.sessions.create!(user_agent: request.user_agent, ip_address: request.remote_ip).tap do |session|
         Current.session = session
         cookies.signed.permanent[:session_id] = { value: session.id, httponly: true, same_site: :lax }
+        cookies.signed.permanent[:agency_id] = { value: session.agency_id, httponly: true, same_site: :lax }
       end
     end
 
     def terminate_session
       Current.session.destroy
       cookies.delete(:session_id)
+      cookies.delete(:agency_id)
     end
 end

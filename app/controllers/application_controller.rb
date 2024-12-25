@@ -8,13 +8,17 @@ class ApplicationController < ActionController::Base
   private
 
   def set_agency
-    current_agency = Current.agency
+    @current_agency = find_agency_by_cookie
 
-    unless current_agency.present?
+    unless @current_agency.present?
       flash[:alert] = t("sessions.select_agency")
       return redirect_to root_path
     end
 
-    set_current_tenant(current_agency)
+    set_current_tenant(@current_agency)
+  end
+
+  def find_agency_by_cookie
+    Agency.find_by(id: cookies.signed[:agency_id]) if cookies.signed[:agency_id]
   end
 end
