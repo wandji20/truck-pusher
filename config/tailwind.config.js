@@ -19,7 +19,8 @@ module.exports = {
         "tp-midnight-teal": "#1B2D39",
         "tp-soft-gray": "#F8F9FA",
         "tp-super-light-aqua": "#EAF8FB",
-        "tp-light-red": "#FDECEC",
+        "tp-super-light-red": "#FDECEC",
+        "tp-light-red": "#FFD6D6",
         "tp-deep-red": "#B71C1C",
         "tp-light-green": "#E8F5E9",
         "tp-deep-green": "#1B5E20"

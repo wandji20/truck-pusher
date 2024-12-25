@@ -10,4 +10,8 @@
   .btn-secondary {
     @apply bg-tp-light-sea-blue text-tp-deep-sea-blue hover:bg-tp-gentle-teal;
   }
+
+  .btn-danger {
+    @apply bg-tp-super-light-red text-tp-deep-red hover:bg-tp-light-red;
+  }
 }

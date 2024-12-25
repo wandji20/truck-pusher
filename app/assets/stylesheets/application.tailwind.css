@@ -9,11 +9,23 @@
 
 
 @layer components {
+  .link {
+    @apply text-tp-deep-sea-blue;
+
+    &:hover, &:visited, &:focus {
+      @apply text-tp-sky-blue;
+    }
+  }
+
   .nav-link {
-    @apply flex flex-col gap-2 text-gray-400 text-xs;
+    @apply flex flex-col gap-1 items-center text-gray-400 text-xs;
+
+    &:hover {
+      @apply text-tp-deep-sea-blue;
+    }
 
     &.active {
-      @apply text-tp-deep-sea-blue;
+      @apply text-tp-sky-blue;
     }
   }
 }

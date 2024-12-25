@@ -1,6 +1,6 @@
 module ApplicationHelper
-  def navigation_partial(agency)
-    return "shared/empty" unless agency.present?
+  def navigation_partial(user)
+    return "shared/empty" unless user.present?
 
     "navbar/nav"
   end
@@ -16,7 +16,7 @@ module ApplicationHelper
       { text: t("navigations.add_delivery"), icon: "folder_plus",
         url: new_delivery_path, details: [ "deliveries", "new" ] },
       { text: t("navigations.account"), icon: "user",
-        url: account_path, details: [ "users", "edit" ] },
+        url: account_path, details: [ "admins", "edit" ] },
       { text: t("navigations.settings"), icon: "setting",
         url: agency_setting_path, details: [ "agencies", "edit" ] },
       { text: t("navigations.deliveries"), icon: "folder",

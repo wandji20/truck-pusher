@@ -32,7 +32,7 @@
     </div>
 
     <%# Main content %>
-    <main class="mx-auto my-16 px-2 flex max-w-screen-md">
+    <main class="mx-auto my-16 px-2 flex max-w-screen-sm">
       <%= yield %>
     </main>
 
@@ -40,6 +40,6 @@
     <%= render 'shared/flash' %>
 
     <%# Bottom navigation %>
-    <%= render navigation_partial(@current_agency) %>
+    <%= render navigation_partial(Current.user) %>
   </body>
 </html>

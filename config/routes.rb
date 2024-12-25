@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Registration
-  get "/account", to: "users#edit"
+  get "/account", to: "admins#edit"
+  put "/account", to: "admins#update"
+
+  # Admin
+  resources :admin, only: %i[edit update]
 
   # Session
   get "/login", to: "sessions#new"
