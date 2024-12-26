@@ -23,7 +23,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-tp-white">
+  <body class="bg-tp-white overflow-hidden">
     <%# Logo %>
     <div class="shadow bg-tp-white fixed top-0 inset-x-0 z-20">
       <%= link_to home_path(Current.agency) do %>
@@ -32,7 +32,7 @@
     </div>
 
     <%# Main content %>
-    <main class="mx-auto my-16 px-2 flex max-w-screen-sm">
+    <main class="mx-auto my-16 px-2 flex container">
       <%= yield %>
     </main>
 
@@ -40,6 +40,6 @@
     <%= render 'shared/flash' %>
 
     <%# Bottom navigation %>
-    <%= render navigation_partial(Current.user) %>
+    <%= render navigation_partial(@current_user) %>
   </body>
 </html>
