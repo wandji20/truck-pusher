@@ -1,5 +1,6 @@
 @import "tailwind/alert.css";
 @import "tailwind/button.css";
+@import "tailwind/dropdown.css";
 @import "tailwind/input.css";
 
 @tailwind base;
