@@ -1,6 +1,7 @@
 class Delivery < ApplicationRecord
   # Validations
   validates :tracking_number, :tracking_secret, presence: true
+  validates :tracking_number, :tracking_secret, uniqueness: { scope: :agency_id }
 
   # Enums
   enum :status, %i[registered sent checked_in checked_out]

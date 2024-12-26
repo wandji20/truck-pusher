@@ -29,5 +29,7 @@ class CreateDeliveries < ActiveRecord::Migration[8.0]
     add_index :deliveries, :destination_id
     add_index :deliveries, :sender_id
     add_index :deliveries, :receiver_id
+    add_index :deliveries, %i[tracking_number agency_id]
+    add_index :deliveries, %i[tracking_secret agency_id]
   end
 end

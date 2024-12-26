@@ -8,4 +8,7 @@ class Branch < ApplicationRecord
 
   # Associations
   belongs_to :agency
+  has_many :operators, -> { where(role: "operator") },
+                        class_name: "Users::Admin",
+                        dependent: :destroy
 end

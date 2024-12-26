@@ -15,4 +15,6 @@ RSpec.describe Delivery, type: :model do
 
   it { should validate_presence_of(:tracking_number) }
   it { should validate_presence_of(:tracking_secret) }
+  it { should validate_uniqueness_of(:tracking_number).scoped_to(:agency_id) }
+  it { should validate_uniqueness_of(:tracking_secret).scoped_to(:agency_id) }
 end

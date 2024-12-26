@@ -1,4 +1,4 @@
 module NameConstants
-  MIN_NAME_LENGTH = 5
+  MIN_NAME_LENGTH = 2
   MAX_NAME_LENGTH = 256
 end

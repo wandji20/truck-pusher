@@ -9,4 +9,7 @@ class Agency < ApplicationRecord
   # Associations
   has_many :branches, dependent: :destroy
   has_many :sessions, dependent: :destroy
+  has_many :managers, -> { where(role: "manager") },
+                      class_name: "Users::Admin",
+                      dependent: :destroy
 end

@@ -48,6 +48,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_25_003830) do
     t.index ["origin_id"], name: "index_deliveries_on_origin_id"
     t.index ["receiver_id"], name: "index_deliveries_on_receiver_id"
     t.index ["sender_id"], name: "index_deliveries_on_sender_id"
+    t.index ["tracking_number", "agency_id"], name: "index_deliveries_on_tracking_number_and_agency_id"
+    t.index ["tracking_secret", "agency_id"], name: "index_deliveries_on_tracking_secret_and_agency_id"
   end
 
   create_table "sessions", force: :cascade do |t|

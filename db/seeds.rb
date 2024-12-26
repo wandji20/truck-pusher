@@ -7,3 +7,73 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+AGENCIES = [
+  { name: "Moghamo", branches: [ "Bamenda", "Yaounde", "Douala", "Limbe" ] },
+  { name: "Vatican", branches: [ "Bamenda", "Yaounde", "Douala", "Limbe" ] },
+  { name: "Nso Boyz", branches: [ "Bamenda", "Yaounde", "Douala", "Limbe" ] },
+  { name: "Garanti", branches: [ "Bamenda", "Yaounde", "Douala", "Limbe" ] },
+  { name: "Golden", branches: [ "Kumba", "Buea", "Douala" ] }
+]
+
+def create_agencies_and_branches
+  AGENCIES.each_with_index do |details, idx|
+    password = "password"
+    agency = Agency.create!(name: details[:name])
+
+    ActsAsTenant.with_tenant(agency) do
+      details[:branches].each_with_index do |name, idx|
+        branch = agency.branches.create!(name:)
+        agency.managers.create!(full_name: "#{details[:name]} Admin", telephone: "67#{idx}495621", password:,
+                                password_confirmation: password, confirmed: true, role: :manager, branch:)
+        # Create 3 operators for each branch
+        3.times do |n|
+          branch.operators.create!(full_name: "#{details[:name]}-#{name} Operator-#{n + 1}",
+                                    telephone: "6784956#{n}#{idx + 3}", password:,
+                                    password_confirmation: password, confirmed: true, role: :operator, branch:)
+        end
+      end
+    end
+  end
+end
+
+def create_customers_and_deliveries
+  30.times do |number|
+    telephone = "67845216#{number.to_s.rjust(2, "0")}"
+    password = 'password'
+
+    Users::Customer.create!(full_name: Faker::Name.name, telephone:, password:,
+                            password_confirmation: password)
+  end
+
+  customer_ids = Users::Customer.pluck(:id)
+
+  Agency.all.each do |agency|
+    ActsAsTenant.with_tenant(agency) do
+      branch_ids = agency.branch_ids
+      agency.branches.each do |branch|
+        # create 10 deliveries for each branch
+        operator_ids = branch.operator_ids
+
+        10.times do
+          sender_id, receiver_id, = customer_ids.shuffle[3, 7]
+          destination_id = branch_ids.select { |id| id != branch.id }.shuffle.sample
+          registered_by_id = operator_ids.shuffle.sample
+          tracking_number = "#{branch.id}-#{destination_id}-#{SecureRandom.hex(8)}"
+          tracking_secret = "#{destination_id}-#{branch.id}-#{SecureRandom.hex(8)}"
+          attrs =  { sender_id:, receiver_id:, origin_id: branch.id, destination_id:, registered_by_id:,
+                    tracking_number:, tracking_secret: }
+
+          Delivery.create!(attrs)
+        end
+      end
+    end
+  end
+end
+
+
+ActiveRecord::Base.transaction do
+  p "Creating Agencies and Branches"
+  create_agencies_and_branches
+  p "Create customers and deliveries"
+  create_customers_and_deliveries
+end
