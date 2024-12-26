@@ -19,13 +19,27 @@
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%# stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="bg-tp-white">
+    <%# Logo %>
+    <div class="shadow bg-tp-white fixed top-0 inset-x-0 z-20">
+      <%= link_to home_path(Current.agency) do %>
+        <%= image_tag "truck-pusher.jpg", class: "h-16 w-auto mx-auto" %>
+      <% end %>
+    </div>
+
+    <%# Main content %>
+    <main class="mx-auto my-16 px-2 flex max-w-screen-sm">
       <%= yield %>
     </main>
+
+    <%# Flash messages %>
+    <%= render 'shared/flash' %>
+
+    <%# Bottom navigation %>
+    <%= render navigation_partial(Current.user) %>
   </body>
 </html>

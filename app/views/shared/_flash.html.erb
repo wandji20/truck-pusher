@@ -1,0 +1,7 @@
+<div class="fixed bottom-16 inset-x-0 z-20 mb-2">
+  <div class="mx-auto flex flex-col w-full gap-3 px-2 max-w-screen-sm" id="flash-notifications">
+    <% flash.each do |type, message| %>
+      <%= render 'shared/flash_message', type:, message: %>
+    <% end %>
+  </div>
+</div>

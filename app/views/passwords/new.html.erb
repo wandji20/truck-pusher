@@ -1,0 +1,25 @@
+<div class="flex w-full flex-col justify-center mt-6">
+  <div class="mx-auto sm:w-full">
+    <h2 class="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+      <%= t('.title') %>
+    </h2>
+  </div>
+
+  <div class="sm:mx-auto sm:w-full sm:max-w-[480px]">
+    <div class="px-6 py-12 sm:px-12">
+
+      <%= form_with url: passwords_path do |form| %>
+        <%= form.hidden_field :agency_name, value: params[:agency_name] %>
+        <div class="form-group">
+          <%= form.label :text_field, t('.telephone.label'), class: "form-label" %>
+          <%= form.text_field :telephone, required: true, placeholder: t('.telephone.placeholder'),
+                class: "form-control", value: params[:telephone] %>
+        </div>
+
+        <div class="form-group">
+          <%= form.submit t('.submit'), class: "btn btn-primary rounded-lg" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

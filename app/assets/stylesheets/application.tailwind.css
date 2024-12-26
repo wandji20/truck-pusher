@@ -1,13 +1,31 @@
+@import "tailwind/alert.css";
+@import "tailwind/button.css";
+@import "tailwind/input.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/*
+
 
 @layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+  .link {
+    @apply text-tp-deep-sea-blue;
+
+    &:hover, &:visited, &:focus {
+      @apply text-tp-sky-blue;
+    }
+  }
+
+  .nav-link {
+    @apply flex flex-col gap-1 items-center text-gray-400 text-xs;
+
+    &:hover {
+      @apply text-tp-deep-sea-blue;
+    }
+
+    &.active {
+      @apply text-tp-sky-blue;
+    }
   }
 }
-
-*/
