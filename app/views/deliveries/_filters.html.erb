@@ -23,15 +23,15 @@
               data: { turbo_frame: 'delivery-list', turbo_action: :advance, }) do |form| %>
 
         <div class="w-full">
-          <%= form.label :interval, t('.from.label'), class: 'form-label'  %>
-          <%= form.text_field :interval, class: "form-control mb-5", placeholder: t('.from.placeholder'),
-                data: { controller: "flatpickr", 'flatpickr-init-conf-value': { mode: "range", dateFormat: "d-M-Y" } } %>
+          <%= form.label :from, t('.from.label'), class: 'form-label'  %>
+          <%= form.text_field :from, class: "form-control mb-5", placeholder: t('.from.placeholder'),
+                data: { controller: "flatpickr", 'flatpickr-init-conf-value': { dateFormat: "d-M-Y" } } %>
         </div>
 
         <div class="w-full">
-          <%= form.label :interval, t('.to.label'), class: 'form-label'  %>
-          <%= form.text_field :interval, class: "form-control mb-5", placeholder: t('.to.placeholder'),
-                data: { controller: "flatpickr", 'flatpickr-init-conf-value': { mode: "range", dateFormat: "d-M-Y" } } %>
+          <%= form.label :to, t('.to.label'), class: 'form-label'  %>
+          <%= form.text_field :to, class: "form-control mb-5", placeholder: t('.to.placeholder'),
+                data: { controller: "flatpickr", 'flatpickr-init-conf-value': { dateFormat: "d-M-Y" } } %>
         </div>
 
 
