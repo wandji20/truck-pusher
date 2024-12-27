@@ -1,7 +1,7 @@
 module Users
   class Admin < User
     # Enums
-    enum :role, %i[operator manager]
+    enum :role, %i[operator manager general_manager]
 
     # Associations
     belongs_to :branch, optional: true

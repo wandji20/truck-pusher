@@ -9,7 +9,8 @@ class DeliveriesController < ApplicationController
     end
 
     @deliveries = @deliveries.joins([ :sender, :receiver ])
-                              .select("deliveries.id, deliveries.tracking_number, deliveries.tracking_secret,
+                              .select("deliveries.id, deliveries.agency_id, deliveries.origin_id, deliveries.destination_id,
+                                        deliveries.tracking_number, deliveries.tracking_secret,
                                         deliveries.status, deliveries.created_at, users.full_name AS sender_name,
                                         users.telephone AS sender_telephone, receivers_deliveries.full_name AS receiver_name,
                                         receivers_deliveries.telephone AS receiver_telephone")
