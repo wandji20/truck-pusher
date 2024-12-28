@@ -41,6 +41,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_25_003830) do
     t.integer "status", default: 0
     t.string "tracking_number", null: false
     t.string "tracking_secret", null: false
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["agency_id"], name: "index_deliveries_on_agency_id"

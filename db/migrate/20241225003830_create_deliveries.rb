@@ -20,6 +20,7 @@ class CreateDeliveries < ActiveRecord::Migration[8.0]
 
       t.string :tracking_number, null: false
       t.string :tracking_secret, null: false
+      t.text :description
 
       t.timestamps
     end
