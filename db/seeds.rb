@@ -38,7 +38,7 @@ end
 
 def create_customers_and_deliveries
   30.times do |number|
-    telephone = "67845216#{number.to_s.rjust(2, "0")}"
+    telephone = "6784521#{number.to_s.rjust(2, "0")}"
     password = 'password'
 
     Users::Customer.create!(full_name: Faker::Name.name, telephone:, password:,
@@ -58,11 +58,11 @@ def create_customers_and_deliveries
           sender_id, receiver_id, = customer_ids.shuffle[3, 7]
           destination_id = branch_ids.select { |id| id != branch.id }.shuffle.sample
           registered_by_id = operator_ids.shuffle.sample
-          tracking_number = "#{branch.id}-#{destination_id}-#{SecureRandom.hex(8)}"
-          tracking_secret = "#{destination_id}-#{branch.id}-#{SecureRandom.hex(8)}"
+
           attrs =  { sender_id:, receiver_id:, origin_id: branch.id, destination_id:, registered_by_id:,
                     tracking_number:, tracking_secret: }
 
+          sleep 1 # Avoid creatingtracking number within thesame second
           Delivery.create!(attrs)
         end
       end
