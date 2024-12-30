@@ -8,14 +8,18 @@
   }
 
   .form-control {
-    @apply block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-tp-sky-blue sm:text-sm/6;
+    @apply block w-full text-start rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-tp-sky-blue sm:text-sm/6;
+  }
+
+  .form-control.placeholder {
+    @apply text-gray-400;
   }
 
   .form-control.is-invalid {
-    @apply text-tp-deep-red ring-tp-light-red placeholder:text-tp-light-red focus:ring-tp-light-red;
+    @apply text-tp-deep-red ring-tp-red placeholder:text-tp-red focus:ring-tp-red;
   }
 
   .invalid-feedback {
-    @apply mt-2 text-xs text-tp-deep-red;
+    @apply flex flex-col mt-2 text-xs text-tp-deep-red;
   }
 }
