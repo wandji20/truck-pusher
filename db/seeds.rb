@@ -23,13 +23,15 @@ def create_agencies_and_branches
     ActsAsTenant.with_tenant(agency) do
       details[:branches].each_with_index do |name, idx|
         branch = agency.branches.create!(name:)
-        agency.managers.create!(full_name: "#{details[:name]} Admin", telephone: "67#{idx}495621", password:,
+        telephone = "67#{(branch.id.to_s + idx.to_s).rjust(3, "0")}5621"
+        agency.managers.create!(full_name: "#{details[:name]} Admin", telephone:, password:,
                                 password_confirmation: password, confirmed: true, role: :manager, branch:)
         # Create 3 operators for each branch
         3.times do |n|
+          telephone = "65249#{(branch.id.to_s + idx.to_s + n.to_s).rjust(4, "0")}"
           branch.operators.create!(full_name: "#{details[:name]}-#{name} Operator-#{n + 1}",
-                                    telephone: "6784956#{n}#{idx + 3}", password:,
-                                    password_confirmation: password, confirmed: true, role: :operator, branch:)
+                                    telephone:, password:, password_confirmation: password,
+                                    confirmed: true, role: :operator, branch:)
         end
       end
     end
@@ -38,7 +40,7 @@ end
 
 def create_customers_and_deliveries
   30.times do |number|
-    telephone = "6784521#{number.to_s.rjust(2, "0")}"
+    telephone = "6824521#{number.to_s.rjust(2, "0")}"
     password = 'password'
 
     Users::Customer.create!(full_name: Faker::Name.name, telephone:, password:,
@@ -59,10 +61,9 @@ def create_customers_and_deliveries
           destination_id = branch_ids.select { |id| id != branch.id }.shuffle.sample
           registered_by_id = operator_ids.shuffle.sample
 
-          attrs =  { sender_id:, receiver_id:, origin_id: branch.id, destination_id:, registered_by_id:,
-                    tracking_number:, tracking_secret: }
+          attrs =  { sender_id:, receiver_id:, origin_id: branch.id, destination_id:, registered_by_id: }
 
-          sleep 1 # Avoid creatingtracking number within thesame second
+          sleep 1 # Avoid creating tracking number within thesame second
           Delivery.create!(attrs)
         end
       end

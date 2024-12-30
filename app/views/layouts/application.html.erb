@@ -23,7 +23,8 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="bg-tp-white overflow-hidden">
+  <%# <div class="overflow-hidden"></div> %>
+  <body class="bg-tp-white <%= "overflow-hidden" if active_class("deliveries", "index") %>">
     <%# Logo %>
     <div class="shadow bg-tp-white fixed top-0 inset-x-0 z-20">
       <%= link_to home_path(Current.agency) do %>

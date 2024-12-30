@@ -13,14 +13,14 @@ module ApplicationHelper
 
   def navigations
     [
-      { text: t("navigations.add_delivery"), icon: "folder_plus",
-        url: new_delivery_path, details: [ "deliveries", "new" ] },
-      { text: t("navigations.account"), icon: "user",
-        url: account_path, details: [ "admins", "edit" ] },
-      { text: t("navigations.settings"), icon: "setting",
-        url: agency_setting_path, details: [ "agencies", "edit" ] },
-      { text: t("navigations.deliveries"), icon: "folder",
-        url: deliveries_path, details: [ "deliveries", "index" ] }
+      { text: t("navigations.add_delivery"), icon: "folder_plus", url: new_delivery_path,
+        active: active_class("deliveries", "new") || active_class("deliveries", "create") },
+      { text: t("navigations.account"), icon: "user", url: account_path,
+        active: active_class("admins", "edit") || active_class("admins", "update") },
+      { text: t("navigations.settings"), icon: "setting", url: agency_setting_path,
+      active: active_class("agencies", "edit") || active_class("agencies", "update") },
+      { text: t("navigations.deliveries"), icon: "folder", url: deliveries_path,
+        active: active_class("deliveries", "index") }
     ]
   end
 

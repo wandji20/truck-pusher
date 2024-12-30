@@ -22,7 +22,6 @@ module Users
       delivery
 
     rescue ActiveRecord::RecordInvalid, ActiveRecord::NotNullViolation
-      p delivery.errors.messages
       delivery
     end
 
@@ -45,7 +44,7 @@ module Users
 
     def create_customer(attrs)
       password = SecureRandom.hex(8)
-      attrs = attrs.merge(password:, password_confirmation: password)
+      attrs.merge!(password:, password_confirmation: password)
 
       new_customer = Users::Customer.new(attrs)
       new_customer.valid?

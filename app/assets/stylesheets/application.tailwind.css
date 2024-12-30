@@ -10,6 +10,14 @@
 
 
 @layer components {
+  input[type='checkbox'] {
+    @apply text-tp-sky-blue rounded;
+  
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  }
   .link {
     @apply text-tp-deep-sea-blue;
 
@@ -41,7 +49,7 @@
   .scrollable-table {
     max-height: calc(100vh - 291px);
     
-    @media (min-width: 768px) {
+    @media (min-width: 640px) {
       max-height: calc(100vh - 250px);
     }
   }
@@ -64,7 +72,7 @@
     }
 
     .table-body td {
-      @apply whitespace-nowrap px-3 py-4 text-sm text-gray-500 truncate;
+      @apply whitespace-nowrap px-3 py-4 text-sm text-gray-500 truncate align-baseline;
 
       max-width: 200px;
 

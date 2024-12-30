@@ -5,7 +5,7 @@
     </h1>
 
     <div class="flex items-center justify-between flex-wrap">
-      <nav class="flex items-center grow-1 gap-4 my-2">
+      <nav class="flex items-center grow-1 gap-4 my-2 w-full sm:w-fit">
         <%= link_to t('.all'), deliveries_path(params: { q: params[:q]}), class: "sub-nav-link #{active_nav_link('all')}" %>
         <%= link_to t('.incoming'), deliveries_path(params: { type: "incoming" }),
               class: "sub-nav-link #{active_nav_link('incoming')}" %>

@@ -2,7 +2,7 @@
   <div class="mx-auto max-w-lg px-2">
     <div class="flex h-16 justify-between items-center">
       <% navigations.each do |navigation| %>
-        <%= link_to navigation[:url],  class: "nav-link #{active_class(*navigation[:details])}" do %>
+        <%= link_to navigation[:url],  class: "nav-link #{navigation[:active]}" do %>
           <span><%= render "shared/svgs/#{navigation[:icon]}" %></span>
           <span><%= navigation[:text] %></span>
         <% end %>
