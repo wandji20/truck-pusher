@@ -90,6 +90,7 @@ en:
       sender: "Sender"
       receiver: "Receiver"
       action: "Action"
+      description: "Description"
     table_row:
       arrival_confirmed: "Arrival confirmed"
       confirm_arrival: "Confirm arrival"
