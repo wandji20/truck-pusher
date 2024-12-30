@@ -1,4 +1,54 @@
-<div>
-  <h1 class="font-bold text-4xl">Deliveries#new</h1>
-  <p>Find me in app/views/Deliveries/new.html.erb</p>
+<div class="flex w-full flex-col justify-center mt-6">
+  <div class="mx-auto sm:w-full">
+    <h2 class="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+      <%= t('.title') %>
+    </h2>
+  </div>
+
+  <div class="sm:mx-auto sm:w-full sm:max-w-[480px]">
+    <div class="px-6 py-12 sm:px-12">
+      <%= form_with model: @delivery do |form| %>
+        <%= render "shared/select_dropdown", selected: @delivery.destination_id, placeholder: t('.destination.placeholder'),
+                    label: t('.destination.label'), id: 'delivery_destination_id',
+                    search_url: search_branch_deliveries_url(params: { type: "destination"}),
+                    record: @delivery, autofocus: true, field: 'destination',
+                    display_value: @delivery.destination.present? ? "#{@delivery.destination.name}" : nil,
+                    search_locals: { partial: 'deliveries/search/branch', name: "delivery[branch_id]",
+                      locals: { branches: @branches, name: "delivery[destination_id]", type: "destination",
+                                selected: @delivery.destination_id, list_class: "hidden" }} %>
+                  
+        <%= render "shared/select_dropdown", selected: @delivery.sender_id, placeholder: t('.sender.placeholder'),
+                    label: t('.sender.label'), search_url: search_customer_deliveries_url(params: { type: 'sender'}),
+                    id: 'delivery_sender_id', record: @delivery, autofocus: true, field: 'sender',
+                    field_type: "integer", template: params[:new_sender] == "1" ? "new" : "dropdown",
+                    display_value: @delivery.sender.present? ? "#{@delivery.sender.full_name} (#{@delivery.sender.telephone})" : nil,
+                    search_locals: { partial: 'deliveries/search/customer',
+                      locals: { customers: @senders || [], type: 'sender', name: "delivery[sender_id]", list_class: "hidden",
+                        selected: @delivery.sender_id }},
+                    add_new_locals: { partial: "deliveries/new_customer_form",
+                      locals: { form:, object: @delivery.sender, type: "sender" }} %>
+
+        <%= render "shared/select_dropdown", selected: @delivery.receiver_id, placeholder: t('.receiver.placeholder'),
+                    label: t('.receiver.label'), search_url: search_customer_deliveries_url(params: { type: "receiver" }),
+                    id: 'delivery_receiver_id', record: @delivery, autofocus: true, field: 'receiver',
+                    field_type: "integer", template: params[:new_receiver] == "1" ? "new" : "dropdown",
+                    display_value: @delivery.receiver.present? ? "#{@delivery.receiver.full_name} (#{@delivery.receiver.telephone})" : nil,
+                    search_locals: { partial: 'deliveries/search/customer',
+                      locals: { customers: @receivers || [], type: 'receiver', name: "delivery[receiver_id]", list_class: "hidden",
+                                selected: @delivery.receiver_id }},
+                    add_new_locals: { partial: "deliveries/new_customer_form",
+                      locals: { form:, object: @delivery.receiver, type: "receiver" }} %>
+
+        <div class="form-group">
+          <%= form.label :description, t('.description.label'), class: "form-label" %>
+          <%= form.textarea :description, required: false, placeholder: t('.description.placeholder'),
+                class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.submit t('.submit'), class: "btn btn-primary rounded-lg" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
