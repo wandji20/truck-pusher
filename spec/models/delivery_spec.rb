@@ -13,8 +13,6 @@ RSpec.describe Delivery, type: :model do
   it { should belong_to(:checked_in_by).class_name("Users::Admin").optional }
   it { should belong_to(:checked_out_by).class_name("Users::Admin").optional }
 
-  it { should validate_presence_of(:tracking_number) }
-  it { should validate_presence_of(:tracking_secret) }
   it { should validate_uniqueness_of(:tracking_number).scoped_to(:agency_id) }
   it { should validate_uniqueness_of(:tracking_secret).scoped_to(:agency_id) }
 end

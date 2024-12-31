@@ -2,14 +2,13 @@ class Delivery < ApplicationRecord
   # Constants
   HEADERS = [ "tracking_no", "tracking_secret", "sender", "receiver", "type", "description", "action" ].freeze
   # Validations
-  validates :tracking_number, :tracking_secret, presence: true
   validates :tracking_number, :tracking_secret, uniqueness: { scope: :agency_id }
 
   # Enums
   enum :status, %i[registered sent checked_in checked_out]
 
   # Hooks
-  before_validation :generate_tracking_number, :generate_tracking_secret
+  before_create :generate_tracking_number, :generate_tracking_secret
 
   # Associations
   acts_as_tenant :agency
