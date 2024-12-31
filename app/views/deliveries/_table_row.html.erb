@@ -15,10 +15,12 @@
         <span><%= delivery.receiver_telephone %></span>
       </div>
     </td>
+    <td><%= delivery_type(delivery, current_user) %></td>
     <td><%= delivery.description %></td>
     <td>
       <% if delivery.registered? || delivery.sent? %>
-        <%= button_to t('.confirm_arrival'), delivery_path(delivery), method: :update, form_class: 'btn link !p-0', params: { delivery: { status: 'checked_in'}} %>
+        <%= button_to t('.confirm_arrival'), delivery_path(delivery), method: :update,
+              form_class: 'btn link !p-0', params: { delivery: { status: 'checked_in'}} %>
       <% else %>
         <span><%= t('.arrival_confirmed') %></span>
       <% end %>

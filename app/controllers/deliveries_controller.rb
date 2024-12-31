@@ -56,13 +56,8 @@ class DeliveriesController < ApplicationController
   end
 
   def search_deliveries
-    @deliveries = if params[:type] == "incoming"
-      Delivery.where(destination_id: @current_user.branch_id)
-    elsif params[:type] == "outgoing"
-      Delivery.where(destination_id: @current_user.branch_id)
-    else
-      Delivery.where(origin_id: @current_user.branch_id).or(Delivery.where(destination_id: @current_user.branch_id))
-    end
+    @deliveries = Delivery.where(origin_id: @current_user.branch_id)
+                          .or(Delivery.where(destination_id: @current_user.branch_id))
 
     @deliveries = @deliveries.joins([ :sender, :receiver ])
                               .select("deliveries.id, deliveries.agency_id, deliveries.origin_id, deliveries.destination_id,
@@ -72,19 +67,10 @@ class DeliveriesController < ApplicationController
                                         receivers_deliveries.telephone AS receiver_telephone")
                               .order("deliveries.id": :desc)
     if params[:q].present?
+      query = Delivery.sanitize_sql_like(params[:q] || "")
       @deliveries = @deliveries.where(
-        "deliveries.tracking_number = ? OR deliveries.tracking_secret = ?", params[:q].strip, params[:q].strip
+        "deliveries.tracking_number LIKE ? OR deliveries.tracking_secret LIKE ?", "%#{query}%", "%#{query}%"
       )
-    end
-
-    if params[:from].present?
-      from = DateTime.parse(params[:from])
-      @deliveries = @deliveries.where("deliveries.created_at >= ?", from)
-    end
-
-    if params[:to].present?
-      to = DateTime.parse(params[:to])
-      @deliveries = @deliveries.where("deliveries.created_at <= ?", to)
     end
   end
 

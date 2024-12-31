@@ -1,6 +1,6 @@
 class Delivery < ApplicationRecord
   # Constants
-  HEADERS = [ "tracking_no", "tracking_secret", "sender", "receiver", "description", "action" ].freeze
+  HEADERS = [ "tracking_no", "tracking_secret", "sender", "receiver", "type", "description", "action" ].freeze
   # Validations
   validates :tracking_number, :tracking_secret, presence: true
   validates :tracking_number, :tracking_secret, uniqueness: { scope: :agency_id }

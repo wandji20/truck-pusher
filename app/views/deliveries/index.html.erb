@@ -1,20 +1,17 @@
 <div class="w-full flex flex-col">
-  <header class="sticky top-16 py-3 mt-[1px] bg-tp-white flex flex-col w-full container mx-auto z-20">
-    <h1 class="text-3xl font-bold tracking-tight text-gray-900">
+  <header class="sticky top-16 py-3 mt-[1px] bg-tp-white sm:flex items-center gap-2 container mx-auto z-20">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900 mb-2">
       <%= t('.title') %>
     </h1>
 
-    <div class="flex items-center justify-between flex-wrap">
-      <nav class="flex items-center grow-1 gap-4 my-2 w-full sm:w-fit">
-        <%= link_to t('.all'), deliveries_path(params: { q: params[:q]}), class: "sub-nav-link #{active_nav_link('all')}" %>
-        <%= link_to t('.incoming'), deliveries_path(params: { type: "incoming" }),
-              class: "sub-nav-link #{active_nav_link('incoming')}" %>
-        <%= link_to t('.outgoing'), deliveries_path(params: { type: "outgoing" }),
-              class: "sub-nav-link #{active_nav_link('outgoing')}" %>
-      </nav>
-
-      <%= render 'filters' %>
-    </div>
+    <%= form_with(url: deliveries_path, method: :get, class: 'relative sm:ml-auto w-fit',
+          data: { turbo_frame: 'delivery-list', turbo_action: :advance, controller: 'inline-search' }) do %>
+      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+        <%= render 'shared/svgs/search' %>
+      </div>
+      <%= text_field_tag 'q', params[:q], placeholder: t('.search_placeholder'),
+            class: 'form-control pl-10 pr-3', id: 'search_deliveries' %>
+    <% end %>
   </header>
 
   <turbo-frame id="delivery-list">

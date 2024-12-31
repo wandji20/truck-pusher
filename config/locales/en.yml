@@ -69,31 +69,21 @@ en:
         placeholder: "Enter telephone"
     index:
       title: "Deliveries"
-      all: "All"
-      incoming: "Incoming"
-      outgoing: "Outgoing"
-    filters:
-      title: "Filters"
       search_placeholder: "Enter tracking number or secret"
-      from:
-        label: "From"
-        placeholder: "Select from date"
-      to:
-        label: "To"
-        placeholder: "Select to date"
-      apply: "Apply"
-      clear: "Clear"
     table:
       no_deliveries: "No deliveries"
       trackin_no: "Tracking No"
       tracking_secret: "Tracking Secret"
       sender: "Sender"
       receiver: "Receiver"
+      type: "Type"
       action: "Action"
       description: "Description"
     table_row:
       arrival_confirmed: "Arrival confirmed"
       confirm_arrival: "Confirm arrival"
+      incoming: "Incoming"
+      outgoing: "Outgoing"
     delivery:
       tracking_no: "Tracking Number:"
       sender: "Sender"
