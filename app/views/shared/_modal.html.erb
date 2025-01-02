@@ -1,0 +1,22 @@
+<%# Pass distinct id to locals to use this %>
+
+<div class="modal hide invisible" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true" id="<%= id %>" data-controller="modal" data-action="keydown.esc->modal#closeModal" tabindex="-1">
+  <%# Modal backdrop %>
+  <div class="backdrop" aria-hidden="true"></div>
+
+  <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+    <div class="modal-content">
+      <div class="modal-panel">
+        <div class="w-full flex">
+          <button class="btn ml-auto text-gray-400" role="button" data-action="modal#closeModal">
+            <%= render "shared/svgs/close" %>
+          </button>
+        </div>
+        <div data-modal-target="content" class="w-full">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
