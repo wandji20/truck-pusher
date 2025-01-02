@@ -36,6 +36,18 @@ en:
     account: "Account"
     settings: "Settings"
     deliveries: "Deliveries"
+  admins:
+    edit:
+      title: "My Account"
+      agency: "Agency"
+      branch: "Branch"
+      full_name:
+        label: "Full name"
+        placeholder: "Enter full name"
+      telephone:
+        label: "Telephone"
+        placeholder: "Enter telephone"
+      submit: "Save"
   agencies:
     index:
       title: "Agencies"

@@ -8,7 +8,7 @@
   }
 
   .form-control {
-    @apply block w-full text-start rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-tp-sky-blue sm:text-sm/6;
+    @apply block w-full text-start rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-inset focus:ring-tp-sky-blue sm:text-sm/6 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:outline-gray-200;
   }
 
   .form-control.placeholder {

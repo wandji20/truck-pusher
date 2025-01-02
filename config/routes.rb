@@ -3,10 +3,7 @@ Rails.application.routes.draw do
 
   # Registration
   get "/account", to: "admins#edit"
-  put "/account", to: "admins#update"
-
-  # Admin
-  resources :admin, only: %i[edit update]
+  patch "/account", to: "admins#update"
 
   # Session
   get "/login", to: "sessions#new"
