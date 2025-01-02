@@ -1,10 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Users::Admin, type: :model do
+  subject { create(:admin, telephone: "674895621") }
+
   it { should validate_presence_of(:full_name) }
   it { should validate_length_of(:full_name).is_at_least(described_class::MIN_NAME_LENGTH) }
   it { should validate_length_of(:full_name).is_at_most(described_class::MAX_NAME_LENGTH) }
-  it { should belong_to(:agency) }
+  it { should validate_presence_of(:telephone) }
+  it { should validate_uniqueness_of(:telephone).scoped_to(:agency_id).case_insensitive }
 
   describe "validating telephone format" do
     context 'bad format' do

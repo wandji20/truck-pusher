@@ -5,6 +5,7 @@ class User < ApplicationRecord
   validates :full_name, presence: true,
                   length: { within: (MIN_NAME_LENGTH..MAX_NAME_LENGTH) }
   validates :telephone, presence: true, format: { with: /\A\d{9}\z/ }
+  validates :telephone, uniqueness: { scope: :agency_id, case_sensitive: false }
 
   # Secure password
   has_secure_password
