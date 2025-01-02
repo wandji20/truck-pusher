@@ -8,4 +8,5 @@ RSpec.describe Agency, type: :model do
   it { should validate_length_of(:name).is_at_most(described_class::MAX_NAME_LENGTH) }
   it { should have_many(:branches).dependent(:destroy) }
   it { should have_many(:sessions).dependent(:destroy) }
+  it { should have_many(:managers).class_name("Users::Admin").dependent(:destroy) }
 end

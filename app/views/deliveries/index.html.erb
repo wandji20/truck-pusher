@@ -1,6 +1,28 @@
-<div>
-  <h1 class="font-bold text-4xl">Deliveries#index</h1>
-  <p>Find me in app/views/Deliveries/index.html.erb</p>
-  <div class="flex flex-col gap-4">
-  </div>
+<div class="w-full flex flex-col">
+  <header class="sticky top-16 py-3 mt-[1px] bg-tp-white sm:flex items-center gap-2 container mx-auto z-20">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900 mb-2">
+      <%= t('.title') %>
+    </h1>
+
+    <%= form_with(url: deliveries_path, method: :get, class: 'relative sm:ml-auto w-fit',
+          data: { turbo_frame: 'delivery-list', turbo_action: :advance, controller: 'inline-search' }) do %>
+      <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+        <%= render 'shared/svgs/search' %>
+      </div>
+      <%= text_field_tag 'q', params[:q], placeholder: t('.search_placeholder'),
+            class: 'form-control pl-10 pr-3', id: 'search_deliveries' %>
+    <% end %>
+  </header>
+
+  <turbo-frame id="delivery-list">
+    <div class="scrollable-table container relative rounded border overflow-auto w-full">
+      <% if @deliveries.any? %>
+        <%= render 'table', deliveries: @deliveries %>
+      <% else %>
+        <p class="flex h-40 justify-center items-center">
+          <%= t('.no_deliveries') %>
+        </p>
+      <% end %>
+    </div>
+  </turbo-frame>
 </div>

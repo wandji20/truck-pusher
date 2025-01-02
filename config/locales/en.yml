@@ -30,6 +30,7 @@
 en:
   general:
     close: "Close"
+    open_dropdown: "Open dropdown"
   navigations:
     add_delivery: "Add Delivery"
     account: "Account"
@@ -38,6 +39,57 @@ en:
   agencies:
     index:
       title: "Agencies"
+  deliveries:
+    add_customer: "+ Add customer"
+    new:
+      title: "New delivery"
+      destination:
+        label: "Destination"
+        placeholder: "Search destination branch"
+      sender:
+        label: "Sender"
+        placeholder: "Search customer telephone"
+      receiver:
+        label: "Receiver"
+        placeholder: "Search customer telephone"
+      description:
+        label: "Description"
+        placeholder: "Optional package description"
+      submit: "Register"
+    new_customer_form:
+      search_instead: "Search instead?"
+      title:
+        sender: "New customer (sender)"
+        receiver: "New customer (receiver)"
+      full_name:
+        label: "Full name"
+        placeholder: "Enter full name"
+      telephone:
+        label: "Telephone"
+        placeholder: "Enter telephone"
+    index:
+      title: "Deliveries"
+      search_placeholder: "Enter tracking number or secret"
+    table:
+      no_deliveries: "No deliveries"
+      trackin_no: "Tracking No"
+      tracking_secret: "Tracking Secret"
+      sender: "Sender"
+      receiver: "Receiver"
+      type: "Type"
+      action: "Action"
+      description: "Description"
+    table_row:
+      arrival_confirmed: "Arrival confirmed"
+      confirm_arrival: "Confirm arrival"
+      incoming: "Incoming"
+      outgoing: "Outgoing"
+    delivery:
+      tracking_no: "Tracking Number:"
+      sender: "Sender"
+      receiver: "Receiver"
+      confirm_arrival: "Confirm Arrival"
+      confirmed: "Confirmed"
   passwords:
     reset_instructions_sent: "Password reset instructions sent."
     invalid_telephone_address: "Telephone number not found!"

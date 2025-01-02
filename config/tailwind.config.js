@@ -21,6 +21,7 @@ module.exports = {
         "tp-super-light-aqua": "#EAF8FB",
         "tp-super-light-red": "#FDECEC",
         "tp-light-red": "#FFD6D6",
+        "tp-red": "#D93F3F",
         "tp-deep-red": "#B71C1C",
         "tp-light-green": "#E8F5E9",
         "tp-deep-green": "#1B5E20"

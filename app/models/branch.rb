@@ -7,5 +7,8 @@ class Branch < ApplicationRecord
                   uniqueness: { scope: :agency_id }
 
   # Associations
-  belongs_to :agency
+  acts_as_tenant :agency
+  has_many :operators, -> { where(role: "operator") },
+                        class_name: "Users::Admin",
+                        dependent: :destroy
 end

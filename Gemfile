@@ -18,6 +18,8 @@ gem "stimulus-rails"
 gem "tailwindcss-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
+# Authorisation
+gem "cancancan"
 # Multitenancy
 gem "acts_as_tenant"
 
