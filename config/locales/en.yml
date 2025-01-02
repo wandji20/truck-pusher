@@ -28,6 +28,8 @@
 #       enabled: "ON"
 
 en:
+  flash:
+    update_success: "%{name} successfully updated!"
   general:
     close: "Close"
     open_dropdown: "Open dropdown"
@@ -37,6 +39,7 @@ en:
     settings: "Settings"
     deliveries: "Deliveries"
   admins:
+    account: "Account"
     edit:
       title: "My Account"
       agency: "Agency"
@@ -68,6 +71,21 @@ en:
       role: "Role"
       action: "Action"
       remove: "Remove"
+  branches:
+    edit:
+      title: "Edit branch for %{agency}"
+    new:
+      title: "Create new branch for %{agency}"
+    form:
+      telephone:
+        label: "Telephone"
+        placeholder: "Entent telephone"
+      name:
+        label: "Name"
+        placeholder: "Enter name"
+      submit:
+        create: "Create"
+        update: "Update"
   deliveries:
     add_customer: "+ Add customer"
     new:

@@ -3,7 +3,7 @@ class AdminsController < ApplicationController
 
   def update
     if current_user.update(admin_params)
-      flash[:success] = "Accout successfull updated"
+      flash[:success] = t("flash.update_success", name: t("admins.account"))
       redirect_to account_path
     else
       render :edit, status: :unprocessable_entity

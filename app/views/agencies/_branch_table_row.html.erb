@@ -2,7 +2,8 @@
   <td><%= branch.name %></td>
   <td><%= branch.telephone %></td>
   <td>
-    <button class="btn link">
+    <button class="btn link" data-controller="modal-trigger" data-target="#manage-branch-modal"
+            data-url="<%= edit_branch_path(branch) %>" data-action="modal-trigger#fireModalEvent">
       <%= t("agencie.branches.edit") %>
     </button>
   </td>

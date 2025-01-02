@@ -12,6 +12,10 @@ Rails.application.routes.draw do
 
   # Agencies
   get "/settings", to: "agencies#edit", as: :agency_setting
+  delete "remove_user/:user_id", to: "agencies#remove_user", as: :remove_agency_user
+
+  # Branches
+  resources :branches, except: %i[index destroy]
 
   # Password
   resources :passwords, param: :token, except: %i[index show]
