@@ -6,5 +6,10 @@ class AgenciesController < ApplicationController
     @agencies = Agency.order(:created_at)
   end
 
-  def edit; end
+  def edit
+    @branches = Branch.order(:name)
+    @users = Users::Admin.joins(:branch)
+                         .select("users.*, branches.name AS branch_name")
+                         .order(:created_at)
+  end
 end

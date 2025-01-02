@@ -1,5 +1,7 @@
 class Agency < ApplicationRecord
   include NameConstants
+  BRANCH_HEADERS = %w[name telephone action]
+  USER_HEADERS = %w[full_name telephone branch role action]
 
   # Validations
   validates :name, presence: true,

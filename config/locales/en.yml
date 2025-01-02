@@ -51,6 +51,23 @@ en:
   agencies:
     index:
       title: "Agencies"
+    edit:
+      title: "Settings"
+      branches: "Branches"
+      users: "Users"
+    branches:
+      add_branch: "Add branch"
+      name: "Name"
+      telephone: "Telephone"
+      edit: "Edit"
+    users:
+      add_user: "Add user"
+      full_name: "Full name"
+      telephone: "Telephone"
+      branch: "Branch"
+      role: "Role"
+      action: "Action"
+      remove: "Remove"
   deliveries:
     add_customer: "+ Add customer"
     new:

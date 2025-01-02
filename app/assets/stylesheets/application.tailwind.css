@@ -54,6 +54,10 @@
     }
   }
 
+  #branches .scrollable-table, #users .scrollable-table {
+    max-height: calc(100vh - 295px);
+  }
+
   .table {
     @apply min-w-full divide-y divide-gray-300;
 
