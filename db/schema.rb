@@ -20,11 +20,13 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_25_003830) do
 
   create_table "branches", force: :cascade do |t|
     t.string "name", null: false
+    t.string "telephone", null: false
     t.integer "agency_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["agency_id"], name: "index_branches_on_agency_id"
     t.index ["name", "agency_id"], name: "index_branches_on_name_and_agency_id", unique: true
+    t.index ["telephone", "agency_id"], name: "index_branches_on_telephone_and_agency_id", unique: true
   end
 
   create_table "deliveries", force: :cascade do |t|

@@ -22,7 +22,7 @@ def create_agencies_and_branches
 
     ActsAsTenant.with_tenant(agency) do
       details[:branches].each_with_index do |name, idx|
-        branch = agency.branches.create!(name:)
+        branch = agency.branches.create!(name:, telephone: "6203098#{agency.id}#{idx}")
         telephone = "67#{(branch.id.to_s + idx.to_s).rjust(3, "0")}5621"
         agency.managers.create!(full_name: "#{details[:name]} Admin", telephone:, password:,
                                 password_confirmation: password, confirmed: true, role: :manager, branch:)
