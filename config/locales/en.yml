@@ -39,6 +39,9 @@ en:
     settings: "Settings"
     deliveries: "Deliveries"
   admins:
+    roles:
+      manager: "Manager"
+      operator: "Mail operator"
     account: "Account"
     edit:
       title: "My Account"
@@ -49,7 +52,7 @@ en:
         placeholder: "Enter full name"
       telephone:
         label: "Telephone"
-        placeholder: "Enter telephone"
+        placeholder: "Enter phone number"
       submit: "Save"
   agencies:
     index:
@@ -70,6 +73,7 @@ en:
       branch: "Branch"
       role: "Role"
       action: "Action"
+      invited_by: "Invited by"
       remove: "Remove"
   branches:
     edit:
@@ -113,7 +117,7 @@ en:
         placeholder: "Enter full name"
       telephone:
         label: "Telephone"
-        placeholder: "Enter telephone"
+        placeholder: "Enter phone number"
     index:
       title: "Deliveries"
       search_placeholder: "Enter tracking number or secret"
@@ -160,3 +164,32 @@ en:
         placeholder: "Enter password"
       submit: "Sign in"
       forgot_password: "Forgot Password?"
+  user_invitations:
+    invalid_url: "Your invitation url is not correct"
+    unconfirmed_message: "Please confirm your account to continue."
+    sent: "An invitation link has been sent to %{telephone}."
+    invalid_token: "Invitation token is invalid or has expired."
+    confirmed: "You invitation was successfully accepted"
+    new:
+      title: "Invite new user"
+    edit:
+      title: "Accept invitation"
+    form:
+      telephone:
+        label: "Telephone"
+        placeholder: "Enter phone number"
+      role:
+        label: "Role"
+        placeholder: "Select user role"
+      full_name:
+        label: "Full name"
+        placeholder: "Enter full name"
+      password:
+        label: "Password"
+        placeholder: "Enter your password"
+      password_confirmation:
+        label: "Password confirmation"
+        placeholder: "Enter your password confirmation"
+      submit:
+        invite: "Invite"
+        save: "Save"

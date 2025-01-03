@@ -4,7 +4,8 @@
       <%= t('agencies.edit.users') %>
     </h4>
 
-    <button class="btn btn-secondary ml-auto flex gap-2" type="button">
+    <button class="btn btn-secondary ml-auto flex gap-2" type="button" data-controller="modal-trigger" 
+        data-target="#invite-user-modal" data-url="<%= new_user_invitation_path %>" data-action="modal-trigger#fireModalEvent">
       <%= render "shared/svgs/plus" %>
       <%= t(".add_user") %>
     </button>
@@ -25,3 +26,5 @@
     </table>
   </div>
 </section>
+
+<%= render "shared/modal", id: "invite-user-modal" %>

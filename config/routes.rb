@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # Registration
   get "/account", to: "admins#edit"
   patch "/account", to: "admins#update"
+  resources :user_invitations, only: %i[new create edit update]
 
   # Session
   get "/login", to: "sessions#new"
