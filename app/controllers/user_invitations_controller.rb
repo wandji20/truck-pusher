@@ -6,6 +6,7 @@ class UserInvitationsController < ApplicationController
   def new
     current_agency = find_agency_by_cookie
     set_current_tenant(current_agency)
+    authorize! :manage, current_agency
 
     @user = Users::Admin.new
     respond_to do |format|
@@ -16,6 +17,7 @@ class UserInvitationsController < ApplicationController
   def create
     current_agency = find_agency_by_cookie
     set_current_tenant(current_agency)
+    authorize! :manage, current_agency
 
     @user = current_user.invite_user(
       params.require(:users_admin).permit(:telephone, :role).merge(agency: current_agency)

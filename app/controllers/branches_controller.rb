@@ -1,5 +1,6 @@
 class BranchesController < ApplicationController
   before_action :set_branch, only: %i[edit update]
+  before_action -> { authorize! :manage, @current_agency }
 
   def new
     @branch = Branch.new

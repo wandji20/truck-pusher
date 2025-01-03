@@ -4,11 +4,14 @@
       <%= t('agencies.edit.branches') %>
     </h4>
 
-    <button class="btn btn-secondary ml-auto flex gap-2" type="button" data-controller="modal-trigger" 
-        data-target="#manage-branch-modal" data-url="<%= new_branch_path %>" data-action="modal-trigger#fireModalEvent">
-      <%= render "shared/svgs/plus" %>
-      <%= t(".add_branch") %>
-    </button>
+    
+    <% if can? :manage, @current_agency %>
+      <button class="btn btn-secondary ml-auto flex gap-2" type="button" data-controller="modal-trigger" 
+          data-target="#manage-branch-modal" data-url="<%= new_branch_path %>" data-action="modal-trigger#fireModalEvent">
+        <%= render "shared/svgs/plus" %>
+        <%= t(".add_branch") %>
+      </button>
+    <% end %>
   </div>
 
   <div class="scrollable-table container relative rounded border overflow-auto w-full">
@@ -16,6 +19,7 @@
       <thead class='table-head'>
         <tr>
           <% Agency::BRANCH_HEADERS.each do |header| %>
+            <% next if header == "action" && !(can? :manage, @current_agency) %>
             <th scope="col" class="min-w-[100px] sticky top-0"><%= t(".#{header}") %></th>
           <% end %>
         </tr>
