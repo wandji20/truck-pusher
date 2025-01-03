@@ -67,11 +67,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_25_003830) do
 
   create_table "users", force: :cascade do |t|
     t.string "type"
-    t.string "full_name", null: false
+    t.string "full_name"
     t.string "telephone", null: false
-    t.integer "invited_by"
+    t.integer "invited_by_id"
     t.datetime "invited_at"
     t.boolean "confirmed", default: false
+    t.boolean "archived", default: false
     t.integer "agency_id"
     t.integer "branch_id"
     t.integer "role"

@@ -1,10 +1,16 @@
 module Users
   class Admin < User
     # Enums
-    enum :role, %i[operator manager general_manager]
+    enum :role, %i[operator manager]
+
+    # Validations
+    validates :full_name, presence: true,
+                length: { within: (MIN_NAME_LENGTH..MAX_NAME_LENGTH) }, on: :update, if: -> { confirmed? }
+    validates :role, presence: true
 
     # Associations
     belongs_to :branch, optional: true
+    belongs_to :invited_by, class_name: "Users::Admin", optional: true
     acts_as_tenant :agency
 
     def create_delivery(params)
@@ -23,6 +29,35 @@ module Users
 
     rescue ActiveRecord::RecordInvalid, ActiveRecord::NotNullViolation
       delivery
+    end
+
+    def invite_user(params)
+      agency = params.delete(:agency)
+      ActsAsTenant.with_tenant(agency) do
+        new_user = if user = Users::Admin.where(confirmed: false).find_by(telephone: params[:telephone])
+                      user.invited_at = Time.current
+                      user.invited_by_id = self.id
+                      user
+        else
+                      password = SecureRandom.hex(8)
+                      Users::Admin.new(params.merge({ invited_by_id: self.id, invited_at: Time.current,
+                          password:, password_confirmation: password, branch: self.branch }))
+        end
+
+        User.transaction do
+          new_user.save!
+          # token = new_user.generate_token_for(:invitation)
+          # edit_user_invitation_url(new_user, params: { token:, agency_name: agency.name }, host: "localhost:3000")
+          # Send message
+          new_user
+        end
+      rescue ActiveRecord::RecordInvalid
+        new_user
+      end
+    end
+
+    generates_token_for :invitation, expires_in: 1.week do
+      invited_at
     end
 
     private

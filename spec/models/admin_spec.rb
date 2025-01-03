@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Users::Admin, type: :model do
-  subject { create(:admin, telephone: "674895621") }
+  subject { create(:admin, :manager, telephone: "674895621") }
 
-  it { should validate_presence_of(:full_name) }
-  it { should validate_length_of(:full_name).is_at_least(described_class::MIN_NAME_LENGTH) }
-  it { should validate_length_of(:full_name).is_at_most(described_class::MAX_NAME_LENGTH) }
+  it { should validate_presence_of(:password) }
+  it { should validate_length_of(:password).is_at_least(described_class::MIN_PASSWORD_LENGTH) }
+  it { should validate_length_of(:password).is_at_most(described_class::MAX_PASSWORD_LENGTH) }
   it { should validate_presence_of(:telephone) }
   it { should validate_uniqueness_of(:telephone).scoped_to(:agency_id).case_insensitive }
 
@@ -19,7 +19,7 @@ RSpec.describe Users::Admin, type: :model do
     end
 
     context 'correct format' do
-      subject { build(:admin, telephone: '123654789') }
+      subject { build(:admin, :manager, telephone: '123654789') }
       it 'accepts correct telephone' do
         expect(subject.valid?).to be(true)
         expect(subject.errors.full_messages).to_not include(/Telephone is invalid/)
@@ -39,7 +39,7 @@ RSpec.describe Users::Admin, type: :model do
   describe "#create delivery" do
     let!(:agency) { create(:agency) }
     let!(:branches) { create_list(:branch, 4) }
-    let!(:operator) { create(:admin, :confirmed, :operator, agency:, branch: branches.first) }
+    let(:operator) { create(:admin, :operator, :confirmed, agency:, branch: branches.first) }
     let!(:customers) { create_list(:customer, 5) }
 
     context "valid attributes" do
@@ -85,6 +85,34 @@ RSpec.describe Users::Admin, type: :model do
         expect(delivery.receiver.errors.messages[:full_name]).to include("can't be blank")
         expect(delivery.receiver.errors.messages[:telephone]).to include("is invalid")
       end
+    end
+  end
+
+  describe "#invite_user" do
+    let(:agency) { create(:agency) }
+    let(:branch) { create(:branch, agency:) }
+    let(:admin) { create(:admin, :manager, :confirmed, agency:, branch:) }
+
+    it "invites new user" do
+      new_user = admin.invite_user({ telephone: '632154785', role: :manager, agency: })
+      expect(new_user.persisted?).to be_truthy
+    end
+
+    it "resends new user invite if user is unconfirmed" do
+      user = create(:admin, :manager, telephone: "632154785")
+
+      new_user = admin.invite_user({ telephone: '632154785', role: :manager, agency:, branch: })
+      expect(user.invited_by).to be_nil
+      expect(new_user.persisted?).to be_truthy
+      expect(new_user.invited_by_id).to be(admin.id)
+    end
+
+    it "fails to invite new user with confirmed account" do
+      create(:admin, :confirmed, :manager, telephone: "632154785", agency:)
+
+      new_user = admin.invite_user({ telephone: '632154785', role: :manager, agency: })
+      expect(new_user.persisted?).to be_falsey
+      expect(new_user.errors.messages[:telephone]).to include(/has already been taken/)
     end
   end
 end
