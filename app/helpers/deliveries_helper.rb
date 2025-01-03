@@ -5,4 +5,8 @@ module DeliveriesHelper
 
     nil
   end
+
+  def user_roles
+    Users::Admin.roles.keys.map { |role| [ role, t("admins.roles.#{role}") ] }
+  end
 end

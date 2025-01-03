@@ -8,8 +8,9 @@ class AgenciesController < ApplicationController
 
   def edit
     @branches = Branch.order(:name)
-    @users = Users::Admin.joins(:branch)
-                         .select("users.*, branches.name AS branch_name")
+    @users = Users::Admin.left_outer_joins([ :branch, :invited_by ])
+                         .select("users.*, branches.name AS branch_name,
+                                  invited_bies_users.full_name AS invited_by_name")
                          .order(:created_at)
   end
 end

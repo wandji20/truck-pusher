@@ -3,6 +3,7 @@
   <td><%= user.telephone %></td>
   <td><%= user.branch_name %></td>
   <td><%= user.role %></td>
+  <td><%= user.invited_by_name %></td>
   <td>
     <%= button_to t("agencie.users.remove"), remove_agency_user_path(user), method: :delete,
               form_class: 'btn link !p-0' %>
