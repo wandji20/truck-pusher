@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
+  # Super Admin
+  resources :super_admin, except: :destroy
   # Registration
   get "/account", to: "admins#edit"
   patch "/account", to: "admins#update"
