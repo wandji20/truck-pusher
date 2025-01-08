@@ -10,8 +10,8 @@ class BranchesController < ApplicationController
   end
 
   def create
-    @branch = Branch.new(branch_params)
-    if @branch.save
+    @branch = Branch.create_new(branch_params.merge({ agency: @current_agency, user: current_user }))
+    if @branch.persisted?
       redirect_to agency_setting_path
     else
       render turbo_stream: turbo_stream.replace("new-branch", partial: "branches/form",

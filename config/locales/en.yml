@@ -194,3 +194,22 @@ en:
       submit:
         invite: "Invite"
         save: "Save"
+  super_admin:
+    index:
+      title: "Agencies"
+      new_agency: "New Agency"
+    edit:
+      title: "Edit Agency"
+    new:
+      title: "New Agency"
+    agency_form:
+      manager: "Agency manager"
+      name:
+        label: "Name"
+        placeholder: "Enter name"
+      telephone:
+        label: "Telephone"
+        placeholder: "Enter phone number"
+      submit:
+        create: "Create"
+        update: "Update"

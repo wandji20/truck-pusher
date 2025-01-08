@@ -6,6 +6,7 @@ module ApplicationHelper
   end
 
   def home_path(agency)
+    return super_admin_index_path if controller_name == "super_admin"
     return root_path unless agency.present?
 
     deliveries_path

@@ -1,0 +1,7 @@
+<div class="w-full pt-2 px-4 max-w-[480px] m-auto mt-8">
+  <h2 class="text-center text-2xl/9 font-semibold tracking-tight text-gray-900">
+    <%= t('.title') %>
+  </h2>
+
+  <%= render "super_admin/agency_form", url: super_admin_index_path(@agency), agency: @agency, manager: @manager %>
+</div>

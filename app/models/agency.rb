@@ -14,4 +14,21 @@ class Agency < ApplicationRecord
   has_many :managers, -> { where(role: "manager") },
                       class_name: "Users::Admin",
                       dependent: :destroy
+
+  def self.create_new(agency_params, manager_params)
+    password = SecureRandom.hex(8)
+    agency = Agency.new(agency_params)
+    manager = agency.managers.build(
+      manager_params.merge({ password:, password_confirmation: password })
+    )
+
+    ActiveRecord::Base.transaction  do
+      agency.save!
+      manager.save!
+      # send confirmation text message
+    end
+    [ agency, manager ]
+  rescue ActiveRecord::RecordInvalid
+    [ agency, manager ]
+  end
 end

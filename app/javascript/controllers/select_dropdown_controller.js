@@ -20,15 +20,14 @@ export default class extends Controller {
     if (this.inputTarget.dataset.fieldType === "integer") {
       const value = this.inputTarget.value.replace(/[^-0-9.]/g, '');
       this.inputTarget.value = value;
-  
-      if(!value) return;
+
     }
 
     clearTimeout(this.debouncedSearch);
 
     this.debouncedSearch = setTimeout(async () => {
       if (this.inputTarget.value === '') {
-        this.selectedValue = null;
+        this.selectedValue = '';
 
         const placeholder = this.displayButtonTarget.querySelector('.label').dataset.placeholder;
         this.displayButtonTarget.querySelector('.label').innerHTML = placeholder;
