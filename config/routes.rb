@@ -3,10 +3,8 @@ Rails.application.routes.draw do
 
   # Registration
   get "/account", to: "admins#edit"
-  put "/account", to: "admins#update"
-
-  # Admin
-  resources :admin, only: %i[edit update]
+  patch "/account", to: "admins#update"
+  resources :user_invitations, only: %i[new create edit update]
 
   # Session
   get "/login", to: "sessions#new"
@@ -15,6 +13,10 @@ Rails.application.routes.draw do
 
   # Agencies
   get "/settings", to: "agencies#edit", as: :agency_setting
+  delete "remove_user/:user_id", to: "agencies#remove_user", as: :remove_agency_user
+
+  # Branches
+  resources :branches, except: %i[index destroy]
 
   # Password
   resources :passwords, param: :token, except: %i[index show]

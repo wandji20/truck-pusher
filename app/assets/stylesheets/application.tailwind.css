@@ -2,6 +2,7 @@
 @import "tailwind/button.css";
 @import "tailwind/dropdown.css";
 @import "tailwind/input.css";
+@import "tailwind/modal.css";
 
 @tailwind base;
 @tailwind components;
@@ -52,6 +53,10 @@
     @media (min-width: 640px) {
       max-height: calc(100vh - 205px);
     }
+  }
+
+  #branches .scrollable-table, #users .scrollable-table {
+    max-height: calc(100vh - 295px);
   }
 
   .table {

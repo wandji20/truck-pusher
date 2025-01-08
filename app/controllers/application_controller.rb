@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
 
   def set_current_user
     @current_user ||= Current.user
+
+    if @current_user && !@current_user.confirmed
+      redirect_to login_path(params: { agency_name: @current_agency.name }), notice: t("user_invitations.unconfirmed_message")
+    end
   end
 
   def current_user

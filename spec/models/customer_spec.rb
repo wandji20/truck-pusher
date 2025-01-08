@@ -7,6 +7,7 @@ RSpec.describe Users::Customer, type: :model do
   it { should validate_length_of(:full_name).is_at_least(described_class::MIN_NAME_LENGTH) }
   it { should validate_length_of(:full_name).is_at_most(described_class::MAX_NAME_LENGTH) }
   it { should validate_presence_of(:telephone) }
+  it { should validate_uniqueness_of(:telephone).scoped_to(:agency_id).case_insensitive }
   it { should_not belong_to(:agency) }
 
   describe "validating telephone format" do

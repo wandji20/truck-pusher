@@ -22,16 +22,16 @@ def create_agencies_and_branches
 
     ActsAsTenant.with_tenant(agency) do
       details[:branches].each_with_index do |name, idx|
-        branch = agency.branches.create!(name:)
+        branch = agency.branches.create!(name:, telephone: "6203098#{agency.id}#{idx}")
         telephone = "67#{(branch.id.to_s + idx.to_s).rjust(3, "0")}5621"
-        agency.managers.create!(full_name: "#{details[:name]} Admin", telephone:, password:,
-                                password_confirmation: password, confirmed: true, role: :manager, branch:)
+        manager = agency.managers.create!(full_name: "#{details[:name]} Admin", telephone:, password:,
+                                          password_confirmation: password, confirmed: true, role: :manager, branch:)
         # Create 3 operators for each branch
         3.times do |n|
           telephone = "65249#{(branch.id.to_s + idx.to_s + n.to_s).rjust(4, "0")}"
           branch.operators.create!(full_name: "#{details[:name]}-#{name} Operator-#{n + 1}",
                                     telephone:, password:, password_confirmation: password,
-                                    confirmed: true, role: :operator, branch:)
+                                    confirmed: true, role: :operator, branch:, invited_by: manager, invited_at: Time.current)
         end
       end
     end
