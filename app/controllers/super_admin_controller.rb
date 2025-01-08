@@ -1,6 +1,6 @@
 class SuperAdminController < ActionController::Base
-  http_basic_authenticate_with name: Rails.application.credentials["app_username"],
-                                password: Rails.application.credentials["app_password"]
+  http_basic_authenticate_with name: Rails.application.credentials["app_username"] || "",
+                                password: Rails.application.credentials["app_password"] || ""
   before_action :set_agency, only: %i[edit update]
   layout "application"
 

@@ -5,7 +5,7 @@ module Users
 
     # Validations
     validates :full_name, presence: true,
-                length: { within: (MIN_NAME_LENGTH..MAX_NAME_LENGTH) }, on: :update, if: -> { confirmed? }
+                length: { within: (MIN_NAME_LENGTH..MAX_NAME_LENGTH) }, if: -> { full_name.present? }
     validates :role, presence: true
 
     # Associations
@@ -19,7 +19,7 @@ module Users
 
       delivery = Delivery.new(params.merge({ registered_by: self, origin: self.branch }))
 
-      User.transaction do
+      ActiveRecord::Base.transaction do
         delivery = set_customer(sender_params, delivery, :sender)
         delivery = set_customer(receiver_params, delivery, :receiver)
 
@@ -44,7 +44,7 @@ module Users
                           password:, password_confirmation: password, branch: self.branch }))
         end
 
-        User.transaction do
+        ActiveRecord::Base.transaction do
           new_user.save!
           # token = new_user.generate_token_for(:invitation)
           # edit_user_invitation_url(new_user, params: { token:, agency_name: agency.name }, host: "localhost:3000")

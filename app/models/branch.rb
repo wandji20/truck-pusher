@@ -13,4 +13,18 @@ class Branch < ApplicationRecord
   has_many :operators, -> { where(role: "operator") },
                         class_name: "Users::Admin",
                         dependent: :destroy
+
+  def self.create_new(params)
+    user = params.delete :user
+    branch = Branch.new(params)
+
+    ActiveRecord::Base.transaction do
+      branch.save!
+      user.update!({ branch_id: branch.id }) unless user.branch.present?
+    end
+    branch
+
+  rescue ActiveRecord::RecordInvalid
+    branch
+  end
 end
