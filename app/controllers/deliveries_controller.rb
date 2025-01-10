@@ -115,5 +115,16 @@ class DeliveriesController < ApplicationController
     params.require(:receiver).permit(:full_name, :telephone)
   end
 
+  def set_agency
+    @current_agency = Agency.find_by(name: params[:agency_name]) || find_agency_by_cookie
+
+    unless @current_agency.present?
+      flash[:alert] = t("sessions.select_agency")
+      return redirect_to root_path
+    end
+
+    set_current_tenant(@current_agency)
+  end
+
   MyCustomer = Struct.new(:id, :full_name, :telephone)
 end
