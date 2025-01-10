@@ -4,10 +4,10 @@
       <%= t('.title') %>
     </h1>
 
-    <%= link_to t(".new_agency"), new_super_admin_path, class: 'btn btn-secondary ml-auto' %>
+    <%= link_to t(".new_agency"), new_admin_path, class: 'btn btn-secondary ml-auto' %>
   </div>
 </header>
 
 <div class="bg-tp-soft-gray grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 rounded mt-20 w-full p-2">
-  <%= render partial: "super_admin/agency", collection: @agencies, as: :agency %>
+  <%= render partial: "admin/agency", collection: @agencies, as: :agency %>
 </div>

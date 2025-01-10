@@ -194,7 +194,7 @@ en:
       submit:
         invite: "Invite"
         save: "Save"
-  super_admin:
+  admin:
     index:
       title: "Agencies"
       new_agency: "New Agency"

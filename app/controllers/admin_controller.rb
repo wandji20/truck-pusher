@@ -1,4 +1,4 @@
-class SuperAdminController < ActionController::Base
+class AdminController < ActionController::Base
   http_basic_authenticate_with name: Rails.application.credentials["app_username"] || "",
                                 password: Rails.application.credentials["app_password"] || ""
   before_action :set_agency, only: %i[edit update]
@@ -12,7 +12,7 @@ class SuperAdminController < ActionController::Base
     @agency, @manager = Agency.create_new(agency_params, manager_params)
 
     if @agency.persisted?
-      redirect_to super_admin_index_path
+      redirect_to admin_index_path
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,7 +27,7 @@ class SuperAdminController < ActionController::Base
 
   def update
     if @agency.update(agency_params)
-      redirect_to super_admin_index_path
+      redirect_to admin_index_path
     else
       render :edit, status: :unprocessable_entity
     end
