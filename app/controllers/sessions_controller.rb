@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :set_agency, only: :destroy
+  skip_before_action :set_enterprise, only: :destroy
   allow_unauthenticated_access only: %i[ new create ]
   rate_limit to: 10, within: 3.minutes, only: :create, with: -> { redirect_to root_path, alert: "Try again later." }
 
@@ -16,22 +16,22 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    @current_agency = find_agency_by_cookie
+    @current_enterprise = find_enterprise_by_cookie
 
     terminate_session
-    redirect_to login_path(params: { agency_name: @current_agency.name })
+    redirect_to login_path(params: { enterprise_name: @current_enterprise.name })
   end
 
   private
 
-  def set_agency
-    @current_agency = Agency.find_by(name: params[:agency_name])
+  def set_enterprise
+    @current_enterprise = Enterprise.find_by(name: params[:enterprise_name])
 
-    unless @current_agency.present?
-      flash[:alert] = t("sessions.select_agency")
+    unless @current_enterprise.present?
+      flash[:alert] = t("sessions.select_enterprise")
       return redirect_to root_path
     end
 
-    set_current_tenant(@current_agency)
+    set_current_tenant(@current_enterprise)
   end
 end

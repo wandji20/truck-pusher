@@ -1,11 +1,11 @@
 <section id="branches">
   <div class="w-full flex items-center pt-2 pb-3">
     <h4 class="text-xl/7 font-bold tracking-tight text-gray-900">
-      <%= t('agencies.edit.branches') %>
+      <%= t('enterprises.edit.branches') %>
     </h4>
 
     
-    <% if can? :manage, @current_agency %>
+    <% if can? :manage, @current_enterprise %>
       <button class="btn btn-secondary ml-auto flex gap-2" type="button" data-controller="modal-trigger" 
           data-target="#manage-branch-modal" data-url="<%= new_branch_path %>" data-action="modal-trigger#fireModalEvent">
         <%= render "shared/svgs/plus" %>
@@ -18,8 +18,8 @@
     <table class="table">
       <thead class='table-head'>
         <tr>
-          <% Agency::BRANCH_HEADERS.each do |header| %>
-            <% next if header == "action" && !(can? :manage, @current_agency) %>
+          <% Enterprise::BRANCH_HEADERS.each do |header| %>
+            <% next if header == "action" && !(can? :manage, @current_enterprise) %>
             <th scope="col" class="min-w-[100px] sticky top-0"><%= t(".#{header}") %></th>
           <% end %>
         </tr>

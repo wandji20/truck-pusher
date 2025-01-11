@@ -7,7 +7,7 @@ RSpec.describe Users::Admin, type: :model do
   it { should validate_length_of(:password).is_at_least(described_class::MIN_PASSWORD_LENGTH) }
   it { should validate_length_of(:password).is_at_most(described_class::MAX_PASSWORD_LENGTH) }
   it { should validate_presence_of(:telephone) }
-  it { should validate_uniqueness_of(:telephone).scoped_to(:agency_id).case_insensitive }
+  it { should validate_uniqueness_of(:telephone).scoped_to(:enterprise_id).case_insensitive }
 
   describe "validating telephone format" do
     context 'bad format' do
@@ -37,15 +37,15 @@ RSpec.describe Users::Admin, type: :model do
 
 
   describe "#create delivery" do
-    let!(:agency) { create(:agency) }
+    let!(:enterprise) { create(:enterprise) }
     let!(:branches) { create_list(:branch, 4) }
-    let(:operator) { create(:admin, :operator, :confirmed, agency:, branch: branches.first) }
+    let(:operator) { create(:admin, :operator, :confirmed, enterprise:, branch: branches.first) }
     let!(:customers) { create_list(:customer, 5) }
 
     context "valid attributes" do
       it "creates new delivery with existing customer record" do
         params = { sender_id: customers.first.id, receiver_id: customers.last.id,
-                   agency_id: agency.id, destination_id: branches.last.id }
+                   enterprise_id: enterprise.id, destination_id: branches.last.id }
         delivery = operator.create_delivery(params)
         expect(delivery.persisted?).to be_truthy
       end
@@ -56,7 +56,7 @@ RSpec.describe Users::Admin, type: :model do
         receiver = build(:customer)
         params = { sender: { full_name: sender.full_name, telephone: sender.telephone },
                    receiver: { full_name: receiver.full_name, telephone: receiver.telephone },
-                   agency_id: agency.id, destination_id: branches.last.id }
+                   enterprise_id: enterprise.id, destination_id: branches.last.id }
 
         delivery = operator.create_delivery(params)
         expect(delivery.persisted?).to be_truthy
@@ -66,7 +66,7 @@ RSpec.describe Users::Admin, type: :model do
 
     context "invalid attributes" do
       it "fails to create new delivery when sender or receiver is absent" do
-        params = { agency_id: agency.id, destination_id: branches.last.id }
+        params = { enterprise_id: enterprise.id, destination_id: branches.last.id }
         delivery = operator.create_delivery(params)
         expect(delivery.persisted?).to be_falsey
         expect(delivery.errors[:sender]).to include("must exist")
@@ -76,7 +76,7 @@ RSpec.describe Users::Admin, type: :model do
       it "fails to create new delivery when sender or receiver attribute is invalid" do
         params = { sender: { full_name: "t", telephone: "" },
                    receiver: { full_name: "", telephone: "1245" },
-                   agency_id: agency.id, destination_id: branches.last.id }
+                   enterprise_id: enterprise.id, destination_id: branches.last.id }
         delivery = operator.create_delivery(params)
         expect(delivery.persisted?).to be_falsey
         expect(delivery.sender.errors.messages[:full_name]).to include("is too short (minimum is 2 characters)")
@@ -89,28 +89,28 @@ RSpec.describe Users::Admin, type: :model do
   end
 
   describe "#invite_user" do
-    let(:agency) { create(:agency) }
-    let(:branch) { create(:branch, agency:) }
-    let(:admin) { create(:admin, :manager, :confirmed, agency:, branch:) }
+    let(:enterprise) { create(:enterprise) }
+    let(:branch) { create(:branch, enterprise:) }
+    let(:admin) { create(:admin, :manager, :confirmed, enterprise:, branch:) }
 
     it "invites new user" do
-      new_user = admin.invite_user({ telephone: '632154785', role: :manager, agency: })
+      new_user = admin.invite_user({ telephone: '632154785', role: :manager, enterprise: })
       expect(new_user.persisted?).to be_truthy
     end
 
     it "resends new user invite if user is unconfirmed" do
       user = create(:admin, :manager, telephone: "632154785")
 
-      new_user = admin.invite_user({ telephone: '632154785', role: :manager, agency:, branch: })
+      new_user = admin.invite_user({ telephone: '632154785', role: :manager, enterprise:, branch: })
       expect(user.invited_by).to be_nil
       expect(new_user.persisted?).to be_truthy
       expect(new_user.invited_by_id).to be(admin.id)
     end
 
     it "fails to invite new user with confirmed account" do
-      create(:admin, :confirmed, :manager, telephone: "632154785", agency:)
+      create(:admin, :confirmed, :manager, telephone: "632154785", enterprise:)
 
-      new_user = admin.invite_user({ telephone: '632154785', role: :manager, agency: })
+      new_user = admin.invite_user({ telephone: '632154785', role: :manager, enterprise: })
       expect(new_user.persisted?).to be_falsey
       expect(new_user.errors.messages[:telephone]).to include(/has already been taken/)
     end

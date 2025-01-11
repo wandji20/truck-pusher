@@ -1,6 +1,6 @@
 class BranchesController < ApplicationController
   before_action :set_branch, only: %i[edit update]
-  before_action -> { authorize! :manage, @current_agency }
+  before_action -> { authorize! :manage, @current_enterprise }
 
   def new
     @branch = Branch.new
@@ -10,9 +10,9 @@ class BranchesController < ApplicationController
   end
 
   def create
-    @branch = Branch.create_new(branch_params.merge({ agency: @current_agency, user: current_user }))
+    @branch = Branch.create_new(branch_params.merge({ enterprise: @current_enterprise, user: current_user }))
     if @branch.persisted?
-      redirect_to agency_setting_path
+      redirect_to enterprise_setting_path
     else
       render turbo_stream: turbo_stream.replace("new-branch", partial: "branches/form",
                                                   locals: { branch: @branch, id: "new-branch" }),
@@ -28,7 +28,7 @@ class BranchesController < ApplicationController
 
   def update
     if @branch.update(branch_params)
-      redirect_to agency_setting_path
+      redirect_to enterprise_setting_path
     else
       render turbo_stream: turbo_stream.replace("edit_branch_#{@branch.id}",
                                                   partial: "branches/form",

@@ -1,4 +1,4 @@
-class Agency < ApplicationRecord
+class Enterprise < ApplicationRecord
   include NameConstants
   BRANCH_HEADERS = %w[name telephone action]
   USER_HEADERS = %w[full_name telephone branch role invited_by action]
@@ -8,6 +8,9 @@ class Agency < ApplicationRecord
                   length: { within: (MIN_NAME_LENGTH..MAX_NAME_LENGTH) },
                   uniqueness: true
 
+  # Enums
+  enum :category, %i[agency special merchant]
+
   # Associations
   has_many :branches, dependent: :destroy
   has_many :sessions, dependent: :destroy
@@ -15,20 +18,20 @@ class Agency < ApplicationRecord
                       class_name: "Users::Admin",
                       dependent: :destroy
 
-  def self.create_new(agency_params, manager_params)
+  def self.create_new(enterprise_params, manager_params)
     password = SecureRandom.hex(8)
-    agency = Agency.new(agency_params)
-    manager = agency.managers.build(
+    enterprise = Enterprise.new(enterprise_params)
+    manager = enterprise.managers.build(
       manager_params.merge({ password:, password_confirmation: password })
     )
 
     ActiveRecord::Base.transaction  do
-      agency.save!
+      enterprise.save!
       manager.save!
       # send confirmation text message
     end
-    [ agency, manager ]
+    [ enterprise, manager ]
   rescue ActiveRecord::RecordInvalid
-    [ agency, manager ]
+    [ enterprise, manager ]
   end
 end

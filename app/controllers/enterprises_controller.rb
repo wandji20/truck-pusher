@@ -1,9 +1,9 @@
-class AgenciesController < ApplicationController
+class EnterprisesController < ApplicationController
   allow_unauthenticated_access only: :index
-  skip_before_action :set_agency, only: :index
+  skip_before_action :set_enterprise, only: :index
 
   def index
-    @agencies = Agency.order(:created_at)
+    @enterprises = Enterprise.order(:created_at)
   end
 
   def edit
@@ -16,7 +16,7 @@ class AgenciesController < ApplicationController
   end
 
   def remove_user
-    authorize! :manage, @current_agency
+    authorize! :manage, @current_enterprise
 
     user = Users::Admin.find(params[:user_id])
     user.update_column(:archived, true)

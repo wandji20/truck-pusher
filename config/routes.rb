@@ -12,9 +12,9 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  # Agencies
-  get "/settings", to: "agencies#edit", as: :agency_setting
-  delete "remove_user/:user_id", to: "agencies#remove_user", as: :remove_agency_user
+  # Enterprises
+  get "/settings", to: "enterprises#edit", as: :enterprise_setting
+  delete "remove_user/:user_id", to: "enterprises#remove_user", as: :remove_enterprise_user
 
   # Branches
   resources :branches, except: %i[index destroy]
@@ -38,5 +38,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "agencies#index"
+  root "enterprises#index"
 end

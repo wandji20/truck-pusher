@@ -5,9 +5,9 @@ module ApplicationHelper
     "navbar/nav"
   end
 
-  def home_path(agency)
+  def home_path(enterprise)
     return admin_index_path if controller_name == "admin"
-    return root_path unless agency.present?
+    return root_path unless enterprise.present?
 
     deliveries_path
   end
@@ -18,8 +18,8 @@ module ApplicationHelper
         active: active_class("deliveries", "new") || active_class("deliveries", "create") },
       { text: t("navigations.account"), icon: "user", url: account_path,
         active: active_class("admins", "edit") || active_class("admins", "update") },
-      { text: t("navigations.settings"), icon: "setting", url: agency_setting_path,
-      active: active_class("agencies", "edit") || active_class("agencies", "update") },
+      { text: t("navigations.settings"), icon: "setting", url: enterprise_setting_path,
+      active: active_class("enterprises", "edit") || active_class("enterprises", "update") },
       { text: t("navigations.deliveries"), icon: "folder", url: deliveries_path,
         active: active_class("deliveries", "index") }
     ]

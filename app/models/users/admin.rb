@@ -11,7 +11,7 @@ module Users
     # Associations
     belongs_to :branch, optional: true
     belongs_to :invited_by, class_name: "Users::Admin", optional: true
-    acts_as_tenant :agency
+    acts_as_tenant :enterprise
 
     def create_delivery(params)
       sender_params = params.delete(:sender)
@@ -32,8 +32,8 @@ module Users
     end
 
     def invite_user(params)
-      agency = params.delete(:agency)
-      ActsAsTenant.with_tenant(agency) do
+      enterprise = params.delete(:enterprise)
+      ActsAsTenant.with_tenant(enterprise) do
         new_user = if user = Users::Admin.where(confirmed: false).find_by(telephone: params[:telephone])
                       user.invited_at = Time.current
                       user.invited_by_id = self.id
@@ -47,7 +47,7 @@ module Users
         ActiveRecord::Base.transaction do
           new_user.save!
           # token = new_user.generate_token_for(:invitation)
-          # edit_user_invitation_url(new_user, params: { token:, agency_name: agency.name }, host: "localhost:3000")
+          # edit_user_invitation_url(new_user, params: { token:, enterprise_name: enterprise.name }, host: "localhost:3000")
           # Send message
           new_user
         end

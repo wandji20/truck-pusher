@@ -41,18 +41,18 @@ class DeliveriesController < ApplicationController
 
   private
 
-  def set_agency
-    # Attempt to set agency from cookies
-    @current_agency = find_agency_by_cookie
+  def set_enterprise
+    # Attempt to set enterprise from cookies
+    @current_enterprise = find_enterprise_by_cookie
     # Else set from params
-    @current_agency ||= Agency.find_by(name: params[:agency_name])
+    @current_enterprise ||= Enterprise.find_by(name: params[:enterprise_name])
 
-    unless @current_agency.present?
-      flash[:alert] = t("sessions.select_agency")
+    unless @current_enterprise.present?
+      flash[:alert] = t("sessions.select_enterprise")
       return redirect_to root_path
     end
 
-    set_current_tenant(@current_agency)
+    set_current_tenant(@current_enterprise)
   end
 
   def search_deliveries
@@ -60,7 +60,7 @@ class DeliveriesController < ApplicationController
                           .or(Delivery.where(destination_id: @current_user.branch_id))
 
     @deliveries = @deliveries.joins([ :sender, :receiver ])
-                              .select("deliveries.id, deliveries.agency_id, deliveries.origin_id, deliveries.destination_id,
+                              .select("deliveries.id, deliveries.enterprise_id, deliveries.origin_id, deliveries.destination_id,
                                         deliveries.tracking_number, deliveries.tracking_secret, deliveries.description,
                                         deliveries.status, deliveries.created_at, users.full_name AS sender_name,
                                         users.telephone AS sender_telephone, receivers_deliveries.full_name AS receiver_name,
@@ -115,15 +115,15 @@ class DeliveriesController < ApplicationController
     params.require(:receiver).permit(:full_name, :telephone)
   end
 
-  def set_agency
-    @current_agency = Agency.find_by(name: params[:agency_name]) || find_agency_by_cookie
+  def set_enterprise
+    @current_enterprise = Enterprise.find_by(name: params[:enterprise_name]) || find_enterprise_by_cookie
 
-    unless @current_agency.present?
-      flash[:alert] = t("sessions.select_agency")
+    unless @current_enterprise.present?
+      flash[:alert] = t("sessions.select_enterprise")
       return redirect_to root_path
     end
 
-    set_current_tenant(@current_agency)
+    set_current_tenant(@current_enterprise)
   end
 
   MyCustomer = Struct.new(:id, :full_name, :telephone)

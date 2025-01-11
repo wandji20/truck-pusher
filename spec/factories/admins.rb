@@ -7,7 +7,7 @@ FactoryBot.define do
     password_confirmation { "password" }
     role { 'operator' }
 
-    association :agency
+    association :enterprise
     association :branch
 
     trait :manager do

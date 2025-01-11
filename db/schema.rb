@@ -14,26 +14,19 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_25_003830) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
-  create_table "agencies", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_agencies_on_name", unique: true
-  end
-
   create_table "branches", force: :cascade do |t|
     t.string "name", null: false
     t.string "telephone", null: false
-    t.integer "agency_id", null: false
+    t.bigint "enterprise_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["agency_id"], name: "index_branches_on_agency_id"
-    t.index ["name", "agency_id"], name: "index_branches_on_name_and_agency_id", unique: true
-    t.index ["telephone", "agency_id"], name: "index_branches_on_telephone_and_agency_id", unique: true
+    t.index ["enterprise_id"], name: "index_branches_on_enterprise_id"
+    t.index ["name", "enterprise_id"], name: "index_branches_on_name_and_enterprise_id", unique: true
+    t.index ["telephone", "enterprise_id"], name: "index_branches_on_telephone_and_enterprise_id", unique: true
   end
 
   create_table "deliveries", force: :cascade do |t|
-    t.integer "agency_id", null: false
+    t.integer "enterprise_id", null: false
     t.integer "origin_id", null: false
     t.integer "destination_id", null: false
     t.integer "sender_id", null: false
@@ -49,20 +42,28 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_25_003830) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["agency_id"], name: "index_deliveries_on_agency_id"
     t.index ["destination_id"], name: "index_deliveries_on_destination_id"
+    t.index ["enterprise_id"], name: "index_deliveries_on_enterprise_id"
     t.index ["origin_id"], name: "index_deliveries_on_origin_id"
     t.index ["receiver_id"], name: "index_deliveries_on_receiver_id"
     t.index ["sender_id"], name: "index_deliveries_on_sender_id"
-    t.index ["tracking_number", "agency_id"], name: "index_deliveries_on_tracking_number_and_agency_id"
-    t.index ["tracking_secret", "agency_id"], name: "index_deliveries_on_tracking_secret_and_agency_id"
+    t.index ["tracking_number", "enterprise_id"], name: "index_deliveries_on_tracking_number_and_enterprise_id"
+    t.index ["tracking_secret", "enterprise_id"], name: "index_deliveries_on_tracking_secret_and_enterprise_id"
+  end
+
+  create_table "enterprises", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "category", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_enterprises_on_name", unique: true
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.bigint "user_id", null: false
     t.string "ip_address"
     t.string "user_agent"
-    t.integer "agency_id"
+    t.integer "enterprise_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_sessions_on_user_id"
@@ -76,15 +77,15 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_25_003830) do
     t.datetime "invited_at"
     t.boolean "confirmed", default: false
     t.boolean "archived", default: false
-    t.integer "agency_id"
+    t.integer "enterprise_id"
     t.integer "branch_id"
     t.integer "role"
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["telephone", "agency_id"], name: "index_users_on_telephone_and_agency_id", unique: true
+    t.index ["telephone", "enterprise_id"], name: "index_users_on_telephone_and_enterprise_id", unique: true
   end
 
-  add_foreign_key "branches", "agencies"
+  add_foreign_key "branches", "enterprises"
   add_foreign_key "sessions", "users"
 end

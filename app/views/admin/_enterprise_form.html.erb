@@ -1,12 +1,12 @@
-<%= form_with model: agency, url:, id: dom_id(agency) do |form| %>
+<%= form_with model: enterprise, url:, id: dom_id(enterprise) do |form| %>
   <div class="form-group">
     <%= form.label :name, t('.name.label'), class: "form-label" %>
     <%= form.text_field :name, required: true, autofocus: true,
           autocomplete: "name", placeholder: t('.name.placeholder'),
-          class: "form-control #{'is-invalid' if agency.errors.messages[:name].present?}" %>
-    <% if agency.errors.messages[:name].present? %>
+          class: "form-control #{'is-invalid' if enterprise.errors.messages[:name].present?}" %>
+    <% if enterprise.errors.messages[:name].present? %>
       <div class="invalid-feedback">
-        <% agency.errors.messages[:name].each do |message| %>
+        <% enterprise.errors.messages[:name].each do |message| %>
           <span><%= message %></span>
         <% end %>
       </div>
@@ -14,7 +14,7 @@
   </div>
 
   
-  <% unless agency.persisted? %>
+  <% unless enterprise.persisted? %>
     <%= form.fields_for manager do |manager_form| %>
       <div class="flex justify-between items-center">
         <h4 class="mb-2"><%= t(".manager") %></h4>
@@ -38,5 +38,5 @@
   <% end %>
   
 
-  <%= form.submit t(".submit.#{agency.persisted? ? 'update' : 'create'}"), class: "btn btn-primary mb-5" %>
+  <%= form.submit t(".submit.#{enterprise.persisted? ? 'update' : 'create'}"), class: "btn btn-primary mb-5" %>
 <% end %>

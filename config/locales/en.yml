@@ -54,9 +54,9 @@ en:
         label: "Telephone"
         placeholder: "Enter phone number"
       submit: "Save"
-  agencies:
+  enterprises:
     index:
-      title: "Agencies"
+      title: "Enterprises"
     edit:
       title: "Settings"
       branches: "Branches"
@@ -78,9 +78,9 @@ en:
       remove: "Remove"
   branches:
     edit:
-      title: "Edit branch for %{agency}"
+      title: "Edit branch for %{enterprise}"
     new:
-      title: "Create new branch for %{agency}"
+      title: "Create new branch for %{enterprise}"
     form:
       telephone:
         label: "Telephone"
@@ -154,7 +154,7 @@ en:
   sessions:
     invalid_credentials: "Wrong telephone number or password."
     login_required: "You need to sign in to continue"
-    select_agency: "Please select an agency to login"
+    select_enterprise: "Please select an enterprise to login"
     new:
       title: "Sign in to your account"
       telephone:
@@ -196,14 +196,14 @@ en:
         save: "Save"
   admin:
     index:
-      title: "Agencies"
-      new_agency: "New Agency"
+      title: "Enterprises"
+      new_enterprise: "New Enterprise"
     edit:
-      title: "Edit Agency"
+      title: "Edit Enterprise"
     new:
-      title: "New Agency"
-    agency_form:
-      manager: "Agency manager"
+      title: "New Enterprise"
+    enterprise_form:
+      manager: "Enterprise manager"
       name:
         label: "Name"
         placeholder: "Enter name"

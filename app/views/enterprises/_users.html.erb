@@ -1,11 +1,11 @@
 <section id="users">
   <div class="w-full flex items-center pt-2 pb-3">
     <h4 class="text-xl/3 font-bold tracking-tight text-gray-900">
-      <%= t('agencies.edit.users') %>
+      <%= t('enterprises.edit.users') %>
     </h4>
 
     
-    <% if (can? :manage, @current_agency) && Branch.exists? %>
+    <% if (can? :manage, @current_enterprise) && Branch.exists? %>
       <button class="btn btn-secondary ml-auto flex gap-2" type="button" data-controller="modal-trigger" 
           data-target="#invite-user-modal" data-url="<%= new_user_invitation_path %>"
           data-action="modal-trigger#fireModalEvent">
@@ -20,8 +20,8 @@
     <table class="table">
       <thead class='table-head'>
         <tr>
-          <% Agency::USER_HEADERS.each do |header| %>
-             <% next if header == "action" && !(can? :manage, @current_agency) %>
+          <% Enterprise::USER_HEADERS.each do |header| %>
+             <% next if header == "action" && !(can? :manage, @current_enterprise) %>
 
             <th scope="col" class="min-w-[100px] sticky top-0"><%= t(".#{header}") %></th>
           <% end %>

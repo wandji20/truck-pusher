@@ -4,11 +4,11 @@
   <td><%= user.branch_name %></td>
   <td><%= user.role %></td>
   <td><%= user.invited_by_name %></td>
-  <% if can? :manage, @current_agency %>
+  <% if can? :manage, @current_enterprise %>
     <td>
-      <%= button_to t("agencies.users.remove"), remove_agency_user_path(user), method: :delete,
+      <%= button_to t("enterprises.users.remove"), remove_enterprise_user_path(user), method: :delete,
                 form_class: 'btn link !p-0',
-                data: { turbo_confirm: t("agencies.users.delete_confirm", user: sanitize(user.full_name)) } %>
+                data: { turbo_confirm: t("enterprises.users.delete_confirm", user: sanitize(user.full_name)) } %>
     </td>
   <% end %>
 </tr>

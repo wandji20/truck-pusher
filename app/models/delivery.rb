@@ -2,7 +2,7 @@ class Delivery < ApplicationRecord
   # Constants
   HEADERS = [ "tracking_no", "tracking_secret", "sender", "receiver", "type", "description", "action" ].freeze
   # Validations
-  validates :tracking_number, :tracking_secret, uniqueness: { scope: :agency_id }
+  validates :tracking_number, :tracking_secret, uniqueness: { scope: :enterprise_id }
 
   # Enums
   enum :status, %i[registered sent checked_in checked_out]
@@ -11,7 +11,7 @@ class Delivery < ApplicationRecord
   before_create :generate_tracking_number, :generate_tracking_secret
 
   # Associations
-  acts_as_tenant :agency
+  acts_as_tenant :enterprise
   belongs_to :origin, class_name: "Branch"
   belongs_to :destination, class_name: "Branch"
 
@@ -51,6 +51,6 @@ class Delivery < ApplicationRecord
   end
 
   def encode_branches
-    "#{(agency_id.to_s + origin_id.to_s + destination_id.to_s).to_i.to_s(36)}"
+    "#{(enterprise_id.to_s + origin_id.to_s + destination_id.to_s).to_i.to_s(36)}"
   end
 end

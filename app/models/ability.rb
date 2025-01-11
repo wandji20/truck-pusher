@@ -4,12 +4,12 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :manage, Agency do |agency|
-      user.agency_id == agency.id && user.manager?
+    can :manage, Enterprise do |enterprise|
+      user.enterprise_id == enterprise.id && user.manager?
     end
 
     can :manage, Delivery do |delivery|
-      return unless delivery.agency_id == user.agency_id
+      return unless delivery.enterprise_id == user.enterprise_id
       return unless user.operator? || user.manager?
 
       [ delivery.origin_id, delivery.destination_id ].include?(user.branch_id)
