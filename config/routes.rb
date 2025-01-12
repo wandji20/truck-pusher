@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :marketers do
+    resources :invitations, except: %i[index destroy]
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # Super Admin
   resources :admin, except: :destroy

@@ -225,3 +225,10 @@ en:
       submit:
         create: "Create"
         update: "Update"
+  marketers:
+    invitation_mailer:
+      subject: "Invitation to join Truck Pusher"
+      invite:
+        title: "New Invitation"
+        message: "Your truck pusher account was successfully created.\nPlease confirm to continue"
+        accept: "Accept"

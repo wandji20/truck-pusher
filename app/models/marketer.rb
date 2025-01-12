@@ -22,4 +22,23 @@ class Marketer < ApplicationRecord
 
   # Associations
   has_many :enterprises
+
+  generates_token_for :invitation, expires_in: 1.day
+
+  def self.invite_new(params)
+    new_marketer = if marketer = Marketer.where(confirmed: false).find_by(email: params[:email])
+          marketer
+    else
+      password = SecureRandom.hex(8)
+      Marketer.new(params.merge({ password:, password_confirmation: password }))
+    end
+
+    ActiveRecord::Base.transaction do
+      new_marketer.save!
+      Marketers::InvitationMailer.invite(marketer).deliver_later
+    end
+    new_marketer
+  rescue ActiveRecord::RecordInvalid
+    new_marketer
+  end
 end

@@ -67,6 +67,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_12_150436) do
     t.string "email", null: false
     t.string "password_digest", null: false
     t.integer "enterprises_count", default: 0
+    t.boolean "confirmed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

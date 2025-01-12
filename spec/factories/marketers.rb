@@ -5,5 +5,9 @@ FactoryBot.define do
     password { "password" }
     password_confirmation { "password" }
     enterprises_count { 1 }
+
+    trait :confirmed do
+      confirmed { true }
+    end
   end
 end
