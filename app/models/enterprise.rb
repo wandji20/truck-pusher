@@ -12,6 +12,7 @@ class Enterprise < ApplicationRecord
   enum :category, %i[agency special merchant]
 
   # Associations
+  belongs_to :marketer, optional: true, counter_cache: true
   has_many :branches, dependent: :destroy
   has_many :sessions, dependent: :destroy
   has_many :managers, -> { where(role: "manager") },

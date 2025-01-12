@@ -4,6 +4,7 @@ class CreateEnterprises < ActiveRecord::Migration[8.0]
       t.string :name, null: false
       t.integer :category, default: 0
       t.jsonb :location, default: {}
+      t.integer :marketer_id
 
       t.timestamps
     end

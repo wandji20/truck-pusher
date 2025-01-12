@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_25_003830) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_12_150436) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -55,9 +55,20 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_25_003830) do
     t.string "name", null: false
     t.integer "category", default: 0
     t.jsonb "location", default: {}
+    t.integer "marketer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_enterprises_on_name", unique: true
+  end
+
+  create_table "marketers", force: :cascade do |t|
+    t.string "full_name"
+    t.string "telephone"
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.integer "enterprises_count", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sessions", force: :cascade do |t|
