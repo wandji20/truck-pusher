@@ -15,6 +15,20 @@ ENTERPRISES = [
   { name: "Golden", branches: [ "Kumba", "Buea", "Douala" ] }
 ]
 
+def create_default_enterprise_and_branches
+  enterprise = Enterprise.create(name: "Truck Pusher", category: :special)
+  ActsAsTenant.with_tenant(enterprise) do
+    password = "password"
+    [ "Bamenda", "Limbe", "Buea", "Douala", "Yaounde", "Kumba", "Bafoussam" ].each_with_index do |name, idx|
+      branch = Branch.create(name:, telephone: "6203099#{enterprise.id}#{idx}")
+      telephone = "69#{(branch.id.to_s + idx.to_s).rjust(3, "0")}5621"
+
+      enterprise.managers.create!(full_name: "#{name} Admin", telephone:, password:,
+                                    password_confirmation: password, confirmed: true, role: :manager, branch:)
+    end
+  end
+end
+
 def create_enterprises_and_branches
   ENTERPRISES.each_with_index do |details, idx|
     password = "password"
@@ -59,7 +73,7 @@ def create_customers_and_deliveries
         10.times do
           sender_id, receiver_id, = customer_ids.shuffle[3, 7]
           destination_id = branch_ids.select { |id| id != branch.id }.shuffle.sample
-          registered_by_id = operator_ids.shuffle.sample
+          registered_by_id = operator_ids.shuffle.sample || enterprise.manager_ids.first
 
           attrs =  { sender_id:, receiver_id:, origin_id: branch.id, destination_id:, registered_by_id: }
 
@@ -73,6 +87,8 @@ end
 
 
 ActiveRecord::Base.transaction do
+  p "Creating default Agency and Branches"
+  create_default_enterprise_and_branches
   p "Creating enterprises and Branches"
   create_enterprises_and_branches
   p "Create customers and deliveries"

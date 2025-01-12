@@ -54,6 +54,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_25_003830) do
   create_table "enterprises", force: :cascade do |t|
     t.string "name", null: false
     t.integer "category", default: 0
+    t.jsonb "location", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_enterprises_on_name", unique: true
@@ -81,6 +82,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_25_003830) do
     t.integer "branch_id"
     t.integer "role"
     t.string "password_digest", null: false
+    t.jsonb "location", default: {}
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["telephone", "enterprise_id"], name: "index_users_on_telephone_and_enterprise_id", unique: true

@@ -12,6 +12,7 @@ class CreateUsers < ActiveRecord::Migration[8.0]
       t.integer :branch_id
       t.integer :role
       t.string :password_digest, null: false
+      t.jsonb :location, default: {}
 
       t.timestamps
     end
