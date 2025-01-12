@@ -56,15 +56,21 @@ class DeliveriesController < ApplicationController
   end
 
   def search_deliveries
-    @deliveries = Delivery.where(origin_id: @current_user.branch_id)
-                          .or(Delivery.where(destination_id: @current_user.branch_id))
+    @deliveries = if @current_enterprise.special?
+      ActsAsTenant.without_tenant do
+        Delivery.joins(:enterprise)
+                .where("(origin_id = ? OR destination_id = ?) AND enterprises.category != ?",
+                        @current_user.branch_id, @current_user.branch_id, 0)
+      end
+    else
+      Delivery.where("origin_id = ? OR destination_id = ?", @current_user.branch_id, @current_user.branch_id)
+    end
 
-    @deliveries = @deliveries.joins([ :sender, :receiver ])
+    @deliveries = @deliveries.joins([ :receiver, :destination ])
                               .select("deliveries.id, deliveries.enterprise_id, deliveries.origin_id, deliveries.destination_id,
                                         deliveries.tracking_number, deliveries.tracking_secret, deliveries.description,
-                                        deliveries.status, deliveries.created_at, users.full_name AS sender_name,
-                                        users.telephone AS sender_telephone, receivers_deliveries.full_name AS receiver_name,
-                                        receivers_deliveries.telephone AS receiver_telephone")
+                                        deliveries.status, deliveries.created_at, users.full_name AS receiver_name,
+                                        users.telephone AS receiver_telephone, branches.name AS destination_name")
                               .order("deliveries.id": :desc)
     if params[:q].present?
       query = Delivery.sanitize_sql_like(params[:q] || "")
@@ -92,7 +98,6 @@ class DeliveriesController < ApplicationController
   def filter_branches
     query = Branch.sanitize_sql_like(params[:search] || "")
     Branch.where("name LIKE ?", "%#{query}%")
-          .where.not(id: current_user.branch_id)
           .or(Branch.where(id: params[:selected]))
           .order(:name)
           .limit(10)

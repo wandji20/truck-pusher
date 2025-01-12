@@ -1,6 +1,6 @@
 class Delivery < ApplicationRecord
   # Constants
-  HEADERS = [ "tracking_no", "tracking_secret", "sender", "receiver", "type", "description", "action" ].freeze
+  HEADERS = %w[tracking_no tracking_secret receiver destination description action].freeze
   # Validations
   validates :tracking_number, :tracking_secret, uniqueness: { scope: :enterprise_id }
 
@@ -30,12 +30,12 @@ class Delivery < ApplicationRecord
     attributes["receiver_name"] || receiver.full_name
   end
 
-  def sender_telephone
-    attributes["sender_telephone"] || sender.telephone
-  end
-
   def receiver_telephone
     attributes["receiver_telephone"] || receiver.telephone
+  end
+
+  def destination_name
+    attributes["destination_name"] || destination.name
   end
 
   private
