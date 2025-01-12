@@ -20,14 +20,14 @@ class UserInvitationsController < ApplicationController
     authorize! :manage, current_enterprise
 
     @user = current_user.invite_user(
-      params.require(:users_admin).permit(:telephone, :role).merge(enterprise: current_enterprise)
+      params.require(:users_admin).permit(:telephone, :role, :branch_id).merge(enterprise: current_enterprise)
     )
 
     if @user.persisted? && @user.errors.none?
       flash[:success] = t("user_invitations.sent", telephone: @user.escape_value(:telephone))
       redirect_back fallback_location: enterprise_setting_path(params: { option: "users" })
     else
-      render turbo_stream: turbo_stream.replace("new-user", partial: "user_invitations/form",
+      render turbo_stream: turbo_stream.replace("new-user", partial: "user_invitations/new_form",
                                                   locals: { user: @user, id: "new-user", url: user_invitations_path }),
               status: :unprocessable_entity
     end
@@ -45,7 +45,6 @@ class UserInvitationsController < ApplicationController
       flash[:success] = t("user_invitations.confirmed")
       redirect_to deliveries_path
     else
-      p @user.errors.full_messages
       render :edit, status: :unprocessable_entity
     end
   end

@@ -3,6 +3,5 @@
     <%= t('.title') %>
   </h1>
 
-  <%= render 'user_invitations/form', user: @user, url: user_invitation_path(token: params[:token]),
-                id: dom_id(@user, :invite) %> 
+  <%= render 'user_invitations/update_form', user: @user %> 
 </div>

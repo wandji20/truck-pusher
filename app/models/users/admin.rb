@@ -7,6 +7,7 @@ module Users
     validates :full_name, presence: true,
                 length: { within: (MIN_NAME_LENGTH..MAX_NAME_LENGTH) }, if: -> { full_name.present? }
     validates :role, presence: true
+    validates :branch, presence: true, if: -> { self.role == "operator" }
 
     # Associations
     belongs_to :branch, optional: true
@@ -31,7 +32,9 @@ module Users
       delivery
     end
 
+    # include Rails.application.routes.url_helpers
     def invite_user(params)
+      branch_id = params.delete :branch_id || self.branch&.id
       enterprise = params.delete(:enterprise)
       ActsAsTenant.with_tenant(enterprise) do
         new_user = if user = Users::Admin.where(confirmed: false).find_by(telephone: params[:telephone])
@@ -41,13 +44,13 @@ module Users
         else
                       password = SecureRandom.hex(8)
                       Users::Admin.new(params.merge({ invited_by_id: self.id, invited_at: Time.current,
-                          password:, password_confirmation: password, branch: self.branch }))
+                          password:, password_confirmation: password, branch_id: }))
         end
 
         ActiveRecord::Base.transaction do
           new_user.save!
           # token = new_user.generate_token_for(:invitation)
-          # edit_user_invitation_url(new_user, params: { token:, enterprise_name: enterprise.name }, host: "localhost:3000")
+          # p edit_user_invitation_url(new_user, params: { token:, enterprise_name: enterprise.name }, host: "localhost:3000")
           # Send message
           new_user
         end

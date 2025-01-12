@@ -131,11 +131,14 @@ en:
       type: "Type"
       action: "Action"
       description: "Description"
+      origin: "Origin"
+      destination: "Destination"
     table_row:
       arrival_confirmed: "Arrival confirmed"
       confirm_arrival: "Confirm arrival"
       incoming: "Incoming"
       outgoing: "Outgoing"
+      registered: "Registered"
     delivery:
       tracking_no: "Tracking Number:"
       sender: "Sender"
@@ -175,7 +178,18 @@ en:
       title: "Invite new user"
     edit:
       title: "Accept invitation"
-    form:
+    new_form:
+      telephone:
+        label: "Telephone"
+        placeholder: "Enter phone number"
+      role:
+        label: "Role"
+        placeholder: "Select user role"
+      branch:
+        label: "Branch"
+        placeholder: "Select user branch"
+      submit: "Invite"
+    update_form:
       telephone:
         label: "Telephone"
         placeholder: "Enter phone number"
@@ -191,9 +205,7 @@ en:
       password_confirmation:
         label: "Password confirmation"
         placeholder: "Enter your password confirmation"
-      submit:
-        invite: "Invite"
-        save: "Save"
+      submit: "Save"
   admin:
     index:
       title: "Enterprises"
