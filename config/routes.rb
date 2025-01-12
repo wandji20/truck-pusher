@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Admin
+  get "/admin", to: "admin/home#index"
+  namespace :admin do
+    resources :enterprises, except: %i[index destroy]
+  end
+
+  # Marketers
   namespace :marketers do
     resources :invitations, except: %i[index destroy]
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  # Super Admin
-  resources :admin, except: :destroy
+
   # Registration
   get "/account", to: "admins#edit"
   patch "/account", to: "admins#update"

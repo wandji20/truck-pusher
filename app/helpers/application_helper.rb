@@ -6,7 +6,7 @@ module ApplicationHelper
   end
 
   def home_path(enterprise)
-    return admin_index_path if controller_name == "admin"
+    return admin_path if controller_name == "home"
     return root_path unless enterprise.present?
 
     deliveries_path

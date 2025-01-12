@@ -30,6 +30,7 @@
 en:
   flash:
     update_success: "%{name} successfully updated!"
+    create_success: "%{name} successfully created!"
   general:
     close: "Close"
     open_dropdown: "Open dropdown"
@@ -207,24 +208,33 @@ en:
         placeholder: "Enter your password confirmation"
       submit: "Save"
   admin:
-    index:
-      title: "Enterprises"
-      new_enterprise: "New Enterprise"
-    edit:
-      title: "Edit Enterprise"
-    new:
-      title: "New Enterprise"
-    enterprise_form:
-      manager: "Enterprise manager"
-      name:
-        label: "Name"
-        placeholder: "Enter name"
-      telephone:
-        label: "Telephone"
-        placeholder: "Enter phone number"
-      submit:
-        create: "Create"
-        update: "Update"
+    home:
+      index:
+        title: "Admin Panel"
+        enterprises: "Enterprises"
+        marketers: "Marketers"
+      enterprises:
+        title: "Enterprises"
+        add: "Add enterprise"
+      marketers:
+        title: "Marketers"
+        invite: "Invite marketer"
+    enterprises:
+      edit:
+        title: "Edit Enterprise"
+      new:
+        title: "New Enterprise"
+      form:
+        manager: "Enterprise manager"
+        name:
+          label: "Name"
+          placeholder: "Enter name"
+        telephone:
+          label: "Telephone"
+          placeholder: "Enter phone number"
+        submit:
+          create: "Create"
+          update: "Update"
   marketers:
     invitation_mailer:
       subject: "Invitation to join Truck Pusher"

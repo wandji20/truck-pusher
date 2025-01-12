@@ -1,3 +1,5 @@
+<% url = enterprise.persisted? ? admin_enterprise_path(enterprise) : admin_enterprises_path %>
+
 <%= form_with model: enterprise, url:, id: dom_id(enterprise) do |form| %>
   <div class="form-group">
     <%= form.label :name, t('.name.label'), class: "form-label" %>
