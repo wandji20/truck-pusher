@@ -6,4 +6,10 @@ module EnterprisesHelper
 
     ""
   end
+
+  def enterprise_categories
+    Enterprise.categories.except(:special).keys.map do |category|
+      [ category, t("admin.enterprises.categories.#{category}") ]
+    end
+  end
 end

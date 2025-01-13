@@ -8,6 +8,7 @@ class Enterprise < ApplicationRecord
                   length: { within: (MIN_NAME_LENGTH..MAX_NAME_LENGTH) },
                   uniqueness: true
   validates :category, presence: true
+  validates :description, :city, presence: true, if: -> { merchant? }
 
   # Enums
   enum :category, %i[agency special merchant]

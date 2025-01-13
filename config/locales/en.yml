@@ -287,6 +287,43 @@ en:
           label: "Password confirmation"
           placeholder: "Enter your password confirmation"
         submit: "Save"
+    merchants:
+      index:
+        title: "Merchants"
+        edit: "Edit"
+      new:
+        title: "New Merchant"
+        manager: "Merchant manager"
+        name:
+          label: "Name"
+          placeholder: "Enter name"
+        city:
+          label: "City"
+          placeholder: "Enter city name"
+        telephone:
+          label: "Telephone"
+          placeholder: "Enter phone number"
+        description:
+          label: "Description"
+          placeholder: "Enter description"
+        submit: "Create"
+      edit:
+        title: "Edit Merchant"
+        name:
+          label: "Name"
+          placeholder: "Enter name"
+        city:
+          label: "City"
+          placeholder: "Enter city name"
+        description:
+          label: "Description"
+          placeholder: "Enter description"
+        submit: "Update"
+        images: "Images"
+        add_image: "Add image"
+        location:
+          save: "Save location"
+          update: "Update location"
     sessions:
       invalid_credentials: "Wrong email or password."
       login_required: "You need to sign in to continue"

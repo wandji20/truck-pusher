@@ -1,4 +1,55 @@
-<div>
-  <h1 class="font-bold text-4xl">Campaigns::Merchants#edit</h1>
-  <p>Find me in app/views/campaigns/merchants/edit.html.erb</p>
+<div class="w-full pt-2 px-4 mt-3">
+  <div class="flex justify-between items-center">
+    <h2 class="text-2xl/9 font-semibold tracking-tight text-gray-900 mb-4">
+      <%= t('.title') %>
+    </h2>
+    
+    <%= button_to t(".location.#{@merchant.location.present? ? 'update' : 'save'}"), campaigns_merchant_path(@merchant),
+                  class: "btn btn-secondary", method: :put, data: {} %>
+  </div>
+
+  <%= form_with model: @merchant, url: campaigns_merchant_path(@merchant), class: "sm-w-full md:w-3/4 lg:w-3/5" do |form| %>
+    <div class="form-group">
+      <%= form.label :name, t('.name.label'), class: "form-label" %>
+      <%= form.text_field :name, required: true, autofocus: true,
+            autocomplete: "name", placeholder: t('.name.placeholder'),
+            class: "form-control #{'is-invalid' if @merchant.errors.messages[:name].present?}" %>
+      <% if @merchant.errors.messages[:name].present? %>
+        <div class="invalid-feedback">
+          <% @merchant.errors.messages[:name].each do |message| %>
+            <span><%= message %></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :city, t('.city.label'), class: "form-label" %>
+      <%= form.text_field :city, required: true, autofocus: true,
+            autocomplete: "city", placeholder: t('.city.placeholder'),
+            class: "form-control #{'is-invalid' if @merchant.errors.messages[:city].present?}" %>
+      <% if @merchant.errors.messages[:city].present? %>
+        <div class="invalid-feedback">
+          <% @merchant.errors.messages[:city].each do |message| %>
+            <span><%= message %></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :description, t('.description.label'), class: "form-label" %>
+      <%= form.textarea :description, required: false, placeholder: t('.description.placeholder'),
+            class: "form-control #{'is-invalid' if @merchant.errors.messages[:description].present?}" %>
+      <% if @merchant.errors.messages[:description].present? %>
+        <div class="invalid-feedback">
+          <% @merchant.errors.messages[:description].each do |message| %>
+            <span><%= message %></span>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <%= form.submit t(".submit"), class: "btn btn-primary mb-5" %>
+  <% end %>
 </div>
