@@ -16,7 +16,7 @@ module Admin
     end
 
     def new
-      @enterprise = Enterprise.new
+      @enterprise = Enterprise.new(category: nil)
       @manager = @enterprise.managers.new
 
       respond_to do |format|
@@ -42,7 +42,7 @@ module Admin
     private
 
     def enterprise_params
-      params.require(:enterprise).permit(:name)
+      params.require(:enterprise).permit(:name, :category, :description)
     end
 
     def manager_params

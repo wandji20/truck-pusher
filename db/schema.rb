@@ -56,6 +56,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_25_003830) do
     t.integer "category", default: 0
     t.jsonb "location", default: {}
     t.integer "marketer_id"
+    t.string "city"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_enterprises_on_name", unique: true

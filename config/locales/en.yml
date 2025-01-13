@@ -220,6 +220,9 @@ en:
         title: "Marketers"
         invite: "Invite marketer"
     enterprises:
+      categories:
+        agency: "Agency"
+        merchant: "Merchant"
       edit:
         title: "Edit Enterprise"
       new:
@@ -229,6 +232,12 @@ en:
         name:
           label: "Name"
           placeholder: "Enter name"
+        category:
+          label: "Category"
+          placeholder: "Select category"
+        description:
+          label: "Description"
+          placeholder: "Enter description"
         telephone:
           label: "Telephone"
           placeholder: "Enter phone number"
