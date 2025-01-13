@@ -37,7 +37,7 @@ module Campaigns
         start_new_session_for(@marketer)
 
         flash[:success] = t("campaigns.invitations.confirmed")
-        redirect_to marketer_enterprises_path
+        redirect_to campaigns_merchants_path
       else
         render :edit, status: :unprocessable_entity
       end

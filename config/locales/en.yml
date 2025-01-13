@@ -288,6 +288,17 @@ en:
           label: "Password confirmation"
           placeholder: "Enter your password confirmation"
         submit: "Save"
+    marketers:
+      account: "Account"
+      edit:
+        title: "My Account"
+        full_name:
+          label: "Full name"
+          placeholder: "Enter full name"
+        email:
+          label: "Email"
+          placeholder: "Enter email"
+        submit: "Save"
     merchants:
       location: "Location"
       index:

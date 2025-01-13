@@ -15,6 +15,9 @@ Rails.application.routes.draw do
     get "/login", to: "sessions#new"
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
+    # Registration
+    get "/account", to: "marketers#edit"
+    patch "/account", to: "marketers#update"
     # Password
     resources :passwords, param: :token, except: %i[index show]
 

@@ -6,7 +6,7 @@
   <%= form_with model: @merchant, url: campaigns_merchants_path, id: dom_id(@merchant) do |form| %>
     <div class="form-group">
       <%= form.label :name, t('.name.label'), class: "form-label" %>
-      <%= form.text_field :name, required: false, autofocus: true,
+      <%= form.text_field :name, required: true, autofocus: true,
             autocomplete: "name", placeholder: t('.name.placeholder'),
             class: "form-control #{'is-invalid' if @merchant.errors.messages[:name].present?}" %>
       <% if @merchant.errors.messages[:name].present? %>
@@ -20,7 +20,7 @@
 
     <div class="form-group">
       <%= form.label :city, t('.city.label'), class: "form-label" %>
-      <%= form.text_field :city, required: false, autofocus: true,
+      <%= form.text_field :city, required: true, autofocus: true,
             autocomplete: "city", placeholder: t('.city.placeholder'),
             class: "form-control #{'is-invalid' if @merchant.errors.messages[:city].present?}" %>
       <% if @merchant.errors.messages[:city].present? %>
@@ -34,7 +34,7 @@
 
     <div class="form-group">
       <%= form.label :description, t('.description.label'), class: "form-label" %>
-      <%= form.textarea :description, required: false, placeholder: t('.description.placeholder'),
+      <%= form.textarea :description, required: true, placeholder: t('.description.placeholder'),
             class: "form-control #{'is-invalid' if @merchant.errors.messages[:description].present?}" %>
       <% if @merchant.errors.messages[:description].present? %>
         <div class="invalid-feedback">
