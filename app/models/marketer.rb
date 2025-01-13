@@ -21,7 +21,8 @@ class Marketer < ApplicationRecord
   has_secure_password
 
   # Associations
-  has_many :enterprises
+  has_many :enterprises, -> { where(category: "merchant") }
+  has_many :sessions, dependent: :destroy
 
   generates_token_for :invitation, expires_in: 1.day
 
@@ -35,7 +36,8 @@ class Marketer < ApplicationRecord
 
     ActiveRecord::Base.transaction do
       new_marketer.save!
-      Marketers::InvitationMailer.invite(marketer).deliver_later
+
+      Campaigns::InvitationMailer.invite(new_marketer).deliver_later
     end
     new_marketer
   rescue ActiveRecord::RecordInvalid

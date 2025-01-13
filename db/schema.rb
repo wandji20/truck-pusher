@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_12_150436) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_25_003830) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -73,12 +73,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_12_150436) do
   end
 
   create_table "sessions", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
+    t.bigint "marketer_id"
     t.string "ip_address"
     t.string "user_agent"
     t.integer "enterprise_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["marketer_id"], name: "index_sessions_on_marketer_id"
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
@@ -101,5 +103,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_12_150436) do
   end
 
   add_foreign_key "branches", "enterprises"
+  add_foreign_key "sessions", "marketers"
   add_foreign_key "sessions", "users"
 end
