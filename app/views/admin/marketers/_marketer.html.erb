@@ -1,0 +1,19 @@
+<div class="rounded-lg bg-white shadow">
+  <div class="flex w-full flex-col gap-1 p-4">
+    <div class="flex items-center space-x-3">
+      <h3 class="truncate text-sm font-medium text-gray-900">
+        <%= marketer.full_name %>
+      </h3>
+    </div>
+    <p class="truncate text-sm text-gray-500">
+      <%= marketer.email %>
+    </p>
+    <p class="truncate text-sm text-gray-500">
+      <%= marketer.telephone %>
+    </p>
+    <p class="flex items-center gap-2 text-sm text-gray-500">
+      <span><%= t(".merchants") %></span>
+      <span><%= marketer.enterprises_count %></span>
+    </p>
+  </div>
+</div>

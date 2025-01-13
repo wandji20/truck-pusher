@@ -235,10 +235,42 @@ en:
         submit:
           create: "Create"
           update: "Update"
-  marketers:
+    marketers:
+      marketer:
+        merchants: "Merchants:"
+  campaigns:
     invitation_mailer:
       subject: "Invitation to join Truck Pusher"
       invite:
         title: "New Invitation"
         message: "Your truck pusher account was successfully created.\nPlease confirm to continue"
         accept: "Accept"
+    invitations:
+      invalid_url: "Your invitation url is not correct"
+      unconfirmed_message: "Please confirm your account to continue."
+      sent: "An invitation link has been sent to %{email}."
+      invalid_token: "Invitation token is invalid or has expired."
+      confirmed: "You invitation was successfully accepted"
+      new:
+        title: "Invite new marketer"
+      edit:
+        title: "Accept invitation"
+      new_form:
+        email:
+          label: "Email"
+          placeholder: "Enter email"
+        submit: "Invite"
+      update_form:
+        email:
+          label: "email"
+          placeholder: "Enter phone number"
+        full_name:
+          label: "Full name"
+          placeholder: "Enter full name"
+        password:
+          label: "Password"
+          placeholder: "Enter your password"
+        password_confirmation:
+          label: "Password confirmation"
+          placeholder: "Enter your password confirmation"
+        submit: "Save"
