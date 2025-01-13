@@ -259,6 +259,11 @@ en:
         title: "New Invitation"
         message: "Your truck pusher account was successfully created.\nPlease confirm to continue"
         accept: "Accept"
+    password_mailer:
+      subject: "Reset password"
+      reset:
+        message: "You can reset your password within the next 15 minutes on"
+        reset: "Reset"
     invitations:
       invalid_url: "Your invitation url is not correct"
       unconfirmed_message: "Please confirm your account to continue."
@@ -338,6 +343,27 @@ en:
         location:
           save: "Save location"
           update: "Update location"
+    passwords:
+      invalid_email: "Email not found!"
+      confirm_account: "Please confirm your account to continue"
+      instruction_sent: "Password reset instructions successfully sent."
+      reset_successful: "Password has been successfully reset."
+      invalid_token: "Password reset token is invalid or has expired."
+      new:
+        title: "Forgot your password?"
+        email:
+          label: "Email"
+          placeholder: "Enter email address"
+        submit: "Send reset instructions"
+      edit:
+        title: "Change your password"
+        submit: "Change my password"
+        password:
+          label: "Password"
+          placeholder: "Enter your password"
+        password_confirmation:
+          label: "Password confirmation"
+          placeholder: "Enter your password confirmation"
     sessions:
       invalid_credentials: "Wrong email or password."
       login_required: "You need to sign in to continue"
