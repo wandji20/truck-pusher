@@ -4,7 +4,7 @@ FactoryBot.define do
     email { Faker::Internet.unique.email }
     password { "password" }
     password_confirmation { "password" }
-    enterprises_count { 1 }
+    enterprises_count { 0 }
 
     trait :confirmed do
       confirmed { true }

@@ -91,7 +91,7 @@ def create_markerters_and_merchants
     marketer = Marketer.create(full_name: Faker::Name.name, email: "marketer#{n}@email.com",
                                 password:, password_confirmation: password, confirmed: true)
     [ 4, 5, 7 ].shuffle.sample.times do |n|
-      marketer.merchants.create(name: "Merchant-#{n} (#{marketer.id})", description: Faker::Lorem.paragraph)
+      marketer.merchants.create(name: "Merchant-#{n} (#{marketer.id})", description: Faker::Lorem.paragraph, city: Faker::Address.city)
     end
   end
 end

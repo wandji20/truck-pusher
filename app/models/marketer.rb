@@ -21,10 +21,27 @@ class Marketer < ApplicationRecord
   has_secure_password
 
   # Associations
-  has_many :enterprises, -> { where(category: "merchant") }
+  has_many :merchants, -> { where(category: "merchant") }, class_name: "Enterprise"
   has_many :sessions, dependent: :destroy
 
   generates_token_for :invitation, expires_in: 1.day
+
+  def create_merchant(merchant_params, manager_params)
+    password = SecureRandom.hex(8)
+    merchant = merchants.build(merchant_params)
+    manager = merchant.managers.build(
+      manager_params.merge({ password:, password_confirmation: password })
+    )
+
+    ActiveRecord::Base.transaction  do
+      merchant.save!
+      manager.save!
+      # send confirmation text message
+    end
+    [ merchant, manager ]
+  rescue ActiveRecord::RecordInvalid
+    [ merchant, manager ]
+  end
 
   def self.invite_new(params)
     new_marketer = if marketer = Marketer.where(confirmed: false).find_by(email: params[:email])
