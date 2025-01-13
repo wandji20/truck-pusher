@@ -322,7 +322,8 @@ en:
           placeholder: "Enter description"
         submit: "Update"
         images: "Images"
-        add_image: "Add image"
+        add_image: "Upload or Capture Images"
+        selected: "Selected"
         location:
           save: "Save location"
           update: "Update location"

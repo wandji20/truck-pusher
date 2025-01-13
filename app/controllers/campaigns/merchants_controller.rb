@@ -33,7 +33,11 @@ module Campaigns
     def update
       authorize! :create_merchant, @merchant
 
-      if @merchant.update(merchant_params)
+      if @merchant.update(merchant_params.except(:images))
+        if merchant_params[:images].last.present?
+          @merchant.update(images: merchant_params[:images])
+        end
+
         flash[:success] = t("flash.update_success", name: @merchant.escape_value(:name))
         redirect_to edit_campaigns_merchant_path(@merchant)
       else
@@ -59,7 +63,7 @@ module Campaigns
     end
 
     def merchant_params
-      params.require(:enterprise).permit(:name, :category, :description, :city)
+      params.require(:enterprise).permit(:name, :category, :description, :city, images: [])
     end
 
     def manager_params

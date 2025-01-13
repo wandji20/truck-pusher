@@ -10,7 +10,6 @@ export default class extends Controller {
   setLocation() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
-        console.log(position)
         const { coords: { latitude: lat, longitude: long } } = position;
 
         this.updateForm(lat, long)

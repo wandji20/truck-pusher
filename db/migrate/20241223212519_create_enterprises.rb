@@ -7,6 +7,7 @@ class CreateEnterprises < ActiveRecord::Migration[8.0]
       t.integer :marketer_id
       t.string :city
       t.text :description
+      t.boolean :locked, default: false
 
       t.timestamps
     end

@@ -20,6 +20,7 @@ class Enterprise < ApplicationRecord
   has_many :managers, -> { where(role: "manager") },
                       class_name: "Users::Admin",
                       dependent: :destroy
+  has_many_attached :images
 
   def self.create_new(enterprise_params, manager_params)
     password = SecureRandom.hex(8)
