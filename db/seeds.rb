@@ -85,12 +85,24 @@ def create_customers_and_deliveries
   end
 end
 
+def create_markerters_and_merchants
+  password = "password"
+  4.times do |n|
+    marketer = Marketer.create(full_name: Faker::Name.name, email: "marketer#{n}@email.com",
+                                password:, password_confirmation: password, confirmed: true)
+    [ 4, 5, 7 ].shuffle.sample.times do |n|
+      marketer.enterprises.create(name: "Merchant-#{n} (#{marketer.id})")
+    end
+  end
+end
 
 ActiveRecord::Base.transaction do
   p "Creating default Agency and Branches"
   create_default_enterprise_and_branches
   p "Creating enterprises and Branches"
   create_enterprises_and_branches
+  p "Creating marketers and merchants"
+  create_markerters_and_merchants
   p "Create customers and deliveries"
   create_customers_and_deliveries
 end

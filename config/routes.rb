@@ -6,9 +6,23 @@ Rails.application.routes.draw do
     resources :enterprises, except: %i[index destroy]
   end
 
-  # Marketers
-  namespace :marketers do
-    resources :invitations, except: %i[index destroy]
+  # Campaigns
+  namespace :campaigns do
+    get "marketer/show"
+    # Invitations
+    resources :invitations, param: :token, except: %i[index destroy]
+    # Sessions
+    get "/login", to: "sessions#new"
+    post "/login", to: "sessions#create"
+    delete "/logout", to: "sessions#destroy"
+    # Password
+    resources :passwords, param: :token, except: %i[index show]
+
+    # Enterprises
+    resources :merchants, except: :destroy
+
+    get "/account", to: "marketers#edit"
+    patch "/account", to: "marketers#update"
   end
 
   # Registration

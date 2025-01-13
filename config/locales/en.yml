@@ -239,6 +239,10 @@ en:
       marketer:
         merchants: "Merchants:"
   campaigns:
+    navigations:
+      add_merchant: "Add merchant"
+      account: "Account"
+      merchants: "Merchants"
     invitation_mailer:
       subject: "Invitation to join Truck Pusher"
       invite:
