@@ -1,6 +1,7 @@
 module Campaigns
   class ApplicationController < ActionController::Base
     before_action :require_admin
+    include MarketerAuthentication
 
     layout "campaigns"
 

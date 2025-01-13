@@ -274,3 +274,16 @@ en:
           label: "Password confirmation"
           placeholder: "Enter your password confirmation"
         submit: "Save"
+    sessions:
+      invalid_credentials: "Wrong email or password."
+      login_required: "You need to sign in to continue"
+      new:
+        title: "Sign in to your account"
+        email:
+          label: "Email"
+          placeholder: "Enter email"
+        password:
+          label: "Password"
+          placeholder: "Enter password"
+        submit: "Sign in"
+        forgot_password: "Forgot Password?"
