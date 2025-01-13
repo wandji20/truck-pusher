@@ -19,7 +19,9 @@ Rails.application.routes.draw do
     resources :passwords, param: :token, except: %i[index show]
 
     # Enterprises
-    resources :merchants, except: :destroy
+    resources :merchants, except: :destroy do
+    end
+    put "merchants/:id/location", to: "merchants#location", as: "merchant_location"
 
     get "/account", to: "marketers#edit"
     patch "/account", to: "marketers#update"

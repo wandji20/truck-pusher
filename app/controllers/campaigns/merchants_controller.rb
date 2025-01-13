@@ -1,7 +1,7 @@
 module Campaigns
   class MerchantsController < ApplicationController
     skip_before_action :require_admin
-    before_action :set_merchant, only: %i[edit update]
+    before_action :set_merchant, only: %i[edit update location]
 
     def index
       @merchants = @current_user.merchants.order(:created_at)
@@ -38,6 +38,17 @@ module Campaigns
         redirect_to edit_campaigns_merchant_path(@merchant)
       else
         render :edit, status: :upprocessable_entity
+      end
+    end
+
+    def location
+      if params[:latitude] && params[:longitude]
+        @merchant.update(location: { latitude: params[:latitude], longitude: params[:longitude] })
+        flash[:success] = t("flash.update_success", name: t("campaigns.merchants.location"))
+        redirect_to edit_campaigns_merchant_path(@merchant)
+      else
+        flash[:error] = t("flash.update_fail", name: t("campaigns.merchants.location"))
+        redirect_to edit_campaigns_merchant_path(@merchant)
       end
     end
 

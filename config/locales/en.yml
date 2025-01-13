@@ -31,6 +31,7 @@ en:
   flash:
     update_success: "%{name} successfully updated!"
     create_success: "%{name} successfully created!"
+    update_fail: "Failed to update %{name}"
   general:
     close: "Close"
     open_dropdown: "Open dropdown"
@@ -288,6 +289,7 @@ en:
           placeholder: "Enter your password confirmation"
         submit: "Save"
     merchants:
+      location: "Location"
       index:
         title: "Merchants"
         edit: "Edit"

@@ -4,8 +4,8 @@
       <%= t('.title') %>
     </h2>
     
-    <%= button_to t(".location.#{@merchant.location.present? ? 'update' : 'save'}"), campaigns_merchant_path(@merchant),
-                  class: "btn btn-secondary", method: :put, data: {} %>
+    <%= button_to t(".location.#{@merchant.location.present? ? 'update' : 'save'}"), campaigns_merchant_location_path(@merchant),
+                  class: "btn btn-secondary", method: :put, data: { controller: "location" } %>
   </div>
 
   <%= form_with model: @merchant, url: campaigns_merchant_path(@merchant), class: "sm-w-full md:w-3/4 lg:w-3/5" do |form| %>
