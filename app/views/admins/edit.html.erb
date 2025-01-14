@@ -34,14 +34,7 @@
       <div class="form-group">
         <%= form.label :telephone, t(".telephone.label"), class: "form-label" %>
         <%= form.text_field :telephone, autofocus: false, placeholder: t(".telephone.placeholder"),
-              class: "form-control #{'is-invalid' if current_user.errors.messages[:telephone].present?}" %>
-        <% if current_user.errors.messages[:telephone].present? %>
-          <div class="invalid-feedback">
-            <% current_user.errors.messages[:telephone].each do |message| %>
-              <span><%= message %></span>
-            <% end %>
-          </div>
-        <% end %>
+              class: "form-control", disabled: true %>
       </div>
     </div>
 
