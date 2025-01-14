@@ -150,12 +150,28 @@ en:
   passwords:
     reset_instructions_sent: "Password reset instructions sent."
     invalid_telephone_address: "Telephone number not found!"
+    invalid_telephone: "Telephone number not found!"
+    confirm_account: "Please confirm your account to continue"
+    instruction_sent: "Password reset instructions successfully sent."
+    incorrect_email: "Telephone not found! Contact your manager to get an invite"
+    reset_successful: "Password has been successfully reset."
+    invalid_token: "Password reset token is invalid or has expired."
+    invalid_url: "Your password reset url is not correct"
     new:
       title: "Forgot your password?"
       telephone:
         label: "Telephone"
         placeholder: "Enter your phone number"
       submit: "Send reset instructions"
+    edit:
+      title: "Change your password"
+      submit: "Change my password"
+      password:
+        label: "Password"
+        placeholder: "Enter your password"
+      password_confirmation:
+        label: "Password confirmation"
+        placeholder: "Enter your password confirmation"
   sessions:
     invalid_credentials: "Wrong telephone number or password."
     login_required: "You need to sign in to continue"
