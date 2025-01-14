@@ -90,8 +90,10 @@ def create_markerters_and_merchants
   4.times do |n|
     marketer = Marketer.create(full_name: Faker::Name.name, email: "marketer#{n}@email.com",
                                 password:, password_confirmation: password, confirmed: true)
-    [ 4, 5, 7 ].shuffle.sample.times do |n|
-      marketer.merchants.create(name: "Merchant-#{n} (#{marketer.id})", description: Faker::Lorem.paragraph, city: Faker::Address.city)
+    [ 4, 5, 7 ].shuffle.sample.times do |i|
+      merchant = marketer.merchants.create(name: "Merchant-#{i} (#{marketer.id})", description: Faker::Lorem.paragraph, city: Faker::Address.city)
+      merchant.managers.create(full_name: "#{merchant.name} - manager", telephone: "67770002#{i}", password:,
+                                password_confirmation: password, confirmed: true)
     end
   end
 end

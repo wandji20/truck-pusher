@@ -66,6 +66,8 @@ class Delivery < ApplicationRecord
   private
 
   def generate_tracking_number
+    return if tracking_number.present?
+
     self.tracking_number = "#{Time.current.to_i.to_s(36)}-#{encode_branches}"
   end
 
