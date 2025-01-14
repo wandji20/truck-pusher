@@ -94,6 +94,12 @@ en:
         create: "Create"
         update: "Update"
   deliveries:
+    confirm:
+      success: "Delivery successfully checked in"
+      fail: "Failed to check in delivery"
+    deliver:
+      fail: "Failed to confirm delivery"
+      success: "Sucessfully delivered"
     add_customer: "+ Add customer"
     new:
       title: "New delivery"
@@ -128,19 +134,20 @@ en:
       no_deliveries: "No deliveries"
       trackin_no: "Tracking No"
       tracking_secret: "Tracking Secret"
-      sender: "Sender"
       receiver: "Receiver"
       type: "Type"
       action: "Action"
       description: "Description"
-      origin: "Origin"
       destination: "Destination"
+      status: "Status"
     table_row:
-      arrival_confirmed: "Arrival confirmed"
-      confirm_arrival: "Confirm arrival"
-      incoming: "Incoming"
-      outgoing: "Outgoing"
-      registered: "Registered"
+      check_in: "Check in"
+      deliver: "Deliver"
+      statuses:
+        registered: "Registered"
+        sent: "Sent"
+        chacked_in: "Arrival confirmed"
+        checked_out: "Delivered"
     delivery:
       tracking_no: "Tracking Number:"
       sender: "Sender"

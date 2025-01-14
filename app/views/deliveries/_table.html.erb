@@ -1,7 +1,7 @@
 <table class="table">
   <thead class='table-head'>
     <tr>
-      <% Delivery::HEADERS.each do |header| %>
+      <% delivery_headers(@current_enterprise).each do |header| %>
         <th scope="col" class="min-w-[100px] sticky top-0"><%= t(".#{header}") %></th>
       <% end %>
     </tr>

@@ -1,6 +1,7 @@
 class Delivery < ApplicationRecord
   # Constants
-  HEADERS = %w[tracking_no tracking_secret receiver destination description action].freeze
+  HEADERS = %w[tracking_no tracking_secret receiver destination description action status].freeze
+
   # Validations
   validates :tracking_number, :tracking_secret, uniqueness: { scope: :enterprise_id }
 
@@ -36,6 +37,29 @@ class Delivery < ApplicationRecord
 
   def destination_name
     attributes["destination_name"] || destination.name
+  end
+
+
+  def confirm_arrival(user)
+    return false unless user.present?
+
+    self.status = "checked_in"
+    self.checked_in_by = user
+    self.checked_in_at = Time.current
+
+    # Send confirmation message
+    save
+  end
+
+  def confirm_delivery(user)
+    return false unless user.present?
+
+    self.status = "checked_out"
+    self.checked_out_by = user
+    self.checked_out_at = Time.current
+
+    # Send delivery message or not
+    save
   end
 
   private

@@ -39,6 +39,31 @@ class DeliveriesController < ApplicationController
                 type: "#{params[:type]}", name: "delivery[#{params[:type]}_id]" })
   end
 
+  def confirm_arrival
+    delivery = Delivery.find(params[:id])
+
+    if delivery.confirm_arrival(current_user)
+      message = t("deliveries.confirm.success")
+      render turbo_stream: [ turbo_stream.replace("delivery_#{delivery.id}", partial: "deliveries/table_row", locals: { delivery: }),
+                              turbo_stream.append("flash-notifications", partial: "shared/flash_message", locals: { message:, type: :success }) ]
+    else
+      message = t("deliveries.confirm.fail")
+      render turbo_stream: turbo_stream.append("flash-notifications", partial: "shared/flash_message", locals: { message:, type: :alert })
+    end
+  end
+
+  def confirm_delivery
+    delivery = Delivery.find(params[:id])
+    if delivery.confirm_delivery(current_user)
+      message = t("deliveries.deliver.success")
+      render turbo_stream: [ turbo_stream.replace("delivery_#{delivery.id}", partial: "deliveries/table_row", locals: { delivery: }),
+                              turbo_stream.append("flash-notifications", partial: "shared/flash_message", locals: { message:, type: :success }) ]
+    else
+      message = t("deliveries.deliver.fail")
+      render turbo_stream: turbo_stream.append("flash-notifications", partial: "shared/flash_message", locals: { message:, type: :alert })
+    end
+  end
+
   private
 
   def set_enterprise
