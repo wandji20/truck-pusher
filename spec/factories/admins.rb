@@ -20,8 +20,12 @@ FactoryBot.define do
 
     trait :confirmed do
       association :invited_by, factory: :admin
-      invited_at { DateTime.current }
       confirmed { true }
+      invited_at { nil }
+    end
+
+    trait :unconfirmed do
+      invited_at { DateTime.current }
     end
   end
 end

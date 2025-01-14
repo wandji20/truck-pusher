@@ -8,6 +8,10 @@ RSpec.describe Users::Admin, type: :model do
   it { should validate_length_of(:password).is_at_most(described_class::MAX_PASSWORD_LENGTH) }
   it { should validate_presence_of(:telephone) }
   it { should validate_uniqueness_of(:telephone).scoped_to(:enterprise_id).case_insensitive }
+  it { should validate_presence_of(:role) }
+  it { should belong_to(:branch).optional }
+  it { should belong_to(:invited_by).optional }
+  it { should have_many(:sessions).dependent(:destroy) }
 
   describe "validating telephone format" do
     context 'bad format' do

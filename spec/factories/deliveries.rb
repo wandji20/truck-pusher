@@ -10,8 +10,8 @@ FactoryBot.define do
 
     registered_by { association :admin, :operator }
 
-    tracking_number { Faker::Alphanumeric.alpha(number: 10) }
-    tracking_secret { Faker::Alphanumeric.alpha(number: 10) }
+    tracking_number { Faker::Alphanumeric.unique.alpha(number: 10) }
+    tracking_secret { Faker::Alphanumeric.unique.alpha(number: 10) }
 
     trait :checked_in do
       status { 'checked_in' }
