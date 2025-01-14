@@ -9,7 +9,7 @@
     <div class="px-6 py-12 sm:px-12">
 
       <%= form_with url: login_path do |form| %>
-        <%= form.hidden_field :agency_name, value: params[:agency_name] %>
+        <%= form.hidden_field :enterprise_name, value: params[:enterprise_name] %>
         <div class="form-group">
           <%= form.label :text_field, t('.telephone.label'), class: "form-label" %>
           <%= form.text_field :telephone, required: true, placeholder: t('.telephone.placeholder'),
@@ -21,7 +21,7 @@
           <div class="flex w-full justify-between">
             <%= form.label :password, t('.password.label'), class: "form-label !inline-block" %>
 
-            <%= link_to t('.forgot_password'), new_password_path(params: { agency_name: params[:agency_name]}),
+            <%= link_to t('.forgot_password'), new_password_path(params: { enterprise_name: params[:enterprise_name]}),
                           class: "link text-sm/6" %>
           </div>
 

@@ -1,29 +1,25 @@
 
-<% if can? :manage, delivery %>
-  <tr id="<%= dom_id(delivery) %>">
-    <td><%= delivery.tracking_number %></td>
-    <td><%= delivery.tracking_secret %></td>
-    <td>
-      <div class="flex flex-col">
-        <span><%= delivery.sender_name %></span>
-        <span><%= delivery.sender_telephone %></span>
-      </div>
-    </td>
-    <td>
-      <div class="flex flex-col">
-        <span><%= delivery.receiver_name %></span>
-        <span><%= delivery.receiver_telephone %></span>
-      </div>
-    </td>
-    <td><%= delivery_type(delivery, current_user) %></td>
-    <td><%= delivery.description %></td>
-    <td>
-      <% if delivery.registered? || delivery.sent? %>
+<tr id="<%= dom_id(delivery) %>">
+  <td><%= delivery.tracking_number %></td>
+  <td><%= delivery.tracking_secret %></td>
+  <td>
+    <div class="flex flex-col">
+      <span><%= delivery.receiver_name %></span>
+      <span><%= delivery.receiver_telephone %></span>
+    </div>
+  </td>
+  <td><%= delivery.destination_name %></td>
+  <td><%= delivery.description %></td>
+  <td>
+    <% if delivery.registered? || delivery.sent? %>
+      <% if can? :manage, delivery %>
         <%= button_to t('.confirm_arrival'), delivery_path(delivery), method: :update,
               form_class: 'btn link !p-0', params: { delivery: { status: 'checked_in'}} %>
       <% else %>
-        <span><%= t('.arrival_confirmed') %></span>
+        <span><%= t('.registered') %></span>
       <% end %>
-    </td>
-  </tr>
-<% end %>
+    <% else %>
+      <span><%= t('.arrival_confirmed') %></span>
+    <% end %>
+  </td>
+</tr>

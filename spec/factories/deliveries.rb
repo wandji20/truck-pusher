@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :delivery do
-    agency { association :agency }
+    enterprise { association :enterprise }
 
     origin { association :branch }
     destination { association :branch }

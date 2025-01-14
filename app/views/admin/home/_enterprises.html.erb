@@ -1,0 +1,18 @@
+<div class="w-full flex items-center pt-2 pb-3">
+  <h4 class="text-xl/3 font-bold tracking-tight text-gray-900">
+    <%= t('.title') %>
+  </h4>
+
+  <button class="btn btn-secondary ml-auto flex gap-2" type="button" data-controller="modal-trigger" 
+      data-target="#manage-enterprise-modal" data-url="<%= new_admin_enterprise_path %>"
+      data-action="modal-trigger#fireModalEvent">
+    <%= render "shared/svgs/plus" %>
+    <%= t(".add") %>
+  </button>
+</div>
+
+<div class="bg-tp-soft-gray grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 rounded w-full p-2">
+  <%= render partial: "admin/enterprises/enterprise", collection: enterprises, as: :enterprise %>
+</div>
+
+<%= render "shared/modal", id: "manage-enterprise-modal" %>

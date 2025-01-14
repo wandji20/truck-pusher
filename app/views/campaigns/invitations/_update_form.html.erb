@@ -1,0 +1,60 @@
+<%= form_with model: marketer, url: campaigns_invitation_path(token: params[:token]), id: dom_id(marketer) do |form| %>
+
+  <div class="form-group">
+    <%= form.label :email, t('.email.label'), class: "form-label" %>
+
+    <%= form.email_field :email, disabled: true, 
+          placeholder: t('.email.placeholder'), autocomplete: false, required: true,
+          class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :full_name, t('.full_name.label'), class: "form-label" %>
+
+    <%= form.text_field :full_name, autofocus: true, 
+          placeholder: t('.full_name.placeholder'), autocomplete: false, required: true,
+          class: "form-control #{'is-invalid' if marketer.errors[:full_name].present?}" %>
+
+    <% if marketer.errors.messages[:full_name].present? %>
+      <div class="invalid-feedback">
+        <% marketer.errors.messages[:full_name].each do |message| %>
+          <span><%= message %></span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :password, t('.password.label'), class: "form-label" %>
+
+    <%= form.password_field :password, required: true, autocomplete: false, autofocus: false,
+        label: t('.password.label'), placeholder: t('.password.placeholder'),
+        class: "form-control #{'is-invalid' if marketer.errors[:password].present?}"%>
+    
+    <% if marketer.errors.messages[:password].present? %>
+      <div class="invalid-feedback">
+        <% marketer.errors.messages[:password].each do |message| %>
+          <span><%= message %></span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :password_confirmation, t('.password_confirmation.label'), class: "form-label" %>
+
+    <%= form.password_field :password_confirmation, required: true, autocomplete: false,
+        label: t('.password_confirmation.label'), placeholder: t('.password_confirmation.placeholder'),
+        class: "form-control #{'is-invalid' if marketer.errors[:password_confirmation].present?}" %>
+    
+    <% if marketer.errors.messages[:password_confirmation].present? %>
+      <div class="invalid-feedback">
+        <% marketer.errors.messages[:password_confirmation].each do |message| %>
+          <span><%= message %></span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= form.submit t(".submit"), class: "mb-6 btn btn-primary" %>
+<% end %>

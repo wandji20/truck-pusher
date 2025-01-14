@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   set_current_tenant_through_filter
-  before_action :set_agency # Set current tenant before authentication
+  before_action :set_enterprise # Set current tenant before authentication
   include Authentication
   before_action :set_current_user
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
@@ -9,26 +9,26 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_agency
-    @current_agency = find_agency_by_cookie
+  def set_enterprise
+    @current_enterprise = find_enterprise_by_cookie
 
-    unless @current_agency.present?
-      flash[:alert] = t("sessions.select_agency")
+    unless @current_enterprise.present?
+      flash[:alert] = t("sessions.select_enterprise")
       return redirect_to root_path
     end
 
-    set_current_tenant(@current_agency)
+    set_current_tenant(@current_enterprise)
   end
 
-  def find_agency_by_cookie
-    Agency.find_by(id: cookies.signed[:agency_id]) if cookies.signed[:agency_id]
+  def find_enterprise_by_cookie
+    Enterprise.find_by(id: cookies.signed[:enterprise_id]) if cookies.signed[:enterprise_id]
   end
 
   def set_current_user
     @current_user ||= Current.user
 
     if @current_user && !@current_user.confirmed
-      redirect_to login_path(params: { agency_name: @current_agency.name }), notice: t("user_invitations.unconfirmed_message")
+      redirect_to login_path(params: { enterprise_name: @current_enterprise.name }), notice: t("user_invitations.unconfirmed_message")
     end
   end
 

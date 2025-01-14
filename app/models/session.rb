@@ -1,4 +1,6 @@
 class Session < ApplicationRecord
-  belongs_to :user
-  acts_as_tenant :agency
+  belongs_to :user, optional: true
+  belongs_to :marketer, optional: true
+
+  acts_as_tenant :enterprise, optional: true
 end

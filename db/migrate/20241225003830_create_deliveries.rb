@@ -1,7 +1,7 @@
 class CreateDeliveries < ActiveRecord::Migration[8.0]
   def change
     create_table :deliveries do |t|
-      t.integer :agency_id, null: false
+      t.integer :enterprise_id, null: false
 
       t.integer :origin_id, null: false
       t.integer :destination_id, null: false
@@ -25,12 +25,12 @@ class CreateDeliveries < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    add_index :deliveries, :agency_id
+    add_index :deliveries, :enterprise_id
     add_index :deliveries, :origin_id
     add_index :deliveries, :destination_id
     add_index :deliveries, :sender_id
     add_index :deliveries, :receiver_id
-    add_index :deliveries, %i[tracking_number agency_id]
-    add_index :deliveries, %i[tracking_secret agency_id]
+    add_index :deliveries, %i[tracking_number enterprise_id]
+    add_index :deliveries, %i[tracking_secret enterprise_id]
   end
 end

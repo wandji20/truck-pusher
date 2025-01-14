@@ -8,13 +8,14 @@ class CreateUsers < ActiveRecord::Migration[8.0]
       t.datetime :invited_at
       t.boolean :confirmed, default: false
       t.boolean :archived, default: false
-      t.integer :agency_id
+      t.integer :enterprise_id
       t.integer :branch_id
       t.integer :role
       t.string :password_digest, null: false
+      t.jsonb :location, default: {}
 
       t.timestamps
     end
-    add_index :users, %i[telephone agency_id], unique: true
+    add_index :users, %i[telephone enterprise_id], unique: true
   end
 end

@@ -30,6 +30,8 @@
 en:
   flash:
     update_success: "%{name} successfully updated!"
+    create_success: "%{name} successfully created!"
+    update_fail: "Failed to update %{name}"
   general:
     close: "Close"
     open_dropdown: "Open dropdown"
@@ -54,9 +56,9 @@ en:
         label: "Telephone"
         placeholder: "Enter phone number"
       submit: "Save"
-  agencies:
+  enterprises:
     index:
-      title: "Agencies"
+      title: "Enterprises"
     edit:
       title: "Settings"
       branches: "Branches"
@@ -78,9 +80,9 @@ en:
       remove: "Remove"
   branches:
     edit:
-      title: "Edit branch for %{agency}"
+      title: "Edit branch for %{enterprise}"
     new:
-      title: "Create new branch for %{agency}"
+      title: "Create new branch for %{enterprise}"
     form:
       telephone:
         label: "Telephone"
@@ -131,11 +133,14 @@ en:
       type: "Type"
       action: "Action"
       description: "Description"
+      origin: "Origin"
+      destination: "Destination"
     table_row:
       arrival_confirmed: "Arrival confirmed"
       confirm_arrival: "Confirm arrival"
       incoming: "Incoming"
       outgoing: "Outgoing"
+      registered: "Registered"
     delivery:
       tracking_no: "Tracking Number:"
       sender: "Sender"
@@ -154,7 +159,7 @@ en:
   sessions:
     invalid_credentials: "Wrong telephone number or password."
     login_required: "You need to sign in to continue"
-    select_agency: "Please select an agency to login"
+    select_enterprise: "Please select an enterprise to login"
     new:
       title: "Sign in to your account"
       telephone:
@@ -175,7 +180,18 @@ en:
       title: "Invite new user"
     edit:
       title: "Accept invitation"
-    form:
+    new_form:
+      telephone:
+        label: "Telephone"
+        placeholder: "Enter phone number"
+      role:
+        label: "Role"
+        placeholder: "Select user role"
+      branch:
+        label: "Branch"
+        placeholder: "Select user branch"
+      submit: "Invite"
+    update_form:
       telephone:
         label: "Telephone"
         placeholder: "Enter phone number"
@@ -191,25 +207,173 @@ en:
       password_confirmation:
         label: "Password confirmation"
         placeholder: "Enter your password confirmation"
-      submit:
-        invite: "Invite"
-        save: "Save"
-  super_admin:
-    index:
-      title: "Agencies"
-      new_agency: "New Agency"
-    edit:
-      title: "Edit Agency"
-    new:
-      title: "New Agency"
-    agency_form:
-      manager: "Agency manager"
-      name:
-        label: "Name"
-        placeholder: "Enter name"
-      telephone:
-        label: "Telephone"
-        placeholder: "Enter phone number"
-      submit:
-        create: "Create"
-        update: "Update"
+      submit: "Save"
+  admin:
+    home:
+      index:
+        title: "Admin Panel"
+        enterprises: "Enterprises"
+        marketers: "Marketers"
+      enterprises:
+        title: "Enterprises"
+        add: "Add enterprise"
+      marketers:
+        title: "Marketers"
+        invite: "Invite marketer"
+    enterprises:
+      categories:
+        agency: "Agency"
+        merchant: "Merchant"
+      edit:
+        title: "Edit Enterprise"
+      new:
+        title: "New Enterprise"
+      form:
+        manager: "Enterprise manager"
+        name:
+          label: "Name"
+          placeholder: "Enter name"
+        category:
+          label: "Category"
+          placeholder: "Select category"
+        description:
+          label: "Description"
+          placeholder: "Enter description"
+        telephone:
+          label: "Telephone"
+          placeholder: "Enter phone number"
+        submit:
+          create: "Create"
+          update: "Update"
+    marketers:
+      marketer:
+        merchants: "Merchants:"
+  campaigns:
+    navigations:
+      add_merchant: "Add merchant"
+      account: "Account"
+      merchants: "Merchants"
+    invitation_mailer:
+      subject: "Invitation to join Truck Pusher"
+      invite:
+        title: "New Invitation"
+        message: "Your truck pusher account was successfully created.\nPlease confirm to continue"
+        accept: "Accept"
+    password_mailer:
+      subject: "Reset password"
+      reset:
+        message: "You can reset your password within the next 15 minutes on"
+        reset: "Reset"
+    invitations:
+      invalid_url: "Your invitation url is not correct"
+      unconfirmed_message: "Please confirm your account to continue."
+      sent: "An invitation link has been sent to %{email}."
+      invalid_token: "Invitation token is invalid or has expired."
+      confirmed: "You invitation was successfully accepted"
+      new:
+        title: "Invite new marketer"
+      edit:
+        title: "Accept invitation"
+      new_form:
+        email:
+          label: "Email"
+          placeholder: "Enter email"
+        submit: "Invite"
+      update_form:
+        email:
+          label: "email"
+          placeholder: "Enter phone number"
+        full_name:
+          label: "Full name"
+          placeholder: "Enter full name"
+        password:
+          label: "Password"
+          placeholder: "Enter your password"
+        password_confirmation:
+          label: "Password confirmation"
+          placeholder: "Enter your password confirmation"
+        submit: "Save"
+    marketers:
+      account: "Account"
+      edit:
+        title: "My Account"
+        full_name:
+          label: "Full name"
+          placeholder: "Enter full name"
+        email:
+          label: "Email"
+          placeholder: "Enter email"
+        submit: "Save"
+    merchants:
+      location: "Location"
+      index:
+        title: "Merchants"
+        edit: "Edit"
+      new:
+        title: "New Merchant"
+        manager: "Merchant manager"
+        name:
+          label: "Name"
+          placeholder: "Enter name"
+        city:
+          label: "City"
+          placeholder: "Enter city name"
+        telephone:
+          label: "Telephone"
+          placeholder: "Enter phone number"
+        description:
+          label: "Description"
+          placeholder: "Enter description"
+        submit: "Create"
+      edit:
+        title: "Edit Merchant"
+        name:
+          label: "Name"
+          placeholder: "Enter name"
+        city:
+          label: "City"
+          placeholder: "Enter city name"
+        description:
+          label: "Description"
+          placeholder: "Enter description"
+        submit: "Update"
+        images: "Images"
+        add_image: "Upload or Capture Images"
+        selected: "Selected"
+        location:
+          save: "Save location"
+          update: "Update location"
+    passwords:
+      invalid_email: "Email not found!"
+      confirm_account: "Please confirm your account to continue"
+      instruction_sent: "Password reset instructions successfully sent."
+      reset_successful: "Password has been successfully reset."
+      invalid_token: "Password reset token is invalid or has expired."
+      new:
+        title: "Forgot your password?"
+        email:
+          label: "Email"
+          placeholder: "Enter email address"
+        submit: "Send reset instructions"
+      edit:
+        title: "Change your password"
+        submit: "Change my password"
+        password:
+          label: "Password"
+          placeholder: "Enter your password"
+        password_confirmation:
+          label: "Password confirmation"
+          placeholder: "Enter your password confirmation"
+    sessions:
+      invalid_credentials: "Wrong email or password."
+      login_required: "You need to sign in to continue"
+      new:
+        title: "Sign in to your account"
+        email:
+          label: "Email"
+          placeholder: "Enter email"
+        password:
+          label: "Password"
+          placeholder: "Enter password"
+        submit: "Sign in"
+        forgot_password: "Forgot Password?"

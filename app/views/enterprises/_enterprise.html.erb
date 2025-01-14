@@ -1,0 +1,6 @@
+<div class="flex items-center rounded w-full h-16">
+  <%= link_to deliveries_path(params: {enterprise_name: enterprise.name}),
+          class: "btn btn-primary h-12 mx-auto w-full flex items-center justify-center text-base" do %>
+    <%= enterprise.name %>
+  <% end %>
+</div>

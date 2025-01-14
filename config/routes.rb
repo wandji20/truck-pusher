@@ -1,7 +1,35 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  # Super Admin
-  resources :super_admin, except: :destroy
+  # Admin
+  get "/admin", to: "admin/home#index"
+  namespace :admin do
+    resources :enterprises, except: %i[index destroy]
+  end
+
+  # Campaigns
+  namespace :campaigns do
+    get "marketer/show"
+    # Invitations
+    resources :invitations, param: :token, except: %i[index destroy]
+    # Sessions
+    get "/login", to: "sessions#new"
+    post "/login", to: "sessions#create"
+    delete "/logout", to: "sessions#destroy"
+    # Registration
+    get "/account", to: "marketers#edit"
+    patch "/account", to: "marketers#update"
+    # Password
+    resources :passwords, param: :token, except: %i[index show]
+
+    # Enterprises
+    resources :merchants, except: :destroy do
+    end
+    put "merchants/:id/location", to: "merchants#location", as: "merchant_location"
+
+    get "/account", to: "marketers#edit"
+    patch "/account", to: "marketers#update"
+  end
+
   # Registration
   get "/account", to: "admins#edit"
   patch "/account", to: "admins#update"
@@ -12,9 +40,9 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  # Agencies
-  get "/settings", to: "agencies#edit", as: :agency_setting
-  delete "remove_user/:user_id", to: "agencies#remove_user", as: :remove_agency_user
+  # Enterprises
+  get "/settings", to: "enterprises#edit", as: :enterprise_setting
+  delete "remove_user/:user_id", to: "enterprises#remove_user", as: :remove_enterprise_user
 
   # Branches
   resources :branches, except: %i[index destroy]
@@ -38,5 +66,5 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "agencies#index"
+  root "enterprises#index"
 end

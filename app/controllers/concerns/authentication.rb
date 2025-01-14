@@ -32,10 +32,10 @@ module Authentication
     def request_authentication
       session[:return_to_after_authenticating] = request.url
       # Ensure params are included in login url
-      # Agency name is passed in params when attempting to view deliveries from agency list
+      # Enterprise name is passed in params when attempting to view deliveries from enterprise list
       # in root url
       flash[:error] = t("sessions.login_required")
-      redirect_to login_path(params: params.permit(:agency_name))
+      redirect_to login_path(params: params.permit(:enterprise_name))
     end
 
     def after_authentication_url
@@ -46,13 +46,13 @@ module Authentication
       user.sessions.create!(user_agent: request.user_agent, ip_address: request.remote_ip).tap do |session|
         Current.session = session
         cookies.signed.permanent[:session_id] = { value: session.id, httponly: true, same_site: :lax }
-        cookies.signed.permanent[:agency_id] = { value: session.agency_id, httponly: true, same_site: :lax }
+        cookies.signed.permanent[:enterprise_id] = { value: session.enterprise_id, httponly: true, same_site: :lax }
       end
     end
 
     def terminate_session
       Current.session.destroy
       cookies.delete(:session_id)
-      cookies.delete(:agency_id)
+      cookies.delete(:enterprise_id)
     end
 end

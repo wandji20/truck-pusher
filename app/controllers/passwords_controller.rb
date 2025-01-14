@@ -32,14 +32,14 @@ class PasswordsController < ApplicationController
     redirect_to new_password_path, alert: "Password reset link is invalid or has expired."
   end
 
-  def set_agency
-    @current_agency = Agency.find_by(name: params[:agency_name])
+  def set_enterprise
+    @current_enterprise = Enterprise.find_by(name: params[:enterprise_name])
 
-    unless @current_agency.present?
-      flash[:alert] = t("sessions.select_agency")
+    unless @current_enterprise.present?
+      flash[:alert] = t("sessions.select_enterprise")
       return redirect_to root_path
     end
 
-    set_current_tenant(@current_agency)
+    set_current_tenant(@current_enterprise)
   end
 end
