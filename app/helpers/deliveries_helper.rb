@@ -13,7 +13,7 @@ module DeliveriesHelper
   def delivery_headers(enterprise)
     Delivery::HEADERS.select do |header|
       if enterprise.merchant?
-        !header in?(%w[tracking_secret action])
+        !(header.in?(%w[tracking_secret action]))
       else
         header != "status"
       end

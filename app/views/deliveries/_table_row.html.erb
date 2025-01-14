@@ -13,7 +13,7 @@
 
   <td>
     <% if @current_enterprise.merchant? || !(can? :manage, delivery) %>
-      <%= t('.statuses.#{delivery.status}') %>
+      <%= t(".statuses.#{delivery.status}") %>
     <% else %>
       <% if delivery.registered? || delivery.sent? %>
         <%= button_to t('.check_in'), confirm_arrival_path(delivery), method: :put, form_class: 'btn link !p-0' %>

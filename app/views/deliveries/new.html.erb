@@ -16,17 +16,20 @@
                     search_locals: { partial: 'deliveries/search/branch', name: "delivery[branch_id]",
                       locals: { branches: @branches, name: "delivery[destination_id]", type: "destination",
                                 selected: @delivery.destination_id, list_class: "hidden" }} %>
-                  
-        <%= render "shared/select_dropdown", selected: @delivery.sender_id, placeholder: t('.sender.placeholder'),
-                    label: t('.sender.label'), search_url: search_customer_deliveries_url(params: { type: 'sender'}),
-                    id: 'delivery_sender_id', record: @delivery, autofocus: true, field: 'sender',
-                    field_type: "integer", template: params[:new_sender] == "1" ? "new" : "dropdown",
-                    display_value: @delivery.sender.present? ? "#{@delivery.sender.full_name} (#{@delivery.sender.telephone})" : nil,
-                    search_locals: { partial: 'deliveries/search/customer',
-                      locals: { customers: @senders || [], type: 'sender', name: "delivery[sender_id]", list_class: "hidden",
-                        selected: @delivery.sender_id }},
-                    add_new_locals: { partial: "deliveries/new_customer_form",
-                      locals: { form:, object: @delivery.sender, type: "sender" }} %>
+
+        
+        <% unless @current_enterprise.merchant? %>
+          <%= render "shared/select_dropdown", selected: @delivery.sender_id, placeholder: t('.sender.placeholder'),
+                      label: t('.sender.label'), search_url: search_customer_deliveries_url(params: { type: 'sender'}),
+                      id: 'delivery_sender_id', record: @delivery, autofocus: true, field: 'sender',
+                      field_type: "integer", template: params[:new_sender] == "1" ? "new" : "dropdown",
+                      display_value: @delivery.sender.present? ? "#{@delivery.sender.full_name} (#{@delivery.sender.telephone})" : nil,
+                      search_locals: { partial: 'deliveries/search/customer',
+                        locals: { customers: @senders || [], type: 'sender', name: "delivery[sender_id]", list_class: "hidden",
+                          selected: @delivery.sender_id }},
+                      add_new_locals: { partial: "deliveries/new_customer_form",
+                        locals: { form:, object: @delivery.sender, type: "sender" }} %>
+        <% end %>
 
         <%= render "shared/select_dropdown", selected: @delivery.receiver_id, placeholder: t('.receiver.placeholder'),
                     label: t('.receiver.label'), search_url: search_customer_deliveries_url(params: { type: "receiver" }),

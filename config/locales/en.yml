@@ -129,7 +129,9 @@ en:
         placeholder: "Enter phone number"
     index:
       title: "Deliveries"
-      search_placeholder: "Enter tracking number or secret"
+      search:
+        number_and_secret: "Enter tracking number or secret"
+        number: "Enter tracking number"
     table:
       no_deliveries: "No deliveries"
       trackin_no: "Tracking No"

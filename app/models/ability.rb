@@ -19,10 +19,9 @@ class Ability
     end
 
     can :manage, Delivery do |delivery|
-      return if user.enterprise.category == "merchant" # merchants can't update deliveries
-      return unless user.operator? || user.manager?
-      return unless delivery.enterprise_id == user.enterprise_id
-
+      user.enterprise.category == "merchant" && # merchants can't update deliveries
+      user.operator? || user.manager? &&
+      delivery.enterprise_id == user.enterprise_id &&
       [ delivery.origin_id, delivery.destination_id ].include?(user.branch_id)
     end
   end

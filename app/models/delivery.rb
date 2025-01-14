@@ -4,6 +4,7 @@ class Delivery < ApplicationRecord
 
   # Validations
   validates :tracking_number, :tracking_secret, uniqueness: { scope: :enterprise_id }
+  validates :sender, presence: true, unless: -> { enterprise.merchant? }
 
   # Enums
   enum :status, %i[registered sent checked_in checked_out]
@@ -13,10 +14,10 @@ class Delivery < ApplicationRecord
 
   # Associations
   acts_as_tenant :enterprise
-  belongs_to :origin, class_name: "Branch"
+  belongs_to :origin, class_name: "Branch", optional: true
   belongs_to :destination, class_name: "Branch"
 
-  belongs_to :sender, class_name: "Users::Customer"
+  belongs_to :sender, class_name: "Users::Customer", optional: true
   belongs_to :receiver, class_name: "Users::Customer"
 
   belongs_to :registered_by, class_name: "Users::Admin"

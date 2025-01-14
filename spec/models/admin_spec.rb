@@ -41,7 +41,7 @@ RSpec.describe Users::Admin, type: :model do
 
 
   describe "#create delivery" do
-    let!(:enterprise) { create(:enterprise) }
+    let!(:enterprise) { create(:enterprise, category: "agency") }
     let!(:branches) { create_list(:branch, 4) }
     let(:operator) { create(:admin, :operator, :confirmed, enterprise:, branch: branches.first) }
     let!(:customers) { create_list(:customer, 5) }
@@ -73,7 +73,7 @@ RSpec.describe Users::Admin, type: :model do
         params = { enterprise_id: enterprise.id, destination_id: branches.last.id }
         delivery = operator.create_delivery(params)
         expect(delivery.persisted?).to be_falsey
-        expect(delivery.errors[:sender]).to include("must exist")
+        expect(delivery.errors[:sender]).to include("can't be blank")
         expect(delivery.errors[:receiver]).to include("must exist")
       end
 

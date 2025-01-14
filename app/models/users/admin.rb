@@ -17,17 +17,18 @@ module Users
     def create_delivery(params)
       sender_params = params.delete(:sender)
       receiver_params = params.delete(:receiver)
-
       delivery = Delivery.new(params.merge({ registered_by: self, origin: self.branch }))
 
-      ActiveRecord::Base.transaction do
-        delivery = set_customer(sender_params, delivery, :sender)
-        delivery = set_customer(receiver_params, delivery, :receiver)
+      # Use without to allow create delivery for merchants chosing truck pusher branch as destination
+      ActsAsTenant.without_tenant do
+        ActiveRecord::Base.transaction do
+          delivery = set_customer(sender_params, delivery, :sender)
+          delivery = set_customer(receiver_params, delivery, :receiver)
 
-        delivery.save!
+          delivery.save!
+        end
+        delivery
       end
-      delivery
-
     rescue ActiveRecord::RecordInvalid, ActiveRecord::NotNullViolation
       delivery
     end

@@ -9,19 +9,34 @@
       <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
         <%= render 'shared/svgs/search' %>
       </div>
-      <%= text_field_tag 'q', params[:q], placeholder: t('.search_placeholder'),
+      <%= text_field_tag 'q', params[:q],
+            placeholder: t(".search.#{@current_enterprise.merchant? ? 'number' : 'number_and_secret'}"),
             class: 'form-control pl-10 pr-3', id: 'search_deliveries' %>
     <% end %>
   </header>
 
   <turbo-frame id="delivery-list">
     <div class="scrollable-table container relative rounded border overflow-auto w-full">
-      <% if @deliveries.any? %>
-        <%= render 'table', deliveries: @deliveries %>
+      <% if @current_enterprise.merchant? %>
+        <% ActsAsTenant.without_tenant do %>
+          <% if @deliveries.any? %>
+            <%= render 'table', deliveries: @deliveries %>
+          <% else %>
+            <p class="flex h-40 justify-center items-center">
+              <%= t('.no_deliveries') %>
+            </p>
+          <% end %>
+        <% end %>
       <% else %>
-        <p class="flex h-40 justify-center items-center">
-          <%= t('.no_deliveries') %>
-        </p>
+        <% ActsAsTenant.without_tenant do %>
+          <% if @deliveries.any? %>
+            <%= render 'table', deliveries: @deliveries %>
+          <% else %>
+            <p class="flex h-40 justify-center items-center">
+              <%= t('.no_deliveries') %>
+            </p>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
   </turbo-frame>
