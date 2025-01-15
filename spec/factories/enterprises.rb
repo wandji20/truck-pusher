@@ -4,6 +4,7 @@ FactoryBot.define do
     category { 0 }
 
     trait :merchant do
+      association :marketer
       category { "merchant" }
       description { Faker::Lorem.paragraph }
       city { Faker::Address.city }
