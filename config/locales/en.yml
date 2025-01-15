@@ -46,6 +46,7 @@ en:
       operator: "Mail operator"
     account: "Account"
     edit:
+      log_out: "Log out"
       title: "My Account"
       agency: "Agency"
       branch: "Branch"
@@ -321,6 +322,7 @@ en:
     marketers:
       account: "Account"
       edit:
+        log_out: "Log out"
         title: "My Account"
         full_name:
           label: "Full name"
