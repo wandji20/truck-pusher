@@ -19,7 +19,7 @@
     <%= form.label :telephone, t('.telephone.label'), class: "form-label" %>
 
     <%= form.text_field :telephone, required: false,
-          placeholder: t('.telephone.placeholder'), autocomplete: false, required: true,
+          placeholder: t('.telephone.placeholder'), autocomplete: false,
           class: "form-control #{'is-invalid' if branch.errors.messages[:telephone].present?}",
           data: { controller: "format-decimals", action: "format-decimals#formatValue" } %>
     <% if branch.errors.messages[:telephone].present? %>

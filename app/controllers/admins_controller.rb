@@ -13,6 +13,6 @@ class AdminsController < ApplicationController
   private
 
   def admin_params
-    params.require(:users_admin).permit(:telephone, :full_name)
+    params.require(:users_admin).permit(:full_name)
   end
 end

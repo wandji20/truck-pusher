@@ -55,9 +55,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_13_172132) do
 
   create_table "deliveries", force: :cascade do |t|
     t.integer "enterprise_id", null: false
-    t.integer "origin_id", null: false
+    t.integer "origin_id"
     t.integer "destination_id", null: false
-    t.integer "sender_id", null: false
+    t.integer "sender_id"
     t.integer "receiver_id", null: false
     t.integer "registered_by_id", null: false
     t.integer "checked_in_by_id"

@@ -1,4 +1,7 @@
 module NameConstants
   MIN_NAME_LENGTH = 2
   MAX_NAME_LENGTH = 256
+
+  MIN_TEXT_LENGTH = 6
+  MAX_TEXT_LENGTH = 2000
 end

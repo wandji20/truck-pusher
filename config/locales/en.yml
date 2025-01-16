@@ -46,6 +46,7 @@ en:
       operator: "Mail operator"
     account: "Account"
     edit:
+      log_out: "Log out"
       title: "My Account"
       agency: "Agency"
       branch: "Branch"
@@ -94,6 +95,12 @@ en:
         create: "Create"
         update: "Update"
   deliveries:
+    confirm:
+      success: "Delivery successfully checked in"
+      fail: "Failed to check in delivery"
+    deliver:
+      fail: "Failed to confirm delivery"
+      success: "Sucessfully delivered"
     add_customer: "+ Add customer"
     new:
       title: "New delivery"
@@ -123,24 +130,27 @@ en:
         placeholder: "Enter phone number"
     index:
       title: "Deliveries"
-      search_placeholder: "Enter tracking number or secret"
+      search:
+        number_and_secret: "Enter tracking number or secret"
+        number: "Enter tracking number"
     table:
       no_deliveries: "No deliveries"
       trackin_no: "Tracking No"
       tracking_secret: "Tracking Secret"
-      sender: "Sender"
       receiver: "Receiver"
       type: "Type"
       action: "Action"
       description: "Description"
-      origin: "Origin"
       destination: "Destination"
+      status: "Status"
     table_row:
-      arrival_confirmed: "Arrival confirmed"
-      confirm_arrival: "Confirm arrival"
-      incoming: "Incoming"
-      outgoing: "Outgoing"
-      registered: "Registered"
+      check_in: "Check in"
+      deliver: "Deliver"
+      statuses:
+        registered: "Registered"
+        sent: "Sent"
+        chacked_in: "Arrival confirmed"
+        checked_out: "Delivered"
     delivery:
       tracking_no: "Tracking Number:"
       sender: "Sender"
@@ -150,12 +160,28 @@ en:
   passwords:
     reset_instructions_sent: "Password reset instructions sent."
     invalid_telephone_address: "Telephone number not found!"
+    invalid_telephone: "Telephone number not found!"
+    confirm_account: "Please confirm your account to continue"
+    instruction_sent: "Password reset instructions successfully sent."
+    incorrect_email: "Telephone not found! Contact your manager to get an invite"
+    reset_successful: "Password has been successfully reset."
+    invalid_token: "Password reset token is invalid or has expired."
+    invalid_url: "Your password reset url is not correct"
     new:
       title: "Forgot your password?"
       telephone:
         label: "Telephone"
         placeholder: "Enter your phone number"
       submit: "Send reset instructions"
+    edit:
+      title: "Change your password"
+      submit: "Change my password"
+      password:
+        label: "Password"
+        placeholder: "Enter your password"
+      password_confirmation:
+        label: "Password confirmation"
+        placeholder: "Enter your password confirmation"
   sessions:
     invalid_credentials: "Wrong telephone number or password."
     login_required: "You need to sign in to continue"
@@ -296,6 +322,7 @@ en:
     marketers:
       account: "Account"
       edit:
+        log_out: "Log out"
         title: "My Account"
         full_name:
           label: "Full name"

@@ -60,6 +60,8 @@ Rails.application.routes.draw do
       get :search_branch
     end
   end
+  put "deliveries/:id/confirm_arrival", to: "deliveries#confirm_arrival", as: :confirm_arrival
+  put "deliveries/:id/confirm_delivery", to: "deliveries#confirm_delivery", as: :confirm_delivery
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest

@@ -1,7 +1,7 @@
 
 <tr id="<%= dom_id(delivery) %>">
   <td><%= delivery.tracking_number %></td>
-  <td><%= delivery.tracking_secret %></td>
+  <td class="<%= "hidden" if @current_enterprise.merchant? %>"><%= delivery.tracking_secret %></td>
   <td>
     <div class="flex flex-col">
       <span><%= delivery.receiver_name %></span>
@@ -10,16 +10,18 @@
   </td>
   <td><%= delivery.destination_name %></td>
   <td><%= delivery.description %></td>
+
   <td>
-    <% if delivery.registered? || delivery.sent? %>
-      <% if can? :manage, delivery %>
-        <%= button_to t('.confirm_arrival'), delivery_path(delivery), method: :update,
-              form_class: 'btn link !p-0', params: { delivery: { status: 'checked_in'}} %>
-      <% else %>
-        <span><%= t('.registered') %></span>
-      <% end %>
+    <% if @current_enterprise.merchant? || !(can? :manage, delivery) %>
+      <%= t(".statuses.#{delivery.status}") %>
     <% else %>
-      <span><%= t('.arrival_confirmed') %></span>
+      <% if delivery.registered? || delivery.sent? %>
+        <%= button_to t('.check_in'), confirm_arrival_path(delivery), method: :put, form_class: 'btn link !p-0' %>
+      <% elsif delivery.checked_in? %>
+        <%= button_to t('.deliver'), confirm_delivery_path(delivery), method: :put, form_class: 'btn link !p-0' %>
+      <% elsif delivery.checked_out? %>
+        <span><%= t('.statuses.checked_out') %></span>
+      <% end %>
     <% end %>
   </td>
 </tr>

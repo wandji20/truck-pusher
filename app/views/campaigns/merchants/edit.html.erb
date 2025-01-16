@@ -8,7 +8,7 @@
                   class: "btn btn-secondary", method: :put, data: { controller: "location" } %>
   </div>
 
-  <%= form_with model: @merchant, url: campaigns_merchant_path(@merchant), class: "w-full" do |form| %>
+  <%= form_with model: @merchant, url: campaigns_merchant_path(@merchant), class: "w-full", id: dom_id(@merchant, :edit) do |form| %>
     <div class="sm-w-full md:w-3/4 lg:w-3/5">
       <div class="form-group">
         <%= form.label :name, t('.name.label'), class: "form-label" %>

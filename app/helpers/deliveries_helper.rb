@@ -9,4 +9,14 @@ module DeliveriesHelper
   def user_roles
     Users::Admin.roles.keys.map { |role| [ role, t("admins.roles.#{role}") ] }
   end
+
+  def delivery_headers(enterprise)
+    Delivery::HEADERS.select do |header|
+      if enterprise.merchant?
+        !(header.in?(%w[tracking_secret action]))
+      else
+        header != "status"
+      end
+    end
+  end
 end

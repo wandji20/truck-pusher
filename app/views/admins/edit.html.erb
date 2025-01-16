@@ -3,7 +3,7 @@
     <h2 class="text-center text-2xl/9 font-bold tracking-tight text-gray-900">
       <%= t('.title') %>
     </h2>
-    <%= button_to 'Log out', logout_path, class: "btn btn-danger", method: :delete %>
+    <%= button_to t(".log_out"), logout_path, class: "btn btn-danger", method: :delete %>
   </div>
 
   <%= form_with model: current_user, url: account_path, class: "w-full" do |form| %>
@@ -34,14 +34,7 @@
       <div class="form-group">
         <%= form.label :telephone, t(".telephone.label"), class: "form-label" %>
         <%= form.text_field :telephone, autofocus: false, placeholder: t(".telephone.placeholder"),
-              class: "form-control #{'is-invalid' if current_user.errors.messages[:telephone].present?}" %>
-        <% if current_user.errors.messages[:telephone].present? %>
-          <div class="invalid-feedback">
-            <% current_user.errors.messages[:telephone].each do |message| %>
-              <span><%= message %></span>
-            <% end %>
-          </div>
-        <% end %>
+              class: "form-control", disabled: true %>
       </div>
     </div>
 

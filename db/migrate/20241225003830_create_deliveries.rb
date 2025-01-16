@@ -3,9 +3,9 @@ class CreateDeliveries < ActiveRecord::Migration[8.0]
     create_table :deliveries do |t|
       t.integer :enterprise_id, null: false
 
-      t.integer :origin_id, null: false
+      t.integer :origin_id, null: true
       t.integer :destination_id, null: false
-      t.integer :sender_id, null: false
+      t.integer :sender_id, null: true
       t.integer :receiver_id, null: false
       # the operator who collected parcel from origin branch
       t.integer :registered_by_id, null: false
