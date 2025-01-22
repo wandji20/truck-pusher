@@ -288,7 +288,8 @@ en:
     password_mailer:
       subject: "Reset password"
       reset:
-        message: "You can reset your password within the next 15 minutes on"
+        title: "Password reset"
+        message: "You can reset your password within the next 15 minutes below"
         reset: "Reset"
     invitations:
       invalid_url: "Your invitation url is not correct"

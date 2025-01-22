@@ -6,7 +6,20 @@ class Campaigns::InvitationMailer < ApplicationMailer
   #
   def invite(marketer)
     @token = marketer.generate_token_for(:invitation)
+    attrs = {
+      to: marketer.email,
+      from:,
+      template_alias: "user-invitaion",
+      template_model: {
+        subject: I18n.t("campaigns.invitation_mailer.subject"),
+        title: I18n.t("campaigns.invitation_mailer.invite.title"),
+        message: I18n.t("campaigns.invitation_mailer.invite.message"),
+        invite_url: edit_campaigns_invitation_url(@token),
+        invite_text: I18n.t("campaigns.invitation_mailer.invite.accept"),
+        product_name:
+      }
+    }
 
-    mail subject: I18n.t("marketers.invitation_mailer.subject"), to: marketer.email
+    mail attrs
   end
 end
