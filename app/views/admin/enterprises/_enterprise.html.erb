@@ -1,0 +1,8 @@
+<div class="flex items-center rounded w-full h-16" id="<%= dom_id(enterprise) %>">
+  <button class="btn btn-primary h-12 mx-auto w-full flex items-center justify-center text-base"
+      type="button" data-controller="modal-trigger" 
+      data-target="#manage-enterprise-modal" data-url="<%= edit_admin_enterprise_path(enterprise) %>"
+      data-action="modal-trigger#fireModalEvent">
+    <%= enterprise.name %>
+  </button>
+</div>

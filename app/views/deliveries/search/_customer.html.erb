@@ -1,0 +1,22 @@
+<% list_class = local_assigns[:list_class] || '' %>
+<% customers = local_assigns[:customers] || [] %>
+
+<ul class="select-dropdown <%= list_class %>" id="<%= "#{type}-options" %>" role="listbox"
+    data-show="<%= customers.present? %>" data-select-dropdown-target="options">
+  <% customers.each_with_index do |option, idx| %>
+    <li class="select-dropdown-item"
+        role="option" tabindex="-1"
+        data-select-dropdown-target='option'
+        data-value="<%= option.id %>"
+        data-label="<%= option.telephone %>">
+
+      <%= label_tag "#{type}-option-#{idx}" do %>
+        <%= check_box_tag "#{type}-option-#{idx}", option.id, option.id.to_s == selected.to_s,
+              name:, id: "#{type}-option-#{idx}", data: { action: "select-dropdown#toggleOption" } %>
+        <span class="label">
+          <%= "#{option.full_name} (#{option.telephone})" %>
+        </span>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

@@ -1,0 +1,50 @@
+<div class="flex w-full flex-col justify-center mt-6">
+  <div class="mx-auto sm:w-full">
+    <h2 class="mt-6 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+      <%= t('.title') %>
+    </h2>
+  </div>
+
+  <div class="sm:mx-auto sm:w-full sm:max-w-[480px]">
+    <div class="px-6 py-12 sm:px-12">
+
+      <%= form_with url: campaigns_password_path(params[:token]), method: :put do |form| %>
+        <div class="form-group">
+          <%= form.label :password, t('.password.label'), class: "form-label" %>
+
+          <%= form.password_field :password, required: true, autocomplete: false, autofocus: false,
+              label: t('.password.label'), placeholder: t('.password.placeholder'),
+              class: "form-control #{'is-invalid' if @marketer.errors[:password].present?}"%>
+          
+          <% if @marketer.errors.messages[:password].present? %>
+            <div class="invalid-feedback">
+              <% @marketer.errors.messages[:password].each do |message| %>
+                <span><%= message %></span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :password_confirmation, t('.password_confirmation.label'), class: "form-label" %>
+
+          <%= form.password_field :password_confirmation, required: true, autocomplete: false,
+              label: t('.password_confirmation.label'), placeholder: t('.password_confirmation.placeholder'),
+              class: "form-control #{'is-invalid' if @marketer.errors[:password_confirmation].present?}" %>
+          
+          <% if @marketer.errors.messages[:password_confirmation].present? %>
+            <div class="invalid-feedback">
+              <% @marketer.errors.messages[:password_confirmation].each do |message| %>
+                <span><%= message %></span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <%= form.submit t('.submit'), class: "btn btn-primary rounded-lg" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

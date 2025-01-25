@@ -1,0 +1,9 @@
+<div class="alert <%= flash_alert_class(type) %>" data-controller="alert">
+  <%= render flash_icon(type), class_name: "size-5" %>
+  <span class="ms-2"><%= message %></span>
+  
+  <button type="button" class="btn-icon ms-auto" data-action="alert#removeAlert">
+    <span class="sr-only"><%= t('general.close') %></span>
+    <%= render 'shared/svgs/close', class_name: "size-5" %>
+  </button>
+</div>

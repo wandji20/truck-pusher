@@ -28,4 +28,380 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  flash:
+    update_success: "%{name} successfully updated!"
+    create_success: "%{name} successfully created!"
+    update_fail: "Failed to update %{name}"
+  general:
+    close: "Close"
+    open_dropdown: "Open dropdown"
+  navigations:
+    add_delivery: "Add Delivery"
+    account: "Account"
+    settings: "Settings"
+    deliveries: "Deliveries"
+  admins:
+    roles:
+      manager: "Manager"
+      operator: "Mail operator"
+    account: "Account"
+    edit:
+      log_out: "Log out"
+      title: "My Account"
+      agency: "Agency"
+      branch: "Branch"
+      full_name:
+        label: "Full name"
+        placeholder: "Enter full name"
+      telephone:
+        label: "Telephone"
+        placeholder: "Enter phone number"
+      submit: "Save"
+  enterprises:
+    index:
+      title: "Enterprises"
+    edit:
+      title: "Settings"
+      branches: "Branches"
+      users: "Users"
+    branches:
+      add_branch: "Add branch"
+      name: "Name"
+      telephone: "Telephone"
+      edit: "Edit"
+    users:
+      delete_confirm: "Are you sure you want to archive %{user}"
+      add_user: "Add user"
+      full_name: "Full name"
+      telephone: "Telephone"
+      branch: "Branch"
+      role: "Role"
+      action: "Action"
+      invited_by: "Invited by"
+      remove: "Remove"
+  branches:
+    edit:
+      title: "Edit branch for %{enterprise}"
+    new:
+      title: "Create new branch for %{enterprise}"
+    form:
+      telephone:
+        label: "Telephone"
+        placeholder: "Entent telephone"
+      name:
+        label: "Name"
+        placeholder: "Enter name"
+      submit:
+        create: "Create"
+        update: "Update"
+  deliveries:
+    confirm:
+      success: "Delivery successfully checked in"
+      fail: "Failed to check in delivery"
+    deliver:
+      fail: "Failed to confirm delivery"
+      success: "Sucessfully delivered"
+    add_customer: "+ Add customer"
+    new:
+      title: "New delivery"
+      destination:
+        label: "Destination"
+        placeholder: "Search destination branch"
+      sender:
+        label: "Sender"
+        placeholder: "Search customer telephone"
+      receiver:
+        label: "Receiver"
+        placeholder: "Search customer telephone"
+      description:
+        label: "Description"
+        placeholder: "Optional package description"
+      submit: "Register"
+    new_customer_form:
+      search_instead: "Search instead?"
+      title:
+        sender: "New customer (sender)"
+        receiver: "New customer (receiver)"
+      full_name:
+        label: "Full name"
+        placeholder: "Enter full name"
+      telephone:
+        label: "Telephone"
+        placeholder: "Enter phone number"
+    index:
+      title: "Deliveries"
+      search:
+        number_and_secret: "Enter tracking number or secret"
+        number: "Enter tracking number"
+    table:
+      no_deliveries: "No deliveries"
+      trackin_no: "Tracking No"
+      tracking_secret: "Tracking Secret"
+      receiver: "Receiver"
+      type: "Type"
+      action: "Action"
+      description: "Description"
+      destination: "Destination"
+      status: "Status"
+    table_row:
+      check_in: "Check in"
+      deliver: "Deliver"
+      statuses:
+        registered: "Registered"
+        sent: "Sent"
+        chacked_in: "Arrival confirmed"
+        checked_out: "Delivered"
+    delivery:
+      tracking_no: "Tracking Number:"
+      sender: "Sender"
+      receiver: "Receiver"
+      confirm_arrival: "Confirm Arrival"
+      confirmed: "Confirmed"
+  passwords:
+    reset_instructions_sent: "Password reset instructions sent."
+    invalid_telephone_address: "Telephone number not found!"
+    invalid_telephone: "Telephone number not found!"
+    confirm_account: "Please confirm your account to continue"
+    instruction_sent: "Password reset instructions successfully sent."
+    incorrect_email: "Telephone not found! Contact your manager to get an invite"
+    reset_successful: "Password has been successfully reset."
+    invalid_token: "Password reset token is invalid or has expired."
+    invalid_url: "Your password reset url is not correct"
+    new:
+      title: "Forgot your password?"
+      telephone:
+        label: "Telephone"
+        placeholder: "Enter your phone number"
+      submit: "Send reset instructions"
+    edit:
+      title: "Change your password"
+      submit: "Change my password"
+      password:
+        label: "Password"
+        placeholder: "Enter your password"
+      password_confirmation:
+        label: "Password confirmation"
+        placeholder: "Enter your password confirmation"
+  sessions:
+    invalid_credentials: "Wrong telephone number or password."
+    login_required: "You need to sign in to continue"
+    select_enterprise: "Please select an enterprise to login"
+    new:
+      title: "Sign in to your account"
+      telephone:
+        label: "Telephone"
+        placeholder: "Enter your phone number"
+      password:
+        label: "Password"
+        placeholder: "Enter password"
+      submit: "Sign in"
+      forgot_password: "Forgot Password?"
+  user_invitations:
+    invalid_url: "Your invitation url is not correct"
+    unconfirmed_message: "Please confirm your account to continue."
+    sent: "An invitation link has been sent to %{telephone}."
+    invalid_token: "Invitation token is invalid or has expired."
+    confirmed: "You invitation was successfully accepted"
+    new:
+      title: "Invite new user"
+    edit:
+      title: "Accept invitation"
+    new_form:
+      telephone:
+        label: "Telephone"
+        placeholder: "Enter phone number"
+      role:
+        label: "Role"
+        placeholder: "Select user role"
+      branch:
+        label: "Branch"
+        placeholder: "Select user branch"
+      submit: "Invite"
+    update_form:
+      telephone:
+        label: "Telephone"
+        placeholder: "Enter phone number"
+      role:
+        label: "Role"
+        placeholder: "Select user role"
+      full_name:
+        label: "Full name"
+        placeholder: "Enter full name"
+      password:
+        label: "Password"
+        placeholder: "Enter your password"
+      password_confirmation:
+        label: "Password confirmation"
+        placeholder: "Enter your password confirmation"
+      submit: "Save"
+  admin:
+    home:
+      index:
+        title: "Admin Panel"
+        enterprises: "Enterprises"
+        marketers: "Marketers"
+      enterprises:
+        title: "Enterprises"
+        add: "Add enterprise"
+      marketers:
+        title: "Marketers"
+        invite: "Invite marketer"
+    enterprises:
+      categories:
+        agency: "Agency"
+        merchant: "Merchant"
+      edit:
+        title: "Edit Enterprise"
+      new:
+        title: "New Enterprise"
+      form:
+        manager: "Enterprise manager"
+        name:
+          label: "Name"
+          placeholder: "Enter name"
+        category:
+          label: "Category"
+          placeholder: "Select category"
+        description:
+          label: "Description"
+          placeholder: "Enter description"
+        telephone:
+          label: "Telephone"
+          placeholder: "Enter phone number"
+        submit:
+          create: "Create"
+          update: "Update"
+    marketers:
+      marketer:
+        merchants: "Merchants:"
+  campaigns:
+    navigations:
+      add_merchant: "Add merchant"
+      account: "Account"
+      merchants: "Merchants"
+    invitation_mailer:
+      subject: "Invitation to join Truck Pusher"
+      invite:
+        title: "New Invitation"
+        message: "Your truck pusher account was successfully created.\nPlease confirm to continue"
+        accept: "Accept"
+    password_mailer:
+      subject: "Reset password"
+      reset:
+        title: "Password reset"
+        message: "You can reset your password within the next 15 minutes below"
+        reset: "Reset"
+    invitations:
+      invalid_url: "Your invitation url is not correct"
+      unconfirmed_message: "Please confirm your account to continue."
+      sent: "An invitation link has been sent to %{email}."
+      invalid_token: "Invitation token is invalid or has expired."
+      confirmed: "You invitation was successfully accepted"
+      new:
+        title: "Invite new marketer"
+      edit:
+        title: "Accept invitation"
+      new_form:
+        email:
+          label: "Email"
+          placeholder: "Enter email"
+        submit: "Invite"
+      update_form:
+        email:
+          label: "email"
+          placeholder: "Enter phone number"
+        full_name:
+          label: "Full name"
+          placeholder: "Enter full name"
+        password:
+          label: "Password"
+          placeholder: "Enter your password"
+        password_confirmation:
+          label: "Password confirmation"
+          placeholder: "Enter your password confirmation"
+        submit: "Save"
+    marketers:
+      account: "Account"
+      edit:
+        log_out: "Log out"
+        title: "My Account"
+        full_name:
+          label: "Full name"
+          placeholder: "Enter full name"
+        email:
+          label: "Email"
+          placeholder: "Enter email"
+        submit: "Save"
+    merchants:
+      location: "Location"
+      index:
+        title: "Merchants"
+        edit: "Edit"
+      new:
+        title: "New Merchant"
+        manager: "Merchant manager"
+        name:
+          label: "Name"
+          placeholder: "Enter name"
+        city:
+          label: "City"
+          placeholder: "Enter city name"
+        telephone:
+          label: "Telephone"
+          placeholder: "Enter phone number"
+        description:
+          label: "Description"
+          placeholder: "Enter description"
+        submit: "Create"
+      edit:
+        title: "Edit Merchant"
+        name:
+          label: "Name"
+          placeholder: "Enter name"
+        city:
+          label: "City"
+          placeholder: "Enter city name"
+        description:
+          label: "Description"
+          placeholder: "Enter description"
+        submit: "Update"
+        images: "Images"
+        add_image: "Upload or Capture Images"
+        selected: "Selected"
+        location:
+          save: "Save location"
+          update: "Update location"
+    passwords:
+      invalid_email: "Email not found!"
+      confirm_account: "Please confirm your account to continue"
+      instruction_sent: "Password reset instructions successfully sent."
+      reset_successful: "Password has been successfully reset."
+      invalid_token: "Password reset token is invalid or has expired."
+      new:
+        title: "Forgot your password?"
+        email:
+          label: "Email"
+          placeholder: "Enter email address"
+        submit: "Send reset instructions"
+      edit:
+        title: "Change your password"
+        submit: "Change my password"
+        password:
+          label: "Password"
+          placeholder: "Enter your password"
+        password_confirmation:
+          label: "Password confirmation"
+          placeholder: "Enter your password confirmation"
+    sessions:
+      invalid_credentials: "Wrong email or password."
+      login_required: "You need to sign in to continue"
+      new:
+        title: "Sign in to your account"
+        email:
+          label: "Email"
+          placeholder: "Enter email"
+        password:
+          label: "Password"
+          placeholder: "Enter password"
+        submit: "Sign in"
+        forgot_password: "Forgot Password?"

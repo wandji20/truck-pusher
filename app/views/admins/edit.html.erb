@@ -1,0 +1,43 @@
+<div class="flex w-full flex-col justify-center mt-6 w-full md:w-3/5 mx-auto px-2">
+  <div class="flex sm:w-full justify-between items-center mb-6">
+    <h2 class="text-center text-2xl/9 font-bold tracking-tight text-gray-900">
+      <%= t('.title') %>
+    </h2>
+    <%= button_to t(".log_out"), logout_path, class: "btn btn-danger", method: :delete %>
+  </div>
+
+  <%= form_with model: current_user, url: account_path, class: "w-full" do |form| %>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
+      <div class="form-group">
+        <%= form.label :enterprise, t(".enterprise"), class: "form-label" %>
+        <%= form.text_field :enterprise_name, value: current_user.enterprise.name, disabled: true, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :branch, t(".branch"), class: "form-label" %>
+        <%= form.text_field :branch, value: current_user.branch&.name, disabled: true, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :full_name, t(".full_name.label"), class: "form-label" %>
+        <%= form.text_field :full_name, autofocus: true, placeholder: t(".full_name.placeholder"),
+              class: "form-control #{'is-invalid' if current_user.errors.messages[:full_name].present?}" %>
+        <% if current_user.errors.messages[:full_name].present? %>
+          <div class="invalid-feedback">
+            <% current_user.errors.messages[:full_name].each do |message| %>
+              <span><%= message %></span>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :telephone, t(".telephone.label"), class: "form-label" %>
+        <%= form.text_field :telephone, autofocus: false, placeholder: t(".telephone.placeholder"),
+              class: "form-control", disabled: true %>
+      </div>
+    </div>
+
+    <%= form.submit t(".submit"), class: "btn btn-primary" %>
+  <% end %>
+</div>

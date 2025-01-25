@@ -1,0 +1,41 @@
+<% object = local_assigns[:object] || Users::Customer.new %>
+
+<%= form.fields_for object do |customer_form| %>
+  <div class="flex justify-between items-center">
+    <h4 class="mb-2"><%= t(".title.#{type}") %></h4>
+    <button type="button" class="btn text-sm font-normal text-tp-sky-blue" data-action="select-dropdown#toggleTemplate"
+            data-value="dropdown">
+      <%= t('.search_instead') %>
+    </button>
+  </div>
+
+  <div class="form-group">
+    <%= form.hidden_field "new_#{type}", name: "new_#{type}", value: 1 %>
+    <%= form.label :full_name, t('.full_name.label'), class: "form-label" %>
+    <%= customer_form.text_field :full_name, name: "#{type}[full_name]", placeholder: t('.full_name.placeholder'),
+          class: "form-control #{'is-invalid' if object.errors.messages[:full_name].present?}" %>
+
+    <% if object.errors.messages[:full_name].present? %>
+      <div class="invalid-feedback">
+        <% object.errors.messages[:full_name].each do |message| %>
+          <span><%= message %></span>
+        <% end %>
+      </div>  
+    <% end %>
+  </div>
+
+   <div class="form-group">
+    <%= form.label :telephone, t('.telephone.label'), class: "form-label" %>
+    <%= customer_form.text_field :telephone, name: "#{type}[telephone]", placeholder: t('.telephone.placeholder'),
+          class: "form-control #{'is-invalid' if object.errors.messages[:telephone].present?}",
+          data: { "select-dropdown-target": "input", controller: "format-decimals", action: "format-decimals#formatValue" } %>
+
+    <% if object.errors.messages[:telephone].present? %>
+      <div class="invalid-feedback">
+        <% object.errors.messages[:telephone].each do |message| %>
+          <span><%= message %></span>
+        <% end %>
+      </div>  
+    <% end %>  
+  </div>
+<% end %>

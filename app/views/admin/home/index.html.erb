@@ -1,0 +1,22 @@
+<div class="flex w-full flex-col justify-center w-full mx-auto px-2">
+  <header>
+    <h2 class="text-2xl/9 mt-6 font-bold tracking-tight text-gray-900">
+      <%= t('.title') %>
+    </h2>
+  </header>
+
+  <nav class="flex items-center gap-4 my-3">
+    <%= link_to t('.enterprises'), admin_path(params: { option: "enterprises" }),
+          class: "sub-nav-link #{active_nav_link('enterprises')}" %>
+    <%= link_to t('.marketers'), admin_path(params: { option: "marketers" }),
+          class: "sub-nav-link #{active_nav_link('marketers')}" %>
+  </nav>
+  
+  <section>
+    <% if params[:option] == "marketers" %>
+      <%= render "admin/home/marketers", marketers: @marketers %>
+    <% else %>
+      <%= render "admin/home/enterprises", enterprises: @enterprises %>
+    <% end %>
+  </section>
+</div>

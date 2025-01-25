@@ -1,0 +1,71 @@
+<%# required locals are selected. placeholder, label,field %>
+<% search_url = local_assigns[:search_url] %>
+<% id = local_assigns[:id] || '' %>
+<% record = local_assigns[:record] %>
+<% search_locals = local_assigns[:search_locals] %>
+<% options = local_assigns[:options] %>
+<% autofocus = local_assigns[:autofocus] %>
+<% field_type = local_assigns[:field_type] || 'string' %>
+<% show_new_record_form = local_assigns[:show_new_record_form] || false %>
+<% template = local_assigns[:template] || 'dropdown' %>
+<% add_new_locals = local_assigns[:add_new_locals] %>
+
+<div data-controller="select-dropdown"
+    data-select-dropdown-search-url-value="<%= search_url %>"
+    data-select-dropdown-selected-value="<%= selected %>"
+    data-select-dropdown-template-value="<%= template %>"
+    id="<%= id %>">
+
+  <div data-select-dropdown-target="content"></div>
+
+  <template data-select-dropdown-target="dropdownTemplate">
+    <label for="<%= field.to_s %>" class="form-label" data-select-dropdown-target="label"><%= label %></label>
+
+    <div class="mb-5 relative">
+      <%# Display value %>
+      <button class="form-control <%= 'placeholder' unless display_value.present? %> <%= "#{'is-invalid' if record.present? && record.errors[field.to_sym].present?}" %>"
+              type="button" data-action="select-dropdown#showSearchInput" data-select-dropdown-target="displayButton" >
+        <span class='label' data-placeholder="<%= placeholder %>">
+          <%= display_value || placeholder %>
+        </span>
+        <span class="absolute top-2 right-0 rounded-r-md px-2 focus:outline-none"
+              data-action="select-dropdown#toggleDropdown">
+          <%= render 'shared/svgs/chevron_up_down' %>
+        </span>
+      </button>
+
+      <%# Search field %>
+      <div class="relative hidden search-section">
+        <input type="text" name="search"
+          class="form-control <%= "#{'is-invalid' if record.present? && record.errors[field.to_sym].present?}" %>"
+          role="select-dropdown"
+          aria-controls="options" aria-expanded="false" placeholder="<%= placeholder %>"
+          data-select-dropdown-target="input"
+          data-field-type="<%= field_type %>"
+          data-action="select-dropdown#search keydown.esc->select-dropdown#close">
+
+        <button type="button" class="absolute top-2 right-0 rounded-r-md px-2 focus:outline-none"
+              data-action="select-dropdown#toggleDropdown">
+          <%= render 'shared/svgs/chevron_up_down' %>
+          <span class="sr-only"><%= t('general.open_dropdown') %></span>
+        </button>
+      </div>
+
+      <% if record.present? && record.errors[field.to_sym].present? %>
+        <div class="invalid-feedback">
+          <% record.errors[field.to_sym].each do |error| %>
+            <span><%= error %></span>
+          <% end %>
+        </div>
+      <% end %>
+      
+      <%= render search_locals[:partial], **search_locals[:locals] %>
+    </div>
+  </template>
+
+  <template data-select-dropdown-target="newTemplate">
+    <% if add_new_locals.present? %>
+      <%= render add_new_locals[:partial], **add_new_locals[:locals] %>
+    <% end %>
+  </template>
+</div>
